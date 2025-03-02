@@ -1,0 +1,126 @@
+.form_container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 6%;
+}
+
+.form_container_2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 35vw;
+}
+
+.form_container_2 input {
+    height: 46px;
+    width: 100%;
+    margin: 0.5rem 0;
+    border-radius: 0.5rem;
+    border: none;
+    padding-left: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    caret-color: white;
+    color: #f9f6ee;
+    font-size: 1rem;
+    font-family: 'FuturaNowBold', sans-serif;
+}
+
+.form_container_2 .gender_selector {
+    width: 102%;
+    height: 46px;
+    margin: 0.5rem 0;
+    border-radius: 0.5rem;
+    border: none;
+    padding-left: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    caret-color: white;
+    color: #f9f6ee;
+    font-size: 1rem;
+    font-family: 'FuturaNowBold', sans-serif;
+}
+
+.form_container input {
+    height: 46px;
+    width: 45%;
+    margin: 0.5rem 0;
+    border-radius: 0.5rem;
+    border: none;
+    padding-left: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    caret-color: white;
+    color: #f9f6ee;
+    font-size: 1rem;
+    font-family: 'FuturaNowBold', sans-serif;
+}
+
+.react-international-phone-country-selector {
+    padding-top: 0.3rem;
+}
+
+.form_container_2 .date_selector {
+    height: 48px;
+    width: 100%;
+    margin: 0.5rem 0;
+    border-radius: 0.5rem;
+    border: none;
+    padding-left: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #f9f6ee;
+    font-size: 1rem;
+    font-family: 'FuturaNowBold', sans-serif;
+}
+
+/*  */
+.form_container_2 .date_selector:focus {
+    outline: none;
+    color: #737373;
+}
+
+.form_container_2 .gender_selector:focus {
+    outline: none;
+    color: #737373;
+}
+
+
+.form_container_2 .review_info_container {
+    width: 90%;
+    height: fit-content;
+    padding: 0.5rem 0;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 0.5rem;
+    margin: 0.5rem 0;
+}
+
+.form_container_2 .review_info_container h4 {
+    margin: 0;
+}
+
+.form_container_2 .review_info_container div {
+    margin: 0.5rem 0;
+}
+
+.form_container_2 .review_info_container div>h4:first-child {
+    font-family: 'FuturaNowLight', sans-serif;
+    color: rgba(255,255,255,0.4);
+}
+
+@media  screen and (max-width:1000px) {
+    .form_container input{
+        width: 100%;
+    }
+    .form_container_2{
+        width: 97%;
+    }
+    .form_container_2 .gender_selector{
+        width: 104%;
+        height: 48px;
+    }
+    .form_container_2 .review_info_container{
+        width: 100%;
+    }
+    .form_container_2 .review_info_container h4{
+        font-size: 0.8rem;
+    }
+}

@@ -1,0 +1,85 @@
+.heroSectionContainer {
+    margin-top: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+}
+
+span {
+    font-size: 54px;
+    width: 55%;
+    line-height: 5rem;
+}
+
+.mainButton {
+    width: 22rem;
+    height: 58px;
+    font-size: 18px;
+    margin-top: 4rem;
+    border: none;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.05);
+    transition: 0.3s ease-in;
+    color: #fff;
+}
+
+h3 {
+    font-family: 'FuturaNowLight', 'sans-serif';
+    color:rgba(255,255,255,0.3);
+}
+
+.mainButton h3 {
+    color:#f9f6ee;
+    font-size: 1.2rem;
+    margin:0;
+    font-family: 'FuturaNowReg', 'sans-serif';
+}
+
+.mainButton:hover {
+    background-color: #3a74d2;
+}
+
+.mainButton:active {
+    transform: scale(95%);
+}
+
+h3 {
+    font-size: 22px;
+}
+
+/* Mobile responsive */
+@media screen and (max-width:1050px) {
+    .heroSectionContainer {
+        margin-top: 4rem;
+        height: 70vh;
+        justify-content: flex-start;
+        padding-top: 35%;
+    }
+    .heroSectionContainer span {
+        font-size: 36px;
+        width: 90%;
+        line-height: 3rem;
+    }
+    .heroSectionContainer h3{
+        margin-top: 3rem;
+        width: 90%;
+        font-size: 18px;
+    }
+    .mainButton{
+        margin-top:2rem;
+        width: 80%;
+        background-color:#3a74d2;
+    }
+    .mainButton h3{
+        margin:0;
+        width: 70%;
+    }
+}

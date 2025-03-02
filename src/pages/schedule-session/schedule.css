@@ -1,0 +1,132 @@
+.schedule_screen_main {
+    width: 100%;
+    min-height: 100vh;
+    height: fit-content;
+    margin-top: 60px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding:5% 0;
+    flex-direction: column;
+}
+
+.stepper_header {
+    width: 60%;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.stepper_header .line {
+    background-color: rgba(255, 255, 255, 0.2);
+    height: 0.05rem;
+    width: 25%;
+    margin: 0 2rem
+}
+
+.stepper_header .line.white {
+    background-color: #f9f6ee;
+    height: 0.08rem;
+}
+
+.form_area {
+    width: 50%;
+    height: fit-content;
+    margin: 4rem 0;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button_area {
+    width: 60%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button_area button {
+    width: 20%;
+    height: 52px;
+    border-radius: 0.5rem;
+    color: #fff;
+    background-color: #3a74d2cb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: none;
+    transition: 0.3s ease-in;
+}
+
+.button_area button:hover {
+    background-color: #3a74d2;
+}
+
+.button_area button h3 {
+    font-family: 'FuturaNowReg', sans-serif;
+    font-size: 1.2rem;
+    color:#f9f6ee;
+}
+
+/* success page css */
+.schedule_screen_main .information_card {
+    min-width: 40%;
+    width: fit-content;
+    height: 60%;
+    backdrop-filter: blur(1px);
+    border-radius: 0.5rem;
+    background-color: rgba(15, 15, 15, 0.727);
+    padding-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+.schedule_screen_main .information_card .row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:1rem 1rem;
+    text-align: right;
+    height: fit-content;
+    margin:0.5rem 0;
+    width: 90%;
+    border-radius: 0.5rem;
+    background-color: rgba(255,255,255,0.05);
+}
+.schedule_screen_main .information_card .row h4{
+    margin:0;
+}
+
+@media screen and (max-width:1000px) {
+    .stepper_header{
+        width: 90%;
+    }
+    .stepper_header .line{
+        width: 15%;
+    }
+    .form_area{
+        width: 90%;
+    }
+    .button_area button{
+        width: 100%;
+    }
+    .schedule_screen_main .information_card{
+        margin-top: 60px;
+        width: 95%;
+        padding:0 1rem;
+    }
+    .schedule_screen_main .information_card .row h4:nth-child(2){
+        font-size: 0.7rem;
+    }
+    .schedule_screen_main .information_card .row h4:nth-child(1){
+        color:rgba(255,255,255,0.4);
+    }
+}
+
+

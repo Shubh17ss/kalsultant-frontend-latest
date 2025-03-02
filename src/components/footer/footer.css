@@ -1,0 +1,85 @@
+.footerContainer {
+    width: 100%;
+    height: fit-content;
+    backdrop-filter: blur(2px);
+    padding-top: 1rem;
+    box-shadow:
+        /* 0 4px 10px rgba(255, 255, 255, 0.2); */
+        /* White soft glow */
+        0 0 20px rgba(255, 255, 255, 0.1);
+    /* White outer shadow */
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
+
+.footerContainer .infoSection {
+    height: fit-content;
+    width: 100%;
+    display: flex;
+}
+
+.footerContainer .infoSection .leftSection {
+    width: 50%;
+    height: 100%;
+    text-align: left;
+    display: flex;
+}
+
+.footerContainer .infoSection .leftSection h3 {
+    font-family: 'FuturaNowBold', 'sans-serif';
+    font-size: 24px;
+    margin-left: 3rem;
+    margin-top: 0;
+    color:#f9f6ee;
+}
+
+.footerContainer .infoSection .rightSection {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.footerContainer .infoSection .rightSection .row {
+    display: flex;
+    float: right;
+    justify-content: space-evenly;
+    margin:0.5rem;
+}
+
+.footerContainer .infoSection .rightSection h3 {
+    font-size: 1rem;
+    color: #f9f6eecc;
+    cursor: pointer;
+    margin-top: 0;
+    min-width: 10rem;
+    text-align: left;
+}
+
+.footerContainer .infoSection .rightSection .row.links h3 {
+    transition: 0.5s ease;
+}
+
+.footerContainer .infoSection .rightSection .row.links h3:hover {
+    color:#fff;
+    text-decoration: underline;
+}
+
+
+/* MOBILE RESPOONSIVE */
+@media screen and (max-width:1000px) {
+    .footerContainer .infoSection .leftSection{
+        display: none;
+    }
+    .footerContainer .infoSection .rightSection{
+        width: 100%;
+    }
+    .footerContainer .infoSection .rightSection .row{
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 0.5rem;
+    }
+    .footerContainer .infoSection .rightSection .row h3{
+        color:rgba(255,255,255,0.3);
+    }
+}

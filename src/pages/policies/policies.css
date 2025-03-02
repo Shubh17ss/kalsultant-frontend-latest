@@ -1,0 +1,126 @@
+.legal_container{
+    width: 100%;
+    min-height: 100vh;
+    height: fit-content;
+    padding: 5rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.legal_container strong{
+    margin-top: 5rem;
+}
+.legal_container .legal_content_area{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top:1%;
+    color:#f9f6ee;
+    
+}
+
+.legal_container .legal_content_area strong{
+    font-size: 46px;
+    width: 60%;
+    font-weight: 600;
+    filter:contrast(17);
+    text-align: left;
+    
+}
+
+.legal_container .legal_content_area h3{
+    width: 60%;
+    font-size: 18px;
+    color:rgba(255,255,255,0.6);
+    font-weight: 500;
+    line-height: 28px;
+    font-family: 'FuturaNowReg', sans-serif;
+    text-align: left;
+}
+
+.legal_container .legal_content_area h3 a{
+    color:#2962ff;
+    cursor:pointer;
+}
+
+.legal_container .legal_content_area h3 a:hover{
+    text-decoration: underline;
+}
+
+.legal_container .legal_content_area .each_content_section{
+    width: 60%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 3.5rem;
+}
+
+.legal_container .legal_content_area .each_content_section h2{
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.legal_container .legal_content_area .each_content_section h3{
+    font-size: 18px;
+    color:rgba(255,255,255,0.6);
+    font-weight: 500;
+    line-height: 28px;
+    width: 100%;
+    margin-top: 1rem;
+    text-align: left;
+}
+
+@media screen and (max-width:950px) {
+    .legal_container .legal_navbar{
+        padding:0 1rem;
+    }
+    .legal_container strong{
+        margin-top: 3rem;
+    }
+    .legal_container .legal_content_area strong{
+        font-size: 28px;
+        width: 90%;   
+    }
+    .legal_container .legal_content_area p{
+        width: 90%;
+        font-size: 16px;
+    }
+    .legal_container .legal_content_area .each_content_section{
+        width: 90%;
+    }
+    .legal_container .legal_content_area .each_content_section h2{
+        font-size:20px;
+    }
+    .legal_container .legal_content_area .each_content_section p{
+        font-size: 16px;
+    }
+
+}
+
+@media screen and (max-width:1000px) {
+    .legal_container{
+        margin-top: 60px;
+        padding-top: 2rem;
+    }
+    .legal_container .legal_content_area strong{
+        width: 90%;
+    }
+    .legal_container .legal_content_area h3{
+        width: 90%;
+        color:rgba(255,255,255,0.4);
+    }
+    .legal_container .legal_content_area .each_content_section{
+        width: 90%;
+    }
+    .legal_container .legal_content_area .each_content_section h3{
+        color:rgba(255,255,255,0.4);
+    }
+
+   
+}

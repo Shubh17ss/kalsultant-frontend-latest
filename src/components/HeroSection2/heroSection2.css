@@ -1,0 +1,123 @@
+.heroSectionContainer2 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+}
+
+span {
+    font-size: 54px;
+    width: 55%;
+    line-height: 5rem;
+}
+.heroSectionContainer2 h3{
+    color:rgba(255,255,255,0.3);
+}
+
+.imagesContainer {
+    width: 90%;
+    height: 50vh;
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.imagesContainer .card {
+    width: 25%;
+    height: 100%;
+    border-radius: 0.8rem;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    transition: 0.3s ease-in;
+    box-shadow:
+        0 4px 10px rgba(255, 255, 255, 0.2),
+        /* White soft glow */
+        0 0 20px rgba(255, 255, 255, 0.1);
+    /* White outer shadow */
+}
+
+.imagesContainer .card div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: 0.3s ease-in;
+    backdrop-filter: blur(8px);
+    border-radius: 0.8rem;
+}
+
+.imagesContainer .card div:hover {
+    backdrop-filter: blur(0);
+}
+
+.imagesContainer .card div span {
+    font-size: 42px;
+    width: 100%;
+}
+
+.imagesContainer .card:hover {}
+
+.imagesContainer .card.one {
+    background-image: url('../../assets/images/relationship.webp');
+}
+
+.imagesContainer .card.two {
+    background-image: url('../../assets/images/alone.webp');
+}
+
+.imagesContainer .card.three {
+    background-image: url('../../assets/images/struggle.webp');
+}
+
+/* MOBILE RESPONSIVE */
+
+@media screen and (max-width:1000px) {
+    .heroSectionContainer2 {
+        height: fit-content;
+        margin-bottom: 5rem;
+    }
+
+    .heroSectionContainer2 span {
+        font-size: 36px;
+        width: 90%;
+        line-height: 3rem;
+    }
+
+    .heroSectionContainer2 h3 {
+        margin-top: 3rem;
+        width: 90%;
+        font-size: 18px;
+    }
+
+    .imagesContainer {
+        height: fit-content;
+        width: 100%;
+        flex-direction: column;
+        height: fit-content;
+    }
+
+    .imagesContainer .card {
+        width: 90%;
+        min-height: 42vh;
+        margin: 1rem 0;
+    }
+
+    .imagesContainer .card div {
+        height: 42vh;
+        backdrop-filter: blur(0);
+        background-color: rgba(0, 0, 0, 0.6);
+
+    }
+
+    .imagesContainer .card div span {
+        font-size: 36px;
+    }
+}

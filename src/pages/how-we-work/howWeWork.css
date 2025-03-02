@@ -1,0 +1,106 @@
+.howWeWorkContainer {
+    width: 100%;
+    min-height: 100vh;
+    height: fit-content;
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10rem;
+}
+
+.howWeWorkContainer .hwwHeroSection {
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 20vh;
+}
+
+.howWeWorkContainer .hwwHeroSection .left {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.howWeWorkContainer .hwwHeroSection .middle {
+    width: 20%;
+}
+
+.howWeWorkContainer .hwwHeroSection .right {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.howWeWorkContainer .hwwHeroSection strong {
+    font-size: 6rem;
+}
+
+.howWeWorkContainer .lastSection {
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: column;
+}
+
+.howWeWorkContainer .lastSection strong:nth-child(1) {
+    font-size: 4rem;
+    margin-bottom: 10%;
+}
+
+.howWeWorkContainer .lastSection strong:nth-child(2) {
+    font-size: 1.2rem;
+    width: 60%;
+    font-family: 'FuturaNowLight', sans-serif;
+    color:rgba(255,255,255,0.3);
+}
+
+
+@media screen and (max-width:1000px) {
+    .howWeWorkContainer .hwwHeroSection {
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: 2rem;
+    }
+
+    .howWeWorkContainer .hwwHeroSection .left {
+        width: 90%;
+        height: fit-content;
+        align-self: flex-start;
+    }
+    .howWeWorkContainer .hwwHeroSection .middle{
+        margin:2rem 0;
+    }
+    .howWeWorkContainer .hwwHeroSection .right {
+        width: 90%;
+        align-self: flex-end;
+        height: fit-content;
+    }
+
+    .howWeWorkContainer .hwwHeroSection strong {
+        font-size: 3rem;
+    }
+    .howWeWorkContainer .lastSection {
+        height: 50vh;
+    }
+    .howWeWorkContainer .lastSection strong:nth-child(1){
+        font-size: 2.5rem;
+        width: 90%;
+    }
+    .howWeWorkContainer .lastSection strong:nth-child(2){
+        font-size: 1rem;
+        width: 85%;
+
+    }
+}

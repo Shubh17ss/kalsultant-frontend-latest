@@ -1,0 +1,330 @@
+.aboutUsContainer {
+    width: 100%;
+    min-height: 100vh;
+    height: fit-content;
+    padding-bottom: 5rem;
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.aboutUsContainer .heroSectionAU {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.aboutUsContainer .heroSectionAU .left {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.aboutUsContainer .heroSectionAU .left strong {
+    font-size: 6rem;
+    text-align: right;
+    font-family: 'FuturaNowBold', sans-serif;
+}
+
+.aboutUsContainer .heroSectionAU .right {
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.aboutUsContainer .heroSectionAU .right .box {
+    width: 35%;
+    height: 22vh;
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.aboutUsContainer .heroSectionAU .right .box h3:nth-child(1) {
+    font-family: 'FuturaNowBold', sans-serif;
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.aboutUsContainer .heroSectionAU .right .box h3:nth-child(2) {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 1rem;
+    margin-top: 0.5rem;
+}
+
+/* QUOTE SECTION */
+.aboutUsContainer .quoteSection {
+    width: 50%;
+    height: 30vh;
+}
+
+.aboutUsContainer .quoteSection strong:nth-child(1) {
+    font-size: 3rem;
+    font-family: 'FuturaNowLight', sans-serif;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.aboutUsContainer .quoteSection strong:nth-child(2) {
+    font-size: 3rem;
+    font-family: 'FuturaNowLight', sans-serif;
+}
+
+/* section 3 */
+.aboutUsContainer .section3 {
+    width: 100%;
+    height: 75vh;
+    padding-top: 8%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.aboutUsContainer .section3 strong:nth-child(1) {
+    font-size: 3rem;
+    font-family: 'FuturaNowLight', sans-serif;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.aboutUsContainer .section3 strong:nth-child(2) {
+    font-size: 3rem;
+    font-family: 'FuturaNowLight', sans-serif;
+}
+
+/* section3 carousel part */
+@-webkit-keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(calc(-250px * 7));
+    }
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(calc(-250px * 7));
+    }
+}
+
+.slider {
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.125);
+    height: fit-content;
+    margin: auto;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    cursor:pointer;
+}
+.slider::before,
+.slider::after {
+    background: linear-gradient(to right, rgba(255,255,255,0.4), rgba(255, 255, 255, 0) 100%);
+    content: "";
+    height: 100%;
+    position: absolute;
+    width: 60px;
+    z-index: 2;
+}
+
+.slider::after {
+    right: 0;
+    top: 0;
+    transform: rotateZ(180deg);
+}
+
+.slider::before {
+    left: 0;
+    top: 0;
+}
+
+.slider .slide-track {
+    animation-play-state: running;
+    -webkit-animation: scroll 40s linear infinite;
+    animation: scroll 40s linear infinite;
+    display: flex;
+    width: calc(250px * 14);
+    height: 25vh;
+}
+.slider .slide-track:hover{
+    animation-play-state: paused;
+}
+
+.slider .slide {
+    height: 25vh;
+    width: 15%;
+    margin:0 0.5rem;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgba(255,255,255,0.05);
+    border-radius: 0.5rem;
+
+}
+.slider .slide h3{
+    margin:0;
+    width: 80%;
+}
+.slider .slide h3:nth-child(1){
+    font-size: 1rem;
+    color: rgba(255,255,255,0.5);
+}
+.slider .slide h3:nth-child(2){
+    margin-top: 1.5rem;
+    font-size: 1.2rem;
+}
+
+/* section 4 */
+.aboutUsContainer .section4{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin:8rem 0;
+}
+.aboutUsContainer .section4 strong:nth-child(1) {
+    font-size: 3rem;
+    font-family: 'FuturaNowLight', sans-serif;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.aboutUsContainer .section4 strong:nth-child(2) {
+    font-size: 3rem;
+    font-family: 'FuturaNowLight', sans-serif;
+}
+.aboutUsContainer .section4 .infoHolder{
+    width: 90%;
+    height: 50vh;
+    height: fit-content;
+    margin-top: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.aboutUsContainer .section4 .infoHolder .charInfo{
+    width: 30%;
+    height: fit-content;
+    overflow: hidden;
+}
+.aboutUsContainer .section4 .infoHolder .charInfo img{
+    width: 320px;
+    height: 320px;
+    border-radius: 20%;
+    filter: contrast(80%);
+}
+.aboutUsContainer .section4 .infoHolder .charInfo h3{
+    margin:0;
+    margin-top: 0.5rem;
+}
+.aboutUsContainer .section4 .infoHolder .charInfo h3:nth-child(3){
+    margin-top:0.5rem;
+    color:rgba(255, 255, 255, 0.3);
+}
+
+/* MAKING MOBILE RESPONSIVE */
+@media  screen and (max-width:1000px) {
+    .aboutUsContainer .heroSectionAU{
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-top: 15%;
+        height: 85vh;
+    }
+    .aboutUsContainer .heroSectionAU .left{
+        width: 90%;
+        align-self: flex-start;
+    }
+    .aboutUsContainer .heroSectionAU .left strong{
+        font-size: 3rem;
+    }
+    .aboutUsContainer .heroSectionAU .right{
+        width: 100%;
+        margin-top: 2rem;
+    }
+    .aboutUsContainer .heroSectionAU .right .box{
+        width: 40%;
+    }
+    .aboutUsContainer .heroSectionAU .right .box h3:nth-child(1){
+        font-size: 1rem;
+        color:#f9f6ee;
+        min-height: 3rem;
+    }
+    .aboutUsContainer .heroSectionAU .right .box h3:nth-child(2){
+        font-size: 0.8rem;
+    }
+    .aboutUsContainer .quoteSection{
+        width: 90%;
+    }
+    .aboutUsContainer .quoteSection strong:nth-child(1){
+        font-size: 1.8rem;
+    }
+    .aboutUsContainer .quoteSection strong:nth-child(2){
+        font-size: 1.8rem;
+    }
+    .aboutUsContainer .section3{
+        height: 60vh;
+    }
+    .aboutUsContainer .section3 strong:nth-child(1){
+        font-size: 1.8rem;
+    }
+    .aboutUsContainer .section3 strong:nth-child(2){
+        font-size: 1.8rem;
+    }
+    .slider .slide{
+        width: 15rem;
+    }
+    .slider::before,
+    .slider::after{
+        width: 30px;
+    }
+    .slider .slide h3:nth-child(2){
+        color:#f9f6ee;
+    }
+    .aboutUsContainer .section4{
+        margin:2rem 0;
+    }
+    .aboutUsContainer .section4 strong:nth-child(1){
+        font-size: 1.8rem;
+    }
+    .aboutUsContainer .section4 strong:nth-child(2){
+        font-size: 1.8rem;
+        margin-top: 1rem;
+    }
+    .aboutUsContainer .section4 .infoHolder{
+        width: 100%;
+        flex-direction: column;
+    }
+    .aboutUsContainer .section4 .infoHolder .charInfo{
+        width: 90%;
+        margin:2rem 0;
+    }
+    .aboutUsContainer .section4 .infoHolder .charInfo img{
+        width: 280px;
+        height: 280px;
+    }
+    .aboutUsContainer .section4 .infoHolder .charInfo h3:nth-child(2){
+        margin-top:0.5rem;
+        color:#f9f6ee;
+    }
+
+    
+}
