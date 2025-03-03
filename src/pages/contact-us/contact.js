@@ -28,7 +28,7 @@ export const Contact = () => {
             email: email,
             message: message
         }
-        const response =await  fetch('http://localhost:4000/api/user/userContactUsForm', {
+        const response =await  fetch(process.env.REACT_APP_ENV_URL+'/api/user/userContactUsForm', {
             method: 'POST',
             body: JSON.stringify(body),
             headers: {
