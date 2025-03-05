@@ -55,6 +55,7 @@
     font-family: 'FuturaNowBold', sans-serif;
     margin: 0;
     font-size: 1.2rem;
+    color:#f9f6ee;
 }
 
 .aboutUsContainer .heroSectionAU .right .box h3:nth-child(2) {
@@ -190,6 +191,7 @@
 .slider .slide h3:nth-child(2){
     margin-top: 1.5rem;
     font-size: 1.2rem;
+    color:#f9f6ee;
 }
 
 /* section 4 */
