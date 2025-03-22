@@ -26,7 +26,7 @@ export const Schedule = () => {
 
     const [index, setIndex] = useState(0);
     const [loading, setLoading] = useState(false);
-    const { firstName, lastName, email, contactNumber, dob, tob, pob, date, slot, gender } = useFormContext();
+    const { firstName, lastName, email, contactNumber, dob, tob, pob, date, slot, slotChoice, gender } = useFormContext();
     const isMobileScreen = window.innerWidth <= 1000 ? true : false;
     const navigate = useNavigate();
 
@@ -74,8 +74,8 @@ export const Schedule = () => {
                 toast.error('Please select date for session');
                 return;
             }
-            if (slot.length === 0) {
-                toast.error('Please select a slot');
+            if (slot.length === 0 && slotChoice.length === 0) {
+                toast.error('Please select a slot or propose a time');
                 return;
             }
         }
@@ -91,36 +91,66 @@ export const Schedule = () => {
                 tob: tob,
                 pob: pob,
                 date: date,
-                slot: slot
+                slot: slot,
+                proposed_slot: slotChoice
             }
-            let response = await fetch(process.env.REACT_APP_ENV_URL+'/api/session/createSession', {
-                method: 'POST',
-                body: JSON.stringify(body),
-                headers: { 'Content-Type': 'application/json' },
+            if (slot.length === 0) {
+                let response = await fetch(process.env.REACT_APP_ENV_URL + '/api/session/storeProposedSession', {
+                    method: 'POST',
+                    body: JSON.stringify(body),
+                    headers: { 'Content-Type': 'application/json' },
 
-            });
-            if (response.status === 200) {
-                setLoading(false);
-                let res = await response.json();
-                toast.success('Your session has been scheduled...!');
-                setTimeout(() => {
-                    navigate(`/schedule-session/session/${res.sessionId}`)
-                }, 200)
-                return;
-            }
-            else {
-                setLoading(false);
-                let res = await response.json();
-                if (res.code === '23505') {
-                    toast.error('Someone just booked this slot, please try a different one.');
+                });
+                if (response.status === 200) {
+                    setLoading(false);
+                    let res = await response.json();
+                    toast.success('Thank you for showing interest, we will surely get back.');
+                    setTimeout(() => {
+                        navigate(`/`);
+                    }, 200)
+                    return;
                 }
                 else {
-                    toast.error('Oops something went wrong');
+                    setLoading(false);
+                    let res = await response.json();
+                    if (res.code === '23505') {
+                        toast.error('Oops something went wrong');
+                    }
+                    else {
+                        toast.error('Oops something went wrong');
+                    }
+                    return;
                 }
-                return;
+            }
+            else if (slot.length != 0) {
+                let response = await fetch(process.env.REACT_APP_ENV_URL + '/api/session/createSession', {
+                    method: 'POST',
+                    body: JSON.stringify(body),
+                    headers: { 'Content-Type': 'application/json' },
+
+                });
+                if (response.status === 200) {
+                    setLoading(false);
+                    let res = await response.json();
+                    toast.success('Your session has been scheduled...!');
+                    setTimeout(() => {
+                        navigate(`/schedule-session/session/${res.sessionId}`)
+                    }, 200)
+                    return;
+                }
+                else {
+                    setLoading(false);
+                    let res = await response.json();
+                    if (res.code === '23505') {
+                        toast.error('Someone just booked this slot, please try a different one.');
+                    }
+                    else {
+                        toast.error('Oops something went wrong');
+                    }
+                    return;
+                }
             }
         }
-
         let newIndex = index + 1;
         setIndex(newIndex);
     }

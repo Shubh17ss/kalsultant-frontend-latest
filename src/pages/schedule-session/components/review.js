@@ -5,7 +5,7 @@ import { useFormContext } from '../../../context/formContext';
 import { SiGooglemeet } from "react-icons/si";
 
 export const Review = () => {
-  const { firstName, lastName, email, contactNumber, dob, tob, pob, date, slot, gender } = useFormContext();
+  const { firstName, lastName, email, contactNumber, dob, tob, pob, date, slot, slotChoice, gender } = useFormContext();
   const isMobileScreen = window.innerWidth <= 1000 ? true : false;
   const changeLayout = (slot) => {
     let displaySlot = "";
@@ -24,9 +24,9 @@ export const Review = () => {
       return displaySlot;
     }
     else if (Number(hr) == 12) {
-      displaySlot = hr + ":" + min + "-" + "01" +":"+min+" (pm)";
+      displaySlot = hr + ":" + min + "-" + "01" + ":" + min + " (pm)";
       return displaySlot;
-  }
+    }
   }
 
   return (
@@ -68,10 +68,17 @@ export const Review = () => {
           <h4>Session Date</h4>
           <h4>{date}</h4>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row', padding: '0 0.3rem' }}>
-          <h4>Slot</h4>
-          <h4>{changeLayout(slot)}</h4>
-        </div>
+        {slot.length != 0 ?
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row', padding: '0 0.3rem' }}>
+            <h4>Slot</h4>
+            <h4>{changeLayout(slot)}</h4>
+          </div>
+          :
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row', padding: '0 0.3rem' }}>
+            <h4>Choice of Slot</h4>
+            <h4>{slotChoice}</h4>
+          </div>
+        }
       </div>
       <div className='review_info_container' style={{ backgroundColor: 'transparent' }}>
         <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row', padding: '0 0.3rem' }}>

@@ -15,6 +15,7 @@ export const FormContextProvider = ({ children }) => {
     const [pob, setPob] = useState('');
     const [date, setDate] = useState(''); //this is the session date
     const [slot, setSlot] = useState('');
+    const [slotChoice, setSlotChoice]=useState('');
     const [gender, setGender] = useState('');
 
     return <FormContext.Provider value={{
@@ -25,6 +26,7 @@ export const FormContextProvider = ({ children }) => {
         dob, setDob, tob, setTob, pob, setPob, // date, time and place of birth
         date, setDate,
         slot, setSlot,
+        slotChoice, setSlotChoice,
         gender, setGender
 
     }}>
