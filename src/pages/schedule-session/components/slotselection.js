@@ -24,7 +24,9 @@ export const Slotselection = () => {
     useEffect(() => {
         const tempDates = [];
         const today = new Date();
-        for (let i = 2; i <= 8; i++) {
+        //changing value of i from 2 to 1 to include session booking option from 
+        // tomorrow itself
+        for (let i = 1; i <= 8; i++) {
             const futureDate = new Date();
             futureDate.setDate(today.getDate() + i);
             tempDates.push({
@@ -62,6 +64,10 @@ export const Slotselection = () => {
             headers: { "Content-type": "application/json" },
             body: JSON.stringify(body),
         });
+        if(response.status===300){
+            toast.error('Maximum capacity of 6 sessions reached for the day');
+            return;
+        }
         let res = await response.json();
         if (res.results.length === 0) {
             toast.error('No slots available for this day');
@@ -96,12 +102,15 @@ export const Slotselection = () => {
     return (
         <div className='form_container_2'>
             <select className='date_selector' value={date} onChange={(e) => { changeSessionDate(e.target.value) }}>
-                <option>Choose date</option>
+                <option value="">Choose date</option>
                 {dates.map((date) => (
                     <option value={date.value} key={date.value}>{date.label}</option>
                 ))}
             </select>
             {
+                date===""?
+                <></>
+                :
                 slots.length === 0 ?
                     <input
                         style={{ width: isMobileScreen ? "96%" : "98%" }}
