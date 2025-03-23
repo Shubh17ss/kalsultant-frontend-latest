@@ -46,7 +46,9 @@ export const AboutUs = () => {
                     <strong>Clarity comes not from endless choices,</strong>
                     <strong> but from the right one.</strong>
                 </div>
-                <div className='section3'>
+                {/* Commenting out hear it from our clients section till we have
+                review records data set. */}
+                {/* <div className='section3'>
                     <strong>Why Choose Us?</strong>
                     <strong>Hear it from our clients</strong>
                     <div class="slider">
@@ -86,7 +88,7 @@ export const AboutUs = () => {
 
                         </div>
                     </div>
-                </div>
+                </div> */}
                 <div className='section4'>
                     <strong>More</strong>
                     <strong>About Us</strong>
