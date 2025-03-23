@@ -7,6 +7,7 @@ import { Schedule } from './pages/schedule-session/schedule';
 import { Routes, Route } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast';
 import { SuccessPage } from './pages/schedule-session/components/successPage';
+import { RecordReview } from './pages/record-review/recordReview';
 import { TermsAndConditions } from './pages/policies/termsAndConditions';
 import { PrivacyPolicy } from './pages/policies/privacyPolicy';
 import { RefundPolicy } from './pages/policies/refundPolicy';
@@ -26,6 +27,7 @@ function App() {
         <Route path='/how-we-work' element={<HowWeWork />} />
         <Route path='/schedule-session' element={<Schedule />} />
         <Route path='/schedule-session/session/:sessionId' element={<SuccessPage />} />
+        <Route path='/feedback' element={<RecordReview />} />
         <Route path='/terms&Conditions' element={<TermsAndConditions />} />
         <Route path='/privacy-policy' element={<PrivacyPolicy />} />
         <Route path='/refund-policy' element={<RefundPolicy />} />

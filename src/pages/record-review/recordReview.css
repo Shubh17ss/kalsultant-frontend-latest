@@ -1,0 +1,90 @@
+.feedbackContainer {
+    width: 100%;
+    min-height: 100vh;
+    height:fit-content;
+    margin-top: 60px;
+    padding-top: 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.feedbackContainer .feedbackFormContainer {
+    width: 50%;
+    height: fit-content;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.feedbackContainer .feedbackFormContainer input,
+textarea {
+    width: 60%;
+    margin: 0.7rem 0;
+    border-radius: 0.5rem;
+    border: none;
+    padding-left: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    caret-color: white;
+    color: #f9f6ee;
+    font-size: 1rem;
+    font-family: 'FuturaNowBold', sans-serif;
+    min-height: 3rem;
+}
+.feedbackContainer .feedbackFormContainer textarea {
+    min-height: 10rem;
+    margin-bottom: 0;
+}
+.feedbackContainer .feedbackFormContainer h5 {
+    font-family: 'FuturaNowLight', sans-serif;
+    font-size: 0.7rem;
+    margin: 0;
+    width: 60%;
+    text-align: right;
+    color: #407ee2;
+}
+.feedbackContainer .feedbackFormContainer button {
+    width: 60%;
+    height: 52px;
+    border-radius: 0.5rem;
+    color: #fff;
+    background-color: #3a74d2cb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: none;
+    transition: 1.5s ease;
+    margin-top: 2rem;
+}
+.feedbackContainer .feedbackFormContainer button h3{
+    font-family: 'FuturaNowReg', sans-serif;
+    font-size: 1.2rem;
+    color:#f9f6ee;
+}
+.feedbackContainer .feedbackFormContainer button:hover{
+    background-color: #3a74d2;
+}
+.feedbackContainer .feedbackFormContainer button:active{
+    transform: scale(90%);
+}
+
+@media screen and (max-width:1000px) {
+    .feedbackContainer .feedbackFormContainer{
+        width: 100%;
+        padding-top: 0;
+    }
+    .feedbackContainer .feedbackFormContainer input,textarea{
+        width: 90%;
+    }
+    .feedbackContainer .feedbackFormContainer h5{
+        width: 90%;
+        margin-top: 0.1rem;
+        font-size: 0.6rem;
+    }
+    .feedbackContainer .feedbackFormContainer button{
+        width: 90%;
+    }
+}

@@ -49,6 +49,7 @@
 
 .contactUsContainer .box .left form input,
 textarea {
+    width: 95%;
     margin: 0.5rem 0;
     border-radius: 0.5rem;
     border: none;

@@ -28,7 +28,7 @@ export const Contact = () => {
             email: email,
             message: message
         }
-        const response =await  fetch(process.env.REACT_APP_ENV_URL+'/api/user/userContactUsForm', {
+        const response = await fetch(process.env.REACT_APP_ENV_URL + '/api/user/userContactUsForm', {
             method: 'POST',
             body: JSON.stringify(body),
             headers: {
@@ -57,7 +57,7 @@ export const Contact = () => {
                         <h3>Let's Connect: We are here to help, whether you have a question, comment or feedback for us.</h3>
                         <form onSubmit={handleSubmit}>
                             <input type="email" value={email} placeholder='Email address' onChange={(e) => { setEmail(e.target.value) }}></input>
-                            <textarea placeholder='Your message...' style={{ height: '10rem' }} value={message} onChange={(e) => { setMessage(e.target.value) }}></textarea>
+                            <textarea placeholder='Your message...' style={{ height: '10rem', width: '95%' }} value={message} onChange={(e) => { setMessage(e.target.value) }}></textarea>
                             <button type='submit'>{loading ? <ClipLoader color='#fff' size={18} /> : <h2>Send</h2>}</button>
                         </form>
                     </div>
