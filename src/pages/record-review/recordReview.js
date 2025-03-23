@@ -27,7 +27,7 @@ export const RecordReview = () => {
             toast.error('Name cannot be empty');
             return;
         }
-        if (nameRegex.test(name) === false || name.length > 25) {
+        if (nameRegex.test(name.trim()) === false || name.length > 25) {
             toast.error('Name length too long or format not accepted');
             return;
         }
@@ -35,7 +35,7 @@ export const RecordReview = () => {
             toast.error('Please enter email Id');
             return;
         }
-        if (emailRegex.test(email) === false) {
+        if (emailRegex.test(email.trim()) === false) {
             toast.error('Email not correct');
             return;
         }
