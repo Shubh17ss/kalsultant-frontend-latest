@@ -22,6 +22,14 @@ export const Schedule = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
+        const invokeFirebaseFunction = async () => {
+            let response = await fetch(process.env.REACT_APP_ENV_URL + '/', {
+                method: 'get'
+            });
+            let res = await response.json();
+            console.log(res);
+        }
+        invokeFirebaseFunction();
     })
 
     const [index, setIndex] = useState(0);
