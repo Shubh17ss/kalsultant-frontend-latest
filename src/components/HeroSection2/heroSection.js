@@ -9,17 +9,17 @@ export const HeroSection2 = () => {
       <div className='imagesContainer'>
         <div className='card one'>
           <div>
-            <span>#Relationship</span>
+            <span>Relationship</span>
           </div>
         </div>
         <div className='card two'>
           <div>
-            <span>#Goal</span>
+            <span>Career</span>
           </div>
         </div>
         <div className='card three'>
           <div>
-            <span>#Effort</span>
+            <span>Effort</span>
           </div>
         </div>
       </div>
