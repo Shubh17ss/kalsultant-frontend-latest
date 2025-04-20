@@ -46,7 +46,7 @@ export const Slotselection = () => {
                 body: JSON.stringify(body),
             });
             let res = await response.json();
-            setSlots(res.results);
+            setSlots(res.data);
         }
         setSlotsFunction();
     }, []);
@@ -69,11 +69,11 @@ export const Slotselection = () => {
             return;
         }
         let res = await response.json();
-        if (res.results.length === 0) {
+        if (res.data.length === 0) {
             toast.error('No slots available for this day');
         }
         else {
-            setSlots(res.results);
+            setSlots(res.data);
         }
     }
 
