@@ -16,7 +16,6 @@ const formatDateDisplay = (date) => {
 };
 
 export const Slotselection = () => {
-
     const [dates, setDates] = useState([]);
     const [slots, setSlots] = useState([]);
     const { date, setDate, slot, setSlot, slotChoice, setSlotChoice } = useFormContext();
@@ -52,6 +51,7 @@ export const Slotselection = () => {
     }, []);
 
     const changeSessionDate = async (date_temp) => {
+        const toastLoadingId = toast.loading("Getting availabe slots");
         setDate(date_temp);
         setSlot('');
         setSlotChoice('');
@@ -64,7 +64,8 @@ export const Slotselection = () => {
             headers: { "Content-type": "application/json" },
             body: JSON.stringify(body),
         });
-        if(response.status===300){
+        toast.dismiss(toastLoadingId);
+        if (response.status === 300) {
             toast.error('Maximum capacity of 6 sessions reached for the day');
             return;
         }
@@ -108,20 +109,20 @@ export const Slotselection = () => {
                 ))}
             </select>
             {
-                date===""?
-                <></>
-                :
-                slots.length === 0 ?
-                    <input
-                        style={{ width: isMobileScreen ? "96%" : "98%" }}
-                        type="text" placeholder='Propose a time HH:MM' value={slotChoice} onChange={(e) => { setSlotChoice(e.target.value) }}></input>
+                date === "" ?
+                    <></>
                     :
-                    <select className='date_selector' value={slot} onChange={(e) => { setSlot(e.target.value) }}>
-                        <option>Choose slot</option>
-                        {slots.map((slot, index) => (
-                            <option value={slot.slot} key={index}>{changeLayout(slot.slot)}</option>
-                        ))}
-                    </select>
+                    slots.length === 0 ?
+                        <input
+                            style={{ width: isMobileScreen ? "96%" : "98%" }}
+                            type="text" placeholder='Propose a time HH:MM' value={slotChoice} onChange={(e) => { setSlotChoice(e.target.value) }}></input>
+                        :
+                        <select className='date_selector' value={slot} onChange={(e) => { setSlot(e.target.value) }}>
+                            <option>Choose slot</option>
+                            {slots.map((slot, index) => (
+                                <option value={slot.slot} key={index}>{changeLayout(slot.slot)}</option>
+                            ))}
+                        </select>
             }
             <h4 style={{ fontSize: '12px', color: 'crimson', margin: 0 }}>*Date and time are in IST*</h4>
         </div>
