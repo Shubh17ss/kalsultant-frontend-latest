@@ -24,7 +24,7 @@ export const RecordReview = () => {
         let nameRegex = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
         let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         if (name.length === 0) {
-            toast.error('Name cannot be empty');
+            toast.error('Please enter your name');
             return;
         }
         if (nameRegex.test(name.trim()) === false || name.length > 25) {
@@ -32,7 +32,7 @@ export const RecordReview = () => {
             return;
         }
         if (email.length === 0) {
-            toast.error('Please enter email Id');
+            toast.error('Please enter your email');
             return;
         }
         if (emailRegex.test(email.trim()) === false) {
@@ -80,9 +80,12 @@ export const RecordReview = () => {
         <div style={{ overflowX: 'hidden', position: 'relative', width: '100%', minHeight: '100vh', textAlign: 'center' }}>
             <Navbar />
             <div className='feedbackContainer'>
-                <h1 style={{ width: isMobileScreen ? '90%' : '30%', textAlign: 'left' }}>Help Us Get Better</h1>
+                <h1 style={{ width: isMobileScreen ? '90%' : '30%', textAlign: 'left'}}>
+                    Help Us Get Better
+                </h1>
                 <div className='feedbackFormContainer'>
-                    <input type="text" placeholder='Your Name' value={name} onChange={(e) => { setName(e.target.value) }} />
+                    <input type="text" placeholder='Your Name' value={name} onChange={(e) => { setName(e.target.value) }} style={{marginBottom:'0'}}/>
+                    <h5 style={{color:'rgba(255,255,255,0.5)'}}>Identity will be hidden</h5>
                     <input type="email" placeholder='Your Email' value={email} onChange={(e) => { setEmail(e.target.value) }} />
                     <textarea type="text" placeholder='Please share your feedback...' style={{ paddingTop: '1rem' }} value={text} onChange={(e) => { handleTextChange(e.target.value) }}></textarea>
                     <h5>({length}/200)</h5>
