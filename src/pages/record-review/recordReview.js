@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './recordReview.css'
 import { Navbar } from '../../components/navbar/navbar'
@@ -15,6 +15,19 @@ export const RecordReview = () => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const isMobileScreen = window.innerWidth <= 1000 ? true : false;
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        const invokeFirebaseFunction = async () => {
+            let response = await fetch(process.env.REACT_APP_ENV_URL + '/', {
+                method: 'get'
+            });
+            let res = await response.json();
+            console.log(res);
+        }
+        invokeFirebaseFunction();
+    })
+
     const handleTextChange = (val) => {
         if (val.length > 200) return;
         setText(val);
@@ -80,12 +93,12 @@ export const RecordReview = () => {
         <div style={{ overflowX: 'hidden', position: 'relative', width: '100%', minHeight: '100vh', textAlign: 'center' }}>
             <Navbar />
             <div className='feedbackContainer'>
-                <h1 style={{ width: isMobileScreen ? '90%' : '30%', textAlign: 'left'}}>
+                <h1 style={{ width: isMobileScreen ? '90%' : '30%', textAlign: 'left' }}>
                     Help Us Get Better
                 </h1>
                 <div className='feedbackFormContainer'>
-                    <input type="text" placeholder='Your Name' value={name} onChange={(e) => { setName(e.target.value) }} style={{marginBottom:'0'}}/>
-                    <h5 style={{color:'rgba(255,255,255,0.5)'}}>Identity will be hidden</h5>
+                    <input type="text" placeholder='Your Name' value={name} onChange={(e) => { setName(e.target.value) }} style={{ marginBottom: '0' }} />
+                    <h5 style={{ color: 'rgba(255,255,255,0.5)' }}>Identity will be hidden</h5>
                     <input type="email" placeholder='Your Email' value={email} onChange={(e) => { setEmail(e.target.value) }} />
                     <textarea type="text" placeholder='Please share your feedback...' style={{ paddingTop: '1rem' }} value={text} onChange={(e) => { handleTextChange(e.target.value) }}></textarea>
                     <h5>({length}/200)</h5>
