@@ -1,15 +1,29 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './aboutUs.css'
 import { Navbar } from '../../components/navbar/navbar'
 import { Footer } from '../../components/footer/footer'
+
+// importing swiper library
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import { Autoplay } from 'swiper/modules';
 
 // importing images
 import techGuyImage from '../../assets/images/tech_work.webp'
 import theConsultant from '../../assets/images/theConsultant.webp'
 import theClientRelationGuy from '../../assets/images/client_relation.webp'
+import { getReviews } from '../../utils/fetchData'
 
 export const AboutUs = () => {
+    const [reviews, setReviews] = useState([]);
+    const isMobileScreen = window.innerWidth <= 950 ? true : false;
+
     useEffect(() => {
+        const fetchReviews = async () => {
+            const res = await getReviews();
+            setReviews(res);
+        }
+        fetchReviews();
         window.scrollTo(0, 0);
     }, [])
     return (
@@ -46,49 +60,32 @@ export const AboutUs = () => {
                     <strong>Clarity comes not from endless choices,</strong>
                     <strong> but from the right one.</strong>
                 </div>
-                {/* Commenting out hear it from our clients section till we have
-                review records data set. */}
-                {/* <div className='section3'>
+                <div className='section3'>
                     <strong>Why Choose Us?</strong>
                     <strong>Hear it from our clients</strong>
-                    <div class="slider">
-                        <div class="slide-track">
-                            <div className='slide'>
-                                <h3>Consultation was nice, sir explained everything nicely and was all ears.</h3>
-                                <h3>Shubh</h3>
-                            </div>
-                            <div className='slide'>
-                                <h3>Consultation was nice, sir explained everything nicely and was all ears.</h3>
-                                <h3>Shubh</h3>
-                            </div>
-                            <div className='slide'>
-                                <h3>Consultation was nice, sir explained everything nicely and was all ears.</h3>
-                                <h3>Shubh</h3>
-                            </div>
-                            <div className='slide'>
-                                <h3>Consultation was nice, sir explained everything nicely and was all ears.</h3>
-                                <h3>Shubh</h3>
-                            </div>
-                            <div className='slide'>
-                                <h3>Consultation was nice, sir explained everything nicely and was all ears.</h3>
-                                <h3>Shubh</h3>
-                            </div>
-                            <div className='slide'>
-                                <h3>Consultation was nice, sir explained everything nicely and was all ears.</h3>
-                                <h3>Shubh</h3>
-                            </div>
-                            <div className='slide'>
-                                <h3>Consultation was nice, sir explained everything nicely and was all ears.</h3>
-                                <h3>Shubh</h3>
-                            </div>
-                            <div className='slide'>
-                                <h3>Consultation was nice, sir explained everything nicely and was all ears.</h3>
-                                <h3>Shubh</h3>
-                            </div>
-
-                        </div>
+                    <div className='reviews_section_container'>
+                        <Swiper
+                            modules={[Autoplay]}
+                            slidesPerView={isMobileScreen ? 1 : 3}
+                            spaceBetween={30}
+                            loop={true}
+                            speed={2500} // smooth transition speed
+                            autoplay={{
+                                delay: 1, // no delay
+                                disableOnInteraction: false,
+                            }}
+                            freeMode={true} // allow continuous movement
+                            grabCursor={true} // optional: adds grab-style cursor
+                        >
+                            {reviews.map((review, index) => (
+                                <SwiperSlide key={index}>
+                                    <div className='review_text_container'>"{review.text}"</div>
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
+                        {isMobileScreen ? <p>Swipe left...</p> : <></>}
                     </div>
-                </div> */}
+                </div>
                 <div className='section4'>
                     <strong>More</strong>
                     <strong>About Us</strong>
