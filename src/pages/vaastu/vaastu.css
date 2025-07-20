@@ -1,0 +1,59 @@
+.vaastu_container {
+    width: 100%;
+    min-height: 100vh;
+    height: fit-content;
+    padding-top: 60px;
+}
+
+.vaastu_container .vaastu_hero_section {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.vaastu_container .vaastu_hero_section .v_left_section {
+    width: 50%;
+    height: 70vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.vaastu_container .vaastu_hero_section .v_left_section strong {
+    font-size: 6rem;
+    text-align: right;
+    font-family: 'FuturaNowBold', sans-serif;
+}
+
+.vaastu_container .vaastu_hero_section .v_left_section strong span {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 5.8rem;
+    text-align: right;
+    font-family: 'FuturaNowBold', sans-serif;
+}
+.vaastu_container .vaastu_hero_section .v_right_section{
+    width: 50%;
+}
+
+@media screen and  (max-width:950px) {
+    .vaastu_container .vaastu_hero_section{
+        flex-direction: column;
+    }
+    .vaastu_container .vaastu_hero_section .v_left_section{
+        width: 100%;
+        padding-right: 5rem;
+    }
+    .vaastu_container .vaastu_hero_section .v_left_section strong{
+        font-size: 3rem;
+    }
+    .vaastu_container .vaastu_hero_section .v_left_section strong span{
+        font-size: 3rem;
+    }
+    .vaastu_container .vaastu_hero_section .v_right_section{
+        width: 70%;
+        height: fit-content;
+    }
+}

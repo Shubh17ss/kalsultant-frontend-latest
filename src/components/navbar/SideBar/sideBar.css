@@ -1,8 +1,8 @@
-.sideNavBarContainer{
+.sideNavBarContainer {
     width: 100vw;
     height: 100vh;
     position: fixed;
-    top:0;
+    top: 0;
     transform: translateX(100%);
     transition: 0.3s ease;
     z-index: 999;
@@ -10,11 +10,11 @@
     background-color: #000;
 }
 
-.sideNavBarContainer.active{
+.sideNavBarContainer.active {
     transform: translateX(0%);
 }
 
-.sideNavBarContainer .sideNavBarMenuContainer{
+.sideNavBarContainer .sideNavBarMenuContainer {
     width: 100%;
     min-height: 20vh;
     height: fit-content;
@@ -23,12 +23,79 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    padding:0 1rem;
+    padding: 0 1rem;
 }
-.sideNavBarContainer .sideNavBarMenuContainer p{
-    width:100%;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+
+.sideNavBarContainer .sideNavBarMenuContainer p {
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     text-align: left;
-    margin:3% 0;
+    margin: 3% 0;
     font-family: 'FuturaNowLight', sans-serif;
+}
+.sidebar_btn_container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 0 1rem;
+    margin-top: 2rem;
+}
+
+.sb_store_button {
+    position: relative;
+    padding: 6px 24px;
+    font-size: 12px;
+    font-weight: bolder;
+    color: #fff;
+    background: linear-gradient(90deg, #08577c, #a02e6f, #a05d2e, #14709b);
+    background-size: 400%;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    letter-spacing: 2px;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 0 0 15px rgba(0, 198, 255, 0.5);
+    transition: box-shadow 0.3s ease;
+    font-family: 'FuturaNowReg', sans-serif;
+    animation: flow 8s linear infinite;
+}
+.sb_store_button::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: -1;
+    background: linear-gradient(90deg, #196b92, #f441a5, #3b86ff, #03a9f4);
+    background-size: 400%;
+    border-radius: 50px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+@keyframes flow {
+    0% {
+        background-position: 0%;
+    }
+
+    100% {
+        background-position: 400%;
+    }
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 10px rgba(0, 198, 255, 0.8),
+            0 0 20px rgba(0, 198, 255, 0.6);
+    }
+
+    to {
+        box-shadow: 0 0 15px rgba(0, 198, 255, 1),
+            0 0 30px rgba(0, 198, 255, 0.8),
+            0 0 45px rgba(0, 198, 255, 0.6);
+    }
 }

@@ -40,8 +40,9 @@
     font-family: 'FuturaNowLight', 'sans-serif';
     margin-left: 0.3rem;
 }
-.navBarContainer div h3:hover{
-    color:#fff;
+
+.navBarContainer div h3:hover {
+    color: #fff;
     text-decoration: underline;
 }
 
@@ -49,8 +50,83 @@
     color: #fff;
 }
 
+.navBarContainer .store_button {
+    position: relative;
+    padding: 6px 24px;
+    font-size: 12px;
+    font-weight: bolder;
+    color: #fff;
+    background: linear-gradient(90deg, #08577c, #a02e6f, #a05d2e, #14709b);
+    background-size: 400%;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    letter-spacing: 2px;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 0 0 15px rgba(0, 198, 255, 0.5);
+    transition: box-shadow 0.3s ease;
+    font-family: 'FuturaNowReg', sans-serif;
+    animation: flow 8s linear infinite;
+    margin-left: 4rem;
+}
+
+.store_button:hover {
+    box-shadow: 0 0 20px rgba(213, 237, 244, 0.8),
+        0 0 30px rgba(99, 117, 122, 0.6);
+    animation: glow 1.5s ease-in-out infinite alternate;
+    border-radius: 12px;
+}
+
+.store_button::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: -1;
+    background: linear-gradient(90deg, #196b92, #f441a5, #3b86ff, #03a9f4);
+    background-size: 400%;
+    border-radius: 50px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.store_button:hover::before {
+    opacity: 1;
+    filter: blur(20px);
+}
+
+@keyframes flow {
+    0% {
+        background-position: 0%;
+    }
+
+    100% {
+        background-position: 400%;
+    }
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 10px rgba(0, 198, 255, 0.8),
+            0 0 20px rgba(0, 198, 255, 0.6);
+    }
+
+    to {
+        box-shadow: 0 0 15px rgba(0, 198, 255, 1),
+            0 0 30px rgba(0, 198, 255, 0.8),
+            0 0 45px rgba(0, 198, 255, 0.6);
+    }
+}
+
+.store_button:hover {
+    animation: flow 8s linear infinite;
+}
+
 @media screen and (max-width:1000px) {
-    .navBarContainer{
+    .navBarContainer {
         justify-content: space-between;
         width: 100%;
     }

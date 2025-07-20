@@ -15,11 +15,17 @@ export const SideBar = ({ data }) => {
         navigate(route);
 
     }
+    const handleRedirectToItraa = () => {
+        window.open('https://itraa.kalsultant.com', '_blank');
+    }
 
     return (
         <div className={`sideNavBarContainer ${data[0] ? 'active' : ''}`}>
-            <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', padding: '0 0.5rem'}}>
-                <IoCloseOutline size={28} onClick={() => { setSideBarActive(false) }}/>
+            <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', padding: '0 0.5rem' }}>
+                <IoCloseOutline size={28} onClick={() => { setSideBarActive(false) }} />
+            </div>
+            <div className='sidebar_btn_container'>
+                <button className='sb_store_button' onClick={handleRedirectToItraa}>STORE</button>
             </div>
             <div className='sideNavBarMenuContainer'>
                 <p onClick={() => { navigateHandler('/about-us') }}>About</p>
@@ -27,6 +33,7 @@ export const SideBar = ({ data }) => {
                 <p onClick={() => { navigateHandler('/how-we-work') }}>How we work</p>
                 <p onClick={() => { navigateHandler('/pricing') }}>Pricing</p>
                 <p onClick={() => { navigateHandler('/schedule-session') }}>Schedule session</p>
+                <p onClick={() => { navigateHandler('/vaastu') }}>Vaastu</p>
                 <p onClick={() => { navigateHandler('/terms&Conditions') }}>Terms & Conditions</p>
                 <p onClick={() => { navigateHandler('/privacy-policy') }}>Privacy policy</p>
                 <p onClick={() => { navigateHandler('/refund-policy') }}>Refund policy</p>

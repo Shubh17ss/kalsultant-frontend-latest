@@ -13,6 +13,7 @@ import { PrivacyPolicy } from './pages/policies/privacyPolicy';
 import { RefundPolicy } from './pages/policies/refundPolicy';
 import { AboutUs } from './pages/about-us/aboutUs';
 import { HowWeWork } from './pages/how-we-work/howWeWork';
+import { Vaastu } from './pages/vaastu/vaastu';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/pricing' element={<Pricing />} />
+        <Route path='/vaastu' element={<Vaastu />} />
         <Route path='/contact-us' element={<Contact />} />
         <Route path='/about-us' element={<AboutUs />} />
         <Route path='/how-we-work' element={<HowWeWork />} />
