@@ -5,13 +5,15 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { SideBar } from './SideBar/sideBar';
 import { IoIosMenu } from "react-icons/io";
+import {toast} from 'react-hot-toast';
 
 export const Navbar = () => {
     const navigate = useNavigate();
     const [sideBarActive, setSideBarActive] = useState(false);
     const isMobileScreen = window.innerWidth <= 1000 ? true : false;
     const handleRedirectToItraa=()=>{
-        window.open("https://itraa.kalsultant.com",'_blank');
+        toast('Store coming soon');
+        // window.open("https://itraa.kalsultant.com",'_blank');
         return;
     }
     return (

@@ -2,6 +2,7 @@ import React from 'react'
 import { useNavigate, useLocation } from 'react-router-dom';
 import './sideBar.css'
 import { IoCloseOutline } from "react-icons/io5";
+import {toast} from 'react-hot-toast'
 
 export const SideBar = ({ data }) => {
     let setSideBarActive = data[1];
@@ -16,7 +17,8 @@ export const SideBar = ({ data }) => {
 
     }
     const handleRedirectToItraa = () => {
-        window.open('https://itraa.kalsultant.com', '_blank');
+        toast('Store coming soon');
+        // window.open('https://itraa.kalsultant.com', '_blank');
     }
 
     return (

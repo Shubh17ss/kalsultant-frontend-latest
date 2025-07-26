@@ -35,6 +35,7 @@ export const Footer = () => {
               <h3 style={{ color: '#fff' }}>Consultation</h3>
               <h3 onClick={() => { navigate('/about-us') }}>About</h3>
               <h3 onClick={() => { navigate('/schedule-session') }}>Session</h3>
+              <h3 onClick={() => { navigate('/vaastu') }}>Vaastu</h3>
             </div>
             <div className='row links'>
               <h3 style={{ color: '#fff' }}>Support</h3>

@@ -71,6 +71,7 @@ textarea {
     cursor: pointer;
     background-color: transparent;
     transition: 0.3s ease;
+    width:96%;
 }
 
 .contactUsContainer .box .left form button:hover {
@@ -82,7 +83,7 @@ textarea {
 }
 
 .contactUsContainer .box .left form button h2 {
-    font-family: 'FuturaNowBold', sans-serif;
+    font-family: 'FuturaNowReg', sans-serif;
     font-size: 1.2rem;
     color: #f9f6ee;
     margin: 0;

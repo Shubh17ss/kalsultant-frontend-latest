@@ -88,7 +88,7 @@ const RotatingHouse = () => {
 export const House3D = () => {
   const isMobileScreen = window.innerWidth <= 950 ? true : false;
   return (
-    <div style={{ height: isMobileScreen ? '60vh' : '100vh' }}>
+    <div style={{ height: isMobileScreen ? '60vh' : '80vh' }}>
       <Canvas
         camera={{ position: [8, 5, 8], fov: 50 }}
         style={{ background: 'transparent' }}
