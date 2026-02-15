@@ -14,6 +14,7 @@ import { RefundPolicy } from './pages/policies/refundPolicy';
 import { AboutUs } from './pages/about-us/aboutUs';
 import { HowWeWork } from './pages/how-we-work/howWeWork';
 import { Vaastu } from './pages/vaastu/vaastu';
+import { Freetier } from './pages/free-tier/freetier';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path='/how-we-work' element={<HowWeWork />} />
         <Route path='/schedule-session' element={<Schedule />} />
         <Route path='/schedule-session/session/:sessionId' element={<SuccessPage />} />
+        <Route path='/free-tier' element={<Freetier/>} />
         <Route path='/feedback' element={<RecordReview />} />
         <Route path='/terms&Conditions' element={<TermsAndConditions />} />
         <Route path='/privacy-policy' element={<PrivacyPolicy />} />
