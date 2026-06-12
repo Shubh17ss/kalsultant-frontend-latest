@@ -17,12 +17,12 @@ import { Vaastu } from './pages/vaastu/vaastu';
 import { Freetier } from './pages/free-tier/freetier';
 
 function App() {
-  // The home page renders its own 3D cosmic backdrop (with a richer starfield),
+  // Home and Vaastu render their own 3D backdrops (with richer starfields),
   // so the flat particles layer is only used on the other routes.
   const { pathname } = useLocation();
   return (
     <>
-      {pathname !== '/' && <ParticlesBackground />}
+      {pathname !== '/' && pathname !== '/vaastu' && <ParticlesBackground />}
       <Toaster position="top-center" reverseOrder={false} />
       <Routes>
         <Route path='/' element={<Home />} />

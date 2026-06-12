@@ -4,7 +4,7 @@ import { Stars, Line } from '@react-three/drei'
 import * as THREE from 'three'
 import './cosmic.css'
 
-const makeRadialTexture = (stops) => {
+export const makeRadialTexture = (stops) => {
     const size = 256
     const canvas = document.createElement('canvas')
     canvas.width = size
@@ -17,7 +17,7 @@ const makeRadialTexture = (stops) => {
     return new THREE.CanvasTexture(canvas)
 }
 
-const GlowSprite = ({ position, scale, stops, opacity = 1 }) => {
+export const GlowSprite = ({ position, scale, stops, opacity = 1 }) => {
     const texture = useMemo(() => makeRadialTexture(stops), [stops])
     return (
         <sprite position={position} scale={[scale, scale, 1]}>

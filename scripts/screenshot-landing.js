@@ -77,6 +77,18 @@ const run = async () => {
         await page.goto(`${URL}contact-us`, { waitUntil: 'domcontentloaded' })
         await page.waitForTimeout(2500)
         await page.screenshot({ path: path.join(OUT, `${device}_contact.png`) })
+
+        // vaastu: capture the house assembling at several scroll depths
+        await page.goto(`${URL}vaastu`, { waitUntil: 'networkidle' })
+        await page.waitForTimeout(2500)
+        for (const pct of [0, 35, 70, 100]) {
+            await page.evaluate((value) => {
+                const max = document.documentElement.scrollHeight - window.innerHeight
+                window.scrollTo({ top: (max * value) / 100, behavior: 'instant' })
+            }, pct)
+            await page.waitForTimeout(2000) // let the eased build catch up
+            await page.screenshot({ path: path.join(OUT, `${device}_vaastu_${pct}.png`) })
+        }
         if (device === 'mobile') {
             await page.evaluate(() => window.scrollBy(0, document.body.scrollHeight))
             await page.waitForTimeout(1500)
