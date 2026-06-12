@@ -73,6 +73,10 @@ const run = async () => {
         })
         await page.waitForTimeout(1500)
         await page.screenshot({ path: path.join(OUT, `${device}_about_team.png`) })
+
+        await page.goto(`${URL}contact-us`, { waitUntil: 'domcontentloaded' })
+        await page.waitForTimeout(2500)
+        await page.screenshot({ path: path.join(OUT, `${device}_contact.png`) })
         if (device === 'mobile') {
             await page.evaluate(() => window.scrollBy(0, document.body.scrollHeight))
             await page.waitForTimeout(1500)
