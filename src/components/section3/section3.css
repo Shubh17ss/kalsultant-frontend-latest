@@ -70,7 +70,7 @@
 .cosmicQuote {
     font-family: 'BaskervilleItalic', Georgia, serif;
     font-style: italic;
-    font-size: clamp(1.15rem, 2vw, 1.6rem);
+    font-size: clamp(1rem, 1.6vw, 1.3rem);
     line-height: 1.8;
     color: rgba(249, 246, 238, 0.5);
     margin: 0 0 2.4rem;
@@ -84,13 +84,13 @@
 }
 
 .finalCtaButton {
-    font-size: 1.15rem;
-    padding: 1.2rem 3rem;
+    font-size: 1rem;
+    padding: 1.05rem 2.6rem;
 }
 
 .finalCtaNote {
     font-family: 'FuturaNowReg', sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     letter-spacing: 1.6px;
     text-transform: uppercase;
     color: rgba(249, 246, 238, 0.42);

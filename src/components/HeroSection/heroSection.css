@@ -32,18 +32,18 @@ h3 {
 }
 
 .heroTitle {
-    font-family: 'FuturaNowXBlack', 'FuturaNowBold', sans-serif;
-    font-size: clamp(3.1rem, 8vw, 7.4rem);
-    line-height: 0.98;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    font-family: 'Baskerville', Georgia, serif;
+    font-size: clamp(2.2rem, 4.6vw, 4rem);
+    line-height: 1.18;
+    letter-spacing: 0.5px;
     color: #f9f6ee;
-    margin: 1.8rem 0 0;
+    margin: 1.6rem 0 0;
     text-shadow: 0 0 70px rgba(139, 108, 255, 0.4);
 }
 
 .heroTitle em {
-    font-style: normal;
+    font-family: 'BaskervilleItalic', Georgia, serif;
+    font-style: italic;
 }
 
 .heroSerif {
@@ -70,7 +70,7 @@ h3 {
 
 .heroTrustRow span {
     width: auto;
-    font-size: 0.82rem;
+    font-size: 0.72rem;
     line-height: 1.5;
     letter-spacing: 1.6px;
     text-transform: uppercase;
@@ -205,8 +205,8 @@ h3 {
     }
 
     .heroTitle {
-        font-size: clamp(1.6rem, 7vw, 3.4rem);
-        letter-spacing: 0.5px;
+        font-size: clamp(1.55rem, 6.6vw, 2.3rem);
+        letter-spacing: 0.3px;
     }
 
     .cosmicHero .cosmicEyebrow {

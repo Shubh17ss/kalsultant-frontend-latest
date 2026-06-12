@@ -50,8 +50,8 @@
     align-items: center;
     gap: 0.6rem;
     font-family: 'FuturaNowReg', sans-serif;
-    font-size: 0.74rem;
-    letter-spacing: 4.5px;
+    font-size: 0.66rem;
+    letter-spacing: 4px;
     text-transform: uppercase;
     color: var(--gold);
     padding: 0.55rem 1.4rem;
@@ -62,24 +62,24 @@
 }
 
 .cosmicH2 {
-    font-family: 'FuturaNowXBlack', 'FuturaNowBold', sans-serif;
-    font-size: clamp(2.3rem, 5vw, 4.2rem);
-    line-height: 1.04;
+    font-family: 'Baskerville', Georgia, serif;
+    font-size: clamp(1.7rem, 3.2vw, 2.8rem);
+    line-height: 1.25;
     letter-spacing: 0.5px;
     color: var(--ink);
-    margin: 1.6rem auto 0;
-    max-width: 920px;
+    margin: 1.5rem auto 0;
+    max-width: 780px;
     text-shadow: 0 0 50px rgba(139, 108, 255, 0.3);
 }
 
 .cosmicSerif {
     font-family: 'BaskervilleItalic', Georgia, serif;
     font-style: italic;
-    font-size: clamp(1.02rem, 1.5vw, 1.3rem);
+    font-size: clamp(0.92rem, 1.15vw, 1.08rem);
     color: var(--ink-dim);
     line-height: 1.85;
-    max-width: 640px;
-    margin: 1.8rem auto 0;
+    max-width: 560px;
+    margin: 1.6rem auto 0;
 }
 
 /* Gold shimmer text — works on any inline element */
@@ -109,13 +109,13 @@
     align-items: center;
     justify-content: center;
     gap: 0.6rem;
-    padding: 1.05rem 2.5rem;
+    padding: 0.95rem 2.2rem;
     border: none;
     border-radius: 999px;
     cursor: pointer;
     overflow: hidden;
     font-family: 'FuturaNowBold', sans-serif;
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     letter-spacing: 0.5px;
     color: #1d1305;
     background: linear-gradient(135deg, #ffd9a0 0%, #f0b85c 45%, #e09b3a 100%);
@@ -183,12 +183,12 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    padding: 1.05rem 2.3rem;
+    padding: 0.95rem 2rem;
     border: 1px solid rgba(249, 246, 238, 0.25);
     border-radius: 999px;
     cursor: pointer;
     font-family: 'FuturaNowReg', sans-serif;
-    font-size: 1.02rem;
+    font-size: 0.92rem;
     letter-spacing: 0.5px;
     color: var(--ink);
     background: rgba(255, 255, 255, 0.04);

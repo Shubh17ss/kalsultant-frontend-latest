@@ -1,17 +1,15 @@
 import React, { useEffect, useMemo, useRef } from 'react'
 import { Canvas, useFrame, extend } from '@react-three/fiber'
-import { Stars, shaderMaterial } from '@react-three/drei'
+import { Stars, Line, shaderMaterial } from '@react-three/drei'
 import * as THREE from 'three'
 import './cosmic.css'
 
-// Banded gas-giant surface with day/night terminator and golden rim light.
-const PlanetMaterial = shaderMaterial(
+// Cratered lunar surface with maria patches, day/night terminator and a soft warm rim.
+const MoonMaterial = shaderMaterial(
     {
-        uTime: 0,
-        uColorDeep: new THREE.Color('#120e2e'),
-        uColorBand: new THREE.Color('#4633a8'),
-        uColorHaze: new THREE.Color('#8b6cff'),
-        uRim: new THREE.Color('#ffc878'),
+        uColorLight: new THREE.Color('#a39f97'),
+        uColorDark: new THREE.Color('#57544d'),
+        uRim: new THREE.Color('#dfe6f2'),
         uLightDir: new THREE.Vector3(-2.5, 1.2, 2.0),
     },
     `
@@ -26,10 +24,8 @@ const PlanetMaterial = shaderMaterial(
     }
     `,
     `
-    uniform float uTime;
-    uniform vec3 uColorDeep;
-    uniform vec3 uColorBand;
-    uniform vec3 uColorHaze;
+    uniform vec3 uColorLight;
+    uniform vec3 uColorDark;
     uniform vec3 uRim;
     uniform vec3 uLightDir;
     varying vec3 vNormalW;
@@ -49,61 +45,42 @@ const PlanetMaterial = shaderMaterial(
             u.y
         );
     }
+    float fbm(vec2 p) {
+        float v = 0.0;
+        float a = 0.5;
+        for (int i = 0; i < 4; i++) {
+            v += a * noise(p);
+            p *= 2.1;
+            a *= 0.5;
+        }
+        return v;
+    }
 
     void main() {
-        float drift = uTime * 0.012;
-        float n = noise(vec2(vUv.x * 5.0 + drift, vUv.y * 9.0));
-        float bands = sin(vUv.y * 24.0 + n * 4.0 + uTime * 0.05) * 0.5 + 0.5;
-        bands = smoothstep(0.15, 0.85, bands);
-        vec3 base = mix(uColorDeep, uColorBand, bands);
-        base = mix(base, uColorHaze, noise(vec2(vUv.x * 3.0 - drift, vUv.y * 4.0)) * 0.25);
+        // large dark maria patches
+        float m = fbm(vUv * vec2(6.0, 5.0));
+        float maria = smoothstep(0.5, 0.72, m);
+        vec3 base = mix(uColorLight, uColorDark, maria * 0.85);
+
+        // fine regolith grain
+        base -= noise(vUv * 48.0) * 0.07;
+
+        // scattered crater shadows
+        float c = noise(vUv * 20.0);
+        base -= smoothstep(0.78, 0.95, c) * 0.22;
 
         float diff = clamp(dot(vNormalW, normalize(uLightDir)), 0.0, 1.0);
-        vec3 col = base * (0.16 + diff * 1.25);
+        vec3 col = base * (0.12 + diff * 1.3);
 
-        float fres = pow(1.0 - clamp(dot(vNormalV, vec3(0.0, 0.0, 1.0)), 0.0, 1.0), 2.6);
-        col += uRim * fres * (0.35 + diff * 0.85);
+        float fres = pow(1.0 - clamp(dot(vNormalV, vec3(0.0, 0.0, 1.0)), 0.0, 1.0), 3.0);
+        col += uRim * fres * (0.22 + diff * 0.5);
 
         gl_FragColor = vec4(col, 1.0);
     }
     `
 )
 
-// Saturn-style ring: gold near the planet fading to violet, with radial streaks.
-const RingMaterial = shaderMaterial(
-    {
-        uColorA: new THREE.Color('#ffc878'),
-        uColorB: new THREE.Color('#8b6cff'),
-    },
-    `
-    varying vec3 vPos;
-    void main() {
-        vPos = position;
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-    }
-    `,
-    `
-    uniform vec3 uColorA;
-    uniform vec3 uColorB;
-    varying vec3 vPos;
-
-    float hash(float p) {
-        return fract(sin(p * 127.1) * 43758.5453123);
-    }
-
-    void main() {
-        float r = length(vPos.xy);
-        float band = smoothstep(2.6, 2.78, r) * (1.0 - smoothstep(4.35, 4.6, r));
-        float gap = 1.0 - smoothstep(3.35, 3.42, r) * (1.0 - smoothstep(3.52, 3.6, r));
-        float streaks = 0.45 + 0.55 * hash(floor(r * 30.0));
-        vec3 col = mix(uColorA, uColorB, smoothstep(2.6, 4.6, r));
-        float alpha = band * gap * streaks * 0.55;
-        gl_FragColor = vec4(col, alpha);
-    }
-    `
-)
-
-extend({ PlanetMaterial, RingMaterial })
+extend({ MoonMaterial })
 
 const makeRadialTexture = (stops) => {
     const size = 256
@@ -133,58 +110,149 @@ const GlowSprite = ({ position, scale, stops, opacity = 1 }) => {
     )
 }
 
-const HALO_STOPS = [
-    [0, 'rgba(139, 108, 255, 0.5)'],
-    [0.5, 'rgba(139, 108, 255, 0.16)'],
-    [1, 'rgba(139, 108, 255, 0)'],
+const MOON_HALO_STOPS = [
+    [0, 'rgba(205, 212, 240, 0.4)'],
+    [0.5, 'rgba(205, 212, 240, 0.12)'],
+    [1, 'rgba(205, 212, 240, 0)'],
 ]
 
-const Planet = ({ isMobile }) => {
+const Moon = ({ isMobile }) => {
     const group = useRef()
     const sphere = useRef()
-    const planetMat = useRef()
-    const moon = useRef()
 
     const basePosition = useMemo(
-        () => (isMobile ? [0, 2.7, -3.4] : [3.6, -0.5, -1.2]),
+        () => (isMobile ? [0, 3.1, -3.8] : [4.9, -0.3, -2.8]),
         [isMobile]
     )
 
     useFrame((state, delta) => {
         const t = state.clock.elapsedTime
-        if (sphere.current) sphere.current.rotation.y += delta * 0.05
-        if (planetMat.current) planetMat.current.uTime = t
+        if (sphere.current) sphere.current.rotation.y += delta * 0.02
         if (group.current) {
             group.current.position.y =
                 basePosition[1] +
-                Math.sin(t * 0.35) * 0.12 +
+                Math.sin(t * 0.35) * 0.1 +
                 window.scrollY * (isMobile ? 0.0024 : 0.0014)
-            group.current.rotation.z = -0.1 + Math.sin(t * 0.08) * 0.05
-        }
-        if (moon.current) {
-            moon.current.position.set(
-                Math.cos(t * 0.22) * 3.6,
-                Math.sin(t * 0.22) * 0.5,
-                Math.sin(t * 0.22) * 1.6
-            )
         }
     })
 
     return (
-        <group ref={group} position={basePosition} scale={isMobile ? 0.6 : 1}>
-            <GlowSprite position={[0, 0, -0.8]} scale={7.2} stops={HALO_STOPS} />
-            <mesh ref={sphere}>
+        <group ref={group} position={basePosition} scale={isMobile ? 0.55 : 0.9}>
+            <GlowSprite position={[0, 0, -0.8]} scale={6.4} stops={MOON_HALO_STOPS} />
+            <mesh ref={sphere} rotation={[0.3, 1.2, 0]}>
                 <sphereGeometry args={[2, 64, 64]} />
-                <planetMaterial ref={planetMat} key={PlanetMaterial.key} />
+                <moonMaterial key={MoonMaterial.key} />
             </mesh>
-            <mesh rotation={[Math.PI / 2.35, 0, 0.4]}>
-                <ringMaterial key={RingMaterial.key} transparent side={THREE.DoubleSide} depthWrite={false} />
-                <ringGeometry args={[2.6, 4.6, 128]} />
-            </mesh>
-            <mesh ref={moon}>
-                <sphereGeometry args={[0.22, 24, 24]} />
-                <meshStandardMaterial color="#cfc6bb" roughness={0.9} />
-            </mesh>
+        </group>
+    )
+}
+
+// ---------------- comet on a scroll-driven trajectory ----------------
+
+const COMET_HEAD_STOPS = [
+    [0, 'rgba(240, 252, 255, 1)'],
+    [0.18, 'rgba(170, 226, 255, 0.7)'],
+    [0.5, 'rgba(120, 190, 255, 0.18)'],
+    [1, 'rgba(120, 190, 255, 0)'],
+]
+
+const COMET_TRAIL_STOPS = [
+    [0, 'rgba(170, 226, 255, 0.85)'],
+    [0.5, 'rgba(130, 180, 255, 0.2)'],
+    [1, 'rgba(130, 180, 255, 0)'],
+]
+
+const TRAIL_COUNT = 26
+const TRAIL_SPACING = 0.011
+
+const scrollProgress = () => {
+    const max = document.documentElement.scrollHeight - window.innerHeight
+    return max > 0 ? window.scrollY / max : 0
+}
+
+const Comet = ({ isMobile }) => {
+    const head = useRef()
+    const trailRefs = useRef([])
+    const progress = useRef(0)
+
+    const curve = useMemo(() => {
+        const points = isMobile
+            ? [
+                new THREE.Vector3(-5, 6, -4),
+                new THREE.Vector3(-2.2, 3, -3),
+                new THREE.Vector3(1.6, 0, -2.5),
+                new THREE.Vector3(-1.5, -3, -3.5),
+                new THREE.Vector3(4, -6, -5),
+            ]
+            : [
+                new THREE.Vector3(-11, 5, -4),
+                new THREE.Vector3(-4.5, 2.6, -2.5),
+                new THREE.Vector3(1.5, 0.6, -2),
+                new THREE.Vector3(7, -1.8, -3),
+                new THREE.Vector3(12.5, -4.5, -6),
+            ]
+        return new THREE.CatmullRomCurve3(points)
+    }, [isMobile])
+
+    const pathPoints = useMemo(() => curve.getPoints(140), [curve])
+
+    const headTexture = useMemo(() => makeRadialTexture(COMET_HEAD_STOPS), [])
+    const trailTexture = useMemo(() => makeRadialTexture(COMET_TRAIL_STOPS), [])
+
+    useFrame(() => {
+        // ease toward the scroll position so the comet glides, not jumps
+        progress.current += (scrollProgress() - progress.current) * 0.07
+        const t = THREE.MathUtils.clamp(progress.current, 0, 1)
+
+        if (head.current) head.current.position.copy(curve.getPoint(t))
+
+        for (let i = 0; i < TRAIL_COUNT; i++) {
+            const sprite = trailRefs.current[i]
+            if (!sprite) continue
+            const ti = t - (i + 1) * TRAIL_SPACING
+            const fade = 1 - (i + 1) / TRAIL_COUNT
+            if (ti <= 0) {
+                sprite.material.opacity = 0
+                continue
+            }
+            sprite.position.copy(curve.getPoint(ti))
+            sprite.material.opacity = 0.5 * fade
+            const s = 0.55 * fade + 0.06
+            sprite.scale.set(s, s, 1)
+        }
+    })
+
+    return (
+        <group>
+            <Line
+                points={pathPoints}
+                color="#9fd8ff"
+                transparent
+                opacity={0.12}
+                dashed
+                dashSize={0.3}
+                gapSize={0.22}
+                lineWidth={1}
+            />
+            <sprite ref={head} scale={[1.5, 1.5, 1]}>
+                <spriteMaterial
+                    map={headTexture}
+                    transparent
+                    blending={THREE.AdditiveBlending}
+                    depthWrite={false}
+                />
+            </sprite>
+            {Array.from({ length: TRAIL_COUNT }).map((_, i) => (
+                <sprite key={i} ref={(el) => (trailRefs.current[i] = el)}>
+                    <spriteMaterial
+                        map={trailTexture}
+                        transparent
+                        opacity={0}
+                        blending={THREE.AdditiveBlending}
+                        depthWrite={false}
+                    />
+                </sprite>
+            ))}
         </group>
     )
 }
@@ -264,7 +332,8 @@ export const CosmicScene = () => {
                 <GlowSprite position={[-8, 3, -18]} scale={20} stops={NEBULA_GOLD_STOPS} />
                 <GlowSprite position={[9, -5, -18]} scale={24} stops={NEBULA_VIOLET_STOPS} />
                 <GlowSprite position={[2, 8, -20]} scale={17} stops={NEBULA_TEAL_STOPS} />
-                <Planet isMobile={isMobile} />
+                <Moon isMobile={isMobile} />
+                <Comet isMobile={isMobile} />
                 <Rig />
             </Canvas>
         </div>
