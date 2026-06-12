@@ -25,19 +25,19 @@
 
 .navBarContainer .navBarlinksContainer h3 {
     margin: 0 2rem;
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
     color: #f9f6eecc;
     transition: 0.3s ease;
-    font-family: 'FuturaNowLight', 'sans-serif';
+    font-family: 'Baskerville', Georgia, serif;
 }
 
 .navBarContainer div h3 {
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
     color: #f9f6eecc;
     transition: 0.3s ease;
-    font-family: 'FuturaNowLight', 'sans-serif';
+    font-family: 'Baskerville', Georgia, serif;
     margin-left: 0.3rem;
 }
 

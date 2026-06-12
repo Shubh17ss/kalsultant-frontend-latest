@@ -1,86 +1,9 @@
-import React, { useEffect, useMemo, useRef } from 'react'
-import { Canvas, useFrame, extend } from '@react-three/fiber'
-import { Stars, Line, shaderMaterial } from '@react-three/drei'
+import React, { Suspense, useEffect, useMemo, useRef } from 'react'
+import { Canvas, useFrame, useLoader } from '@react-three/fiber'
+import { Stars, Line } from '@react-three/drei'
 import * as THREE from 'three'
+import moonMap from '../../assets/textures/moon_1024.jpg'
 import './cosmic.css'
-
-// Cratered lunar surface with maria patches, day/night terminator and a soft warm rim.
-const MoonMaterial = shaderMaterial(
-    {
-        uColorLight: new THREE.Color('#a39f97'),
-        uColorDark: new THREE.Color('#57544d'),
-        uRim: new THREE.Color('#dfe6f2'),
-        uLightDir: new THREE.Vector3(-2.5, 1.2, 2.0),
-    },
-    `
-    varying vec3 vNormalW;
-    varying vec3 vNormalV;
-    varying vec2 vUv;
-    void main() {
-        vUv = uv;
-        vNormalW = normalize(mat3(modelMatrix) * normal);
-        vNormalV = normalize(normalMatrix * normal);
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-    }
-    `,
-    `
-    uniform vec3 uColorLight;
-    uniform vec3 uColorDark;
-    uniform vec3 uRim;
-    uniform vec3 uLightDir;
-    varying vec3 vNormalW;
-    varying vec3 vNormalV;
-    varying vec2 vUv;
-
-    float hash(vec2 p) {
-        return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
-    }
-    float noise(vec2 p) {
-        vec2 i = floor(p);
-        vec2 f = fract(p);
-        vec2 u = f * f * (3.0 - 2.0 * f);
-        return mix(
-            mix(hash(i), hash(i + vec2(1.0, 0.0)), u.x),
-            mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x),
-            u.y
-        );
-    }
-    float fbm(vec2 p) {
-        float v = 0.0;
-        float a = 0.5;
-        for (int i = 0; i < 4; i++) {
-            v += a * noise(p);
-            p *= 2.1;
-            a *= 0.5;
-        }
-        return v;
-    }
-
-    void main() {
-        // large dark maria patches
-        float m = fbm(vUv * vec2(6.0, 5.0));
-        float maria = smoothstep(0.5, 0.72, m);
-        vec3 base = mix(uColorLight, uColorDark, maria * 0.85);
-
-        // fine regolith grain
-        base -= noise(vUv * 48.0) * 0.07;
-
-        // scattered crater shadows
-        float c = noise(vUv * 20.0);
-        base -= smoothstep(0.78, 0.95, c) * 0.22;
-
-        float diff = clamp(dot(vNormalW, normalize(uLightDir)), 0.0, 1.0);
-        vec3 col = base * (0.12 + diff * 1.3);
-
-        float fres = pow(1.0 - clamp(dot(vNormalV, vec3(0.0, 0.0, 1.0)), 0.0, 1.0), 3.0);
-        col += uRim * fres * (0.22 + diff * 0.5);
-
-        gl_FragColor = vec4(col, 1.0);
-    }
-    `
-)
-
-extend({ MoonMaterial })
 
 const makeRadialTexture = (stops) => {
     const size = 256
@@ -111,14 +34,22 @@ const GlowSprite = ({ position, scale, stops, opacity = 1 }) => {
 }
 
 const MOON_HALO_STOPS = [
-    [0, 'rgba(205, 212, 240, 0.4)'],
-    [0.5, 'rgba(205, 212, 240, 0.12)'],
+    [0, 'rgba(205, 212, 240, 0.35)'],
+    [0.5, 'rgba(205, 212, 240, 0.1)'],
     [1, 'rgba(205, 212, 240, 0)'],
 ]
 
+// Real lunar albedo (NASA-derived, from the three.js example texture set).
 const Moon = ({ isMobile }) => {
     const group = useRef()
     const sphere = useRef()
+    const smoothScroll = useRef(0)
+    const texture = useLoader(THREE.TextureLoader, moonMap)
+
+    useEffect(() => {
+        texture.anisotropy = 8
+        texture.colorSpace = THREE.SRGBColorSpace
+    }, [texture])
 
     const basePosition = useMemo(
         () => (isMobile ? [0, 3.1, -3.8] : [4.9, -0.3, -2.8]),
@@ -127,21 +58,23 @@ const Moon = ({ isMobile }) => {
 
     useFrame((state, delta) => {
         const t = state.clock.elapsedTime
-        if (sphere.current) sphere.current.rotation.y += delta * 0.02
+        // ease toward the real scroll position so wheel steps don't jump the moon
+        smoothScroll.current += (window.scrollY - smoothScroll.current) * Math.min(1, delta * 5)
+        if (sphere.current) sphere.current.rotation.y += delta * 0.012
         if (group.current) {
             group.current.position.y =
                 basePosition[1] +
                 Math.sin(t * 0.35) * 0.1 +
-                window.scrollY * (isMobile ? 0.0024 : 0.0014)
+                smoothScroll.current * (isMobile ? 0.0024 : 0.0014)
         }
     })
 
     return (
         <group ref={group} position={basePosition} scale={isMobile ? 0.55 : 0.9}>
             <GlowSprite position={[0, 0, -0.8]} scale={6.4} stops={MOON_HALO_STOPS} />
-            <mesh ref={sphere} rotation={[0.3, 1.2, 0]}>
-                <sphereGeometry args={[2, 64, 64]} />
-                <moonMaterial key={MoonMaterial.key} />
+            <mesh ref={sphere} rotation={[0.25, 2.1, 0]}>
+                <sphereGeometry args={[2, 96, 96]} />
+                <meshStandardMaterial map={texture} roughness={1} metalness={0} />
             </mesh>
         </group>
     )
@@ -199,9 +132,9 @@ const Comet = ({ isMobile }) => {
     const headTexture = useMemo(() => makeRadialTexture(COMET_HEAD_STOPS), [])
     const trailTexture = useMemo(() => makeRadialTexture(COMET_TRAIL_STOPS), [])
 
-    useFrame(() => {
-        // ease toward the scroll position so the comet glides, not jumps
-        progress.current += (scrollProgress() - progress.current) * 0.07
+    useFrame((state, delta) => {
+        // frame-rate independent easing toward the scroll position
+        progress.current += (scrollProgress() - progress.current) * Math.min(1, delta * 4.5)
         const t = THREE.MathUtils.clamp(progress.current, 0, 1)
 
         if (head.current) head.current.position.copy(curve.getPoint(t))
@@ -260,6 +193,7 @@ const Comet = ({ isMobile }) => {
 // Eases the camera toward the pointer and dips it as the page scrolls.
 const Rig = () => {
     const mouse = useRef({ x: 0, y: 0 })
+    const smoothScroll = useRef(0)
 
     useEffect(() => {
         const onMove = (event) => {
@@ -270,10 +204,11 @@ const Rig = () => {
         return () => window.removeEventListener('mousemove', onMove)
     }, [])
 
-    useFrame((state) => {
+    useFrame((state, delta) => {
         const camera = state.camera
+        smoothScroll.current += (window.scrollY - smoothScroll.current) * Math.min(1, delta * 5)
         const targetX = mouse.current.x * 0.5
-        const targetY = -mouse.current.y * 0.3 - Math.min(window.scrollY * 0.0006, 1)
+        const targetY = -mouse.current.y * 0.3 - Math.min(smoothScroll.current * 0.0006, 1)
         camera.position.x += (targetX - camera.position.x) * 0.045
         camera.position.y += (targetY - camera.position.y) * 0.045
         camera.lookAt(0, 0, -1)
@@ -317,8 +252,8 @@ export const CosmicScene = () => {
                 gl={{ antialias: true }}
             >
                 <color attach="background" args={['#030210']} />
-                <ambientLight intensity={0.3} />
-                <directionalLight position={[-6, 3, 4]} intensity={1.6} color="#ffd9a6" />
+                <ambientLight intensity={0.35} />
+                <directionalLight position={[-6, 3, 4]} intensity={2.6} color="#fff2dc" />
                 <Stars
                     radius={240}
                     depth={70}
@@ -332,7 +267,9 @@ export const CosmicScene = () => {
                 <GlowSprite position={[-8, 3, -18]} scale={20} stops={NEBULA_GOLD_STOPS} />
                 <GlowSprite position={[9, -5, -18]} scale={24} stops={NEBULA_VIOLET_STOPS} />
                 <GlowSprite position={[2, 8, -20]} scale={17} stops={NEBULA_TEAL_STOPS} />
-                <Moon isMobile={isMobile} />
+                <Suspense fallback={null}>
+                    <Moon isMobile={isMobile} />
+                </Suspense>
                 <Comet isMobile={isMobile} />
                 <Rig />
             </Canvas>

@@ -37,21 +37,19 @@ export const Parallax = ({ children, speed = 0.12, className = '', style = {}, .
         if (!el) return
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
         let frame = 0
-        const update = () => {
-            const rect = el.getBoundingClientRect()
-            const offset = (rect.top + rect.height / 2 - window.innerHeight / 2) * -speed
-            el.style.transform = `translate3d(0, ${offset.toFixed(1)}px, 0)`
+        let current = null
+        // Measure the (untransformed) parent — measuring the element itself would
+        // include its own translate and feed back into the next offset.
+        // Continuous eased loop so discrete wheel steps glide instead of jumping.
+        const tick = () => {
+            const rect = (el.parentElement || el).getBoundingClientRect()
+            const target = (rect.top + rect.height / 2 - window.innerHeight / 2) * -speed
+            current = current === null ? target : current + (target - current) * 0.1
+            el.style.transform = `translate3d(0, ${current.toFixed(2)}px, 0)`
+            frame = requestAnimationFrame(tick)
         }
-        const onScroll = () => {
-            cancelAnimationFrame(frame)
-            frame = requestAnimationFrame(update)
-        }
-        update()
-        window.addEventListener('scroll', onScroll, { passive: true })
-        return () => {
-            window.removeEventListener('scroll', onScroll)
-            cancelAnimationFrame(frame)
-        }
+        frame = requestAnimationFrame(tick)
+        return () => cancelAnimationFrame(frame)
     }, [speed])
 
     return (
