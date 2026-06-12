@@ -68,10 +68,11 @@
 }
 
 .cosmicQuote {
-    font-family: 'BaskervilleItalic', Georgia, serif;
-    font-style: italic;
+    font-family: 'FuturaNowLight', sans-serif;
+    font-style: normal;
     font-size: clamp(1rem, 1.6vw, 1.3rem);
     line-height: 1.8;
+    letter-spacing: 0.5px;
     color: rgba(249, 246, 238, 0.5);
     margin: 0 0 2.4rem;
 }

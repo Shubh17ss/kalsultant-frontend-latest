@@ -29,7 +29,7 @@
     cursor: pointer;
     color: #f9f6eecc;
     transition: 0.3s ease;
-    font-family: 'Baskerville', Georgia, serif;
+    font-family: 'FuturaNowReg', sans-serif;
 }
 
 .navBarContainer div h3 {
@@ -37,7 +37,7 @@
     cursor: pointer;
     color: #f9f6eecc;
     transition: 0.3s ease;
-    font-family: 'Baskerville', Georgia, serif;
+    font-family: 'FuturaNowReg', sans-serif;
     margin-left: 0.3rem;
 }
 

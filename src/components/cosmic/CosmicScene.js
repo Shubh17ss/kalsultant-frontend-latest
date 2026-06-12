@@ -1,8 +1,7 @@
-import React, { Suspense, useEffect, useMemo, useRef } from 'react'
-import { Canvas, useFrame, useLoader } from '@react-three/fiber'
+import React, { useEffect, useMemo, useRef } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
 import { Stars, Line } from '@react-three/drei'
 import * as THREE from 'three'
-import moonMap from '../../assets/textures/moon_1024.jpg'
 import './cosmic.css'
 
 const makeRadialTexture = (stops) => {
@@ -30,53 +29,6 @@ const GlowSprite = ({ position, scale, stops, opacity = 1 }) => {
                 depthWrite={false}
             />
         </sprite>
-    )
-}
-
-const MOON_HALO_STOPS = [
-    [0, 'rgba(205, 212, 240, 0.35)'],
-    [0.5, 'rgba(205, 212, 240, 0.1)'],
-    [1, 'rgba(205, 212, 240, 0)'],
-]
-
-// Real lunar albedo (NASA-derived, from the three.js example texture set).
-const Moon = ({ isMobile }) => {
-    const group = useRef()
-    const sphere = useRef()
-    const smoothScroll = useRef(0)
-    const texture = useLoader(THREE.TextureLoader, moonMap)
-
-    useEffect(() => {
-        texture.anisotropy = 8
-        texture.colorSpace = THREE.SRGBColorSpace
-    }, [texture])
-
-    const basePosition = useMemo(
-        () => (isMobile ? [0, 3.1, -3.8] : [4.9, -0.3, -2.8]),
-        [isMobile]
-    )
-
-    useFrame((state, delta) => {
-        const t = state.clock.elapsedTime
-        // ease toward the real scroll position so wheel steps don't jump the moon
-        smoothScroll.current += (window.scrollY - smoothScroll.current) * Math.min(1, delta * 5)
-        if (sphere.current) sphere.current.rotation.y += delta * 0.012
-        if (group.current) {
-            group.current.position.y =
-                basePosition[1] +
-                Math.sin(t * 0.35) * 0.1 +
-                smoothScroll.current * (isMobile ? 0.0024 : 0.0014)
-        }
-    })
-
-    return (
-        <group ref={group} position={basePosition} scale={isMobile ? 0.55 : 0.9}>
-            <GlowSprite position={[0, 0, -0.8]} scale={6.4} stops={MOON_HALO_STOPS} />
-            <mesh ref={sphere} rotation={[0.25, 2.1, 0]}>
-                <sphereGeometry args={[2, 96, 96]} />
-                <meshStandardMaterial map={texture} roughness={1} metalness={0} />
-            </mesh>
-        </group>
     )
 }
 
@@ -252,8 +204,6 @@ export const CosmicScene = () => {
                 gl={{ antialias: true }}
             >
                 <color attach="background" args={['#030210']} />
-                <ambientLight intensity={0.35} />
-                <directionalLight position={[-6, 3, 4]} intensity={2.6} color="#fff2dc" />
                 <Stars
                     radius={240}
                     depth={70}
@@ -267,9 +217,6 @@ export const CosmicScene = () => {
                 <GlowSprite position={[-8, 3, -18]} scale={20} stops={NEBULA_GOLD_STOPS} />
                 <GlowSprite position={[9, -5, -18]} scale={24} stops={NEBULA_VIOLET_STOPS} />
                 <GlowSprite position={[2, 8, -20]} scale={17} stops={NEBULA_TEAL_STOPS} />
-                <Suspense fallback={null}>
-                    <Moon isMobile={isMobile} />
-                </Suspense>
                 <Comet isMobile={isMobile} />
                 <Rig />
             </Canvas>

@@ -16,6 +16,12 @@
 }
 
 @font-face {
+  font-family: 'BrandBe';
+  src: url('./fonts/Brandbe Extra Bold.otf') format('opentype');
+  font-weight: 800;
+}
+
+@font-face {
   font-family: 'FuturaNowXBlack';
   src: url('./fonts/FuturaNow/FuturaNowHeadlineExtraBlack.ttf') format('truetype');
   font-weight: 900;

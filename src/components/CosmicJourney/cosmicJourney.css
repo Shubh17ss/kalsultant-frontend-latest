@@ -168,8 +168,8 @@
     width: auto;
     font-size: 5.5rem;
     line-height: 1;
-    font-family: 'BaskervilleItalic', Georgia, serif;
-    font-style: italic;
+    font-family: 'BrandBe', 'FuturaNowBold', sans-serif;
+    font-style: normal;
     color: rgba(249, 246, 238, 0.07);
     pointer-events: none;
 }
@@ -178,7 +178,7 @@
     width: auto;
     font-size: 1.2rem;
     line-height: 1.3;
-    font-family: 'Baskerville', Georgia, serif;
+    font-family: 'BrandBe', 'FuturaNowBold', sans-serif;
     color: #f9f6ee;
 }
 
