@@ -1,106 +1,213 @@
-.howWeWorkContainer {
+.hwwPage {
+    position: relative;
+    z-index: 1;
     width: 100%;
     min-height: 100vh;
-    height: fit-content;
-    margin-top: 60px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 10rem;
+    overflow-x: hidden;
+    text-align: center;
+    color: #f9f6ee;
 }
 
-.howWeWorkContainer .hwwHeroSection {
+/* ---------------- hero ---------------- */
+.hwwHero {
+    box-sizing: border-box;
     width: 100%;
-    height: 80vh;
     display: flex;
-    justify-content: flex-start;
+    flex-direction: column;
     align-items: center;
-    margin-bottom: 20vh;
+    padding: 9rem 1.5rem 3.5rem;
 }
 
-.howWeWorkContainer .hwwHeroSection .left {
-    width: 40%;
+.hwwTitle em {
+    font-style: normal;
+}
+
+.hwwSub {
+    max-width: 540px;
+}
+
+/* ---------------- slider ---------------- */
+.hwwSliderSection {
+    width: 100%;
+    padding: 1.5rem 0 3rem;
+}
+
+.hwwSwiper {
+    width: min(1180px, 96%);
+    padding: 1.5rem 0 3.2rem;
+}
+
+.hwwSwiper .swiper-slide {
+    height: auto;
+    opacity: 0.3;
+    transform: scale(0.93);
+    transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.hwwSwiper .swiper-slide-active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.hwwSlide {
+    position: relative;
+    box-sizing: border-box;
     height: 100%;
+    min-height: 23rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
-}
-
-.howWeWorkContainer .hwwHeroSection .middle {
-    width: 20%;
-}
-
-.howWeWorkContainer .hwwHeroSection .right {
-    width: 40%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: flex-start;
+    text-align: left;
+    padding: 2.4rem 2.2rem 2.2rem;
+    border-radius: 1.1rem;
+    border: 1px solid rgba(249, 246, 238, 0.12);
+    background: linear-gradient(165deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015));
+    backdrop-filter: blur(8px);
+    overflow: hidden;
 }
 
-.howWeWorkContainer .hwwHeroSection strong {
-    font-size: 6rem;
+.hwwSlideNumber {
+    position: absolute;
+    top: -1.2rem;
+    right: 0.6rem;
+    width: auto;
+    font-size: 7rem;
+    line-height: 1;
+    font-family: 'BrandBe', 'FuturaNowBold', sans-serif;
+    color: rgba(249, 246, 238, 0.06);
+    pointer-events: none;
 }
 
-.howWeWorkContainer .lastSection {
-    width: 100%;
-    height: 80vh;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    flex-direction: column;
+.hwwSlideTag {
+    width: auto;
+    font-size: 0.62rem;
+    line-height: 1.4;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-family: 'FuturaNowReg', sans-serif;
+    color: #f0b85c;
+    text-shadow: 0 0 12px rgba(240, 184, 92, 0.5);
 }
 
-.howWeWorkContainer .lastSection strong:nth-child(1) {
-    font-size: 4rem;
-    margin-bottom: 10%;
+.hwwSlideTitle {
+    font-family: 'BrandBe', 'FuturaNowBold', sans-serif;
+    font-size: 1.45rem;
+    line-height: 1.2;
+    color: #f9f6ee;
+    margin: 0.9rem 0 0;
 }
 
-.howWeWorkContainer .lastSection strong:nth-child(2) {
-    font-size: 1.2rem;
-    width: 60%;
+.hwwSlideBody {
     font-family: 'FuturaNowLight', sans-serif;
-    color:rgba(255,255,255,0.3);
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: rgba(249, 246, 238, 0.62);
+    margin: 1rem 0 0;
 }
 
+.hwwSlidePoints {
+    list-style: none;
+    margin: 1.3rem 0 0;
+    padding: 0;
+}
 
-@media screen and (max-width:1000px) {
-    .howWeWorkContainer .hwwHeroSection {
-        flex-direction: column;
-        justify-content: center;
-        margin-bottom: 2rem;
+.hwwSlidePoints li {
+    font-family: 'FuturaNowReg', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    line-height: 1.6;
+    text-transform: uppercase;
+    color: rgba(249, 246, 238, 0.5);
+    margin-bottom: 0.5rem;
+}
+
+/* swiper controls, on-theme */
+.hwwSwiper .swiper-pagination-bullet {
+    background: rgba(249, 246, 238, 0.35);
+    opacity: 1;
+}
+
+.hwwSwiper .swiper-pagination-bullet-active {
+    background: #f0b85c;
+    box-shadow: 0 0 10px rgba(240, 184, 92, 0.7);
+}
+
+.hwwSwiper .swiper-button-prev,
+.hwwSwiper .swiper-button-next {
+    color: #f0b85c;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 50%;
+    border: 1px solid rgba(240, 184, 92, 0.35);
+    background: rgba(3, 2, 16, 0.55);
+    backdrop-filter: blur(6px);
+    transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.hwwSwiper .swiper-button-prev:hover,
+.hwwSwiper .swiper-button-next:hover {
+    border-color: rgba(240, 184, 92, 0.8);
+    background: rgba(240, 184, 92, 0.12);
+}
+
+.hwwSwiper .swiper-button-prev::after,
+.hwwSwiper .swiper-button-next::after {
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.hwwSwipeHint {
+    font-family: 'FuturaNowReg', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: rgba(249, 246, 238, 0.4);
+    margin: 0;
+}
+
+/* ---------------- outro ---------------- */
+.hwwOutro {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4.5rem 1.5rem 7rem;
+}
+
+.hwwOutroTitle em {
+    font-style: normal;
+}
+
+.hwwOutroNote {
+    max-width: 540px;
+}
+
+.hwwOutro .ctaPrimary {
+    margin-top: 2.4rem;
+}
+
+/* ---------------- mobile ---------------- */
+@media screen and (max-width: 1000px) {
+    .hwwHero {
+        padding: 7rem 1.2rem 2.5rem;
     }
 
-    .howWeWorkContainer .hwwHeroSection .left {
-        width: 90%;
-        height: fit-content;
-        align-self: flex-start;
-    }
-    .howWeWorkContainer .hwwHeroSection .middle{
-        margin:2rem 0;
-    }
-    .howWeWorkContainer .hwwHeroSection .right {
-        width: 90%;
-        align-self: flex-end;
-        height: fit-content;
+    .hwwSlide {
+        min-height: 25rem;
+        padding: 2rem 1.6rem 1.8rem;
     }
 
-    .howWeWorkContainer .hwwHeroSection strong {
-        font-size: 3rem;
+    .hwwSlideNumber {
+        font-size: 5.5rem;
     }
-    .howWeWorkContainer .lastSection {
-        height: 50vh;
-    }
-    .howWeWorkContainer .lastSection strong:nth-child(1){
-        font-size: 2.5rem;
-        width: 90%;
-    }
-    .howWeWorkContainer .lastSection strong:nth-child(2){
-        font-size: 1rem;
-        width: 85%;
 
+    .hwwOutro {
+        padding: 3.5rem 1.2rem 5rem;
+    }
+
+    .hwwOutro .ctaPrimary {
+        width: min(86%, 22rem);
+        box-sizing: border-box;
     }
 }

@@ -48,8 +48,24 @@ const run = async () => {
         await page.goto(`${URL}pricing`, { waitUntil: 'networkidle' })
         await page.waitForTimeout(2200)
         await page.screenshot({ path: path.join(OUT, `${device}_pricing.png`) })
+
+        await page.goto(`${URL}how-we-work`, { waitUntil: 'networkidle' })
+        await page.waitForTimeout(2200)
+        await page.screenshot({ path: path.join(OUT, `${device}_hww.png`) })
+        // advance the step deck a couple of slides
+        const next = page.locator('.hwwSwiper .swiper-button-next')
+        if (await next.isVisible().catch(() => false)) {
+            await next.click()
+            await next.click()
+        } else {
+            await page.locator('.hwwSwiper').hover()
+            await page.mouse.wheel(0, 0)
+            await page.locator('.hwwSwiper .swiper-pagination-bullet').nth(2).click()
+        }
+        await page.waitForTimeout(1200)
+        await page.screenshot({ path: path.join(OUT, `${device}_hww_slide3.png`) })
         if (device === 'mobile') {
-            await page.locator('.pricingFootnote').scrollIntoViewIfNeeded()
+            await page.evaluate(() => window.scrollBy(0, document.body.scrollHeight))
             await page.waitForTimeout(1500)
             await page.screenshot({ path: path.join(OUT, `${device}_pricing_bottom.png`) })
         }
