@@ -64,6 +64,15 @@ const run = async () => {
         }
         await page.waitForTimeout(1200)
         await page.screenshot({ path: path.join(OUT, `${device}_hww_slide3.png`) })
+
+        await page.goto(`${URL}about-us`, { waitUntil: 'networkidle' })
+        await page.waitForTimeout(2200)
+        await page.screenshot({ path: path.join(OUT, `${device}_about.png`) })
+        await page.evaluate(() => {
+            document.querySelector('.auTeam').scrollIntoView({ block: 'center' })
+        })
+        await page.waitForTimeout(1500)
+        await page.screenshot({ path: path.join(OUT, `${device}_about_team.png`) })
         if (device === 'mobile') {
             await page.evaluate(() => window.scrollBy(0, document.body.scrollHeight))
             await page.waitForTimeout(1500)
