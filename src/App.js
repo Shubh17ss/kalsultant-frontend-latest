@@ -4,7 +4,7 @@ import { Contact } from './pages/contact-us/contact';
 import { Home } from './pages/Home/home';
 import { Pricing } from './pages/Pricing/pricing'
 import { Schedule } from './pages/schedule-session/schedule';
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast';
 import { SuccessPage } from './pages/schedule-session/components/successPage';
 import { RecordReview } from './pages/record-review/recordReview';
@@ -17,9 +17,12 @@ import { Vaastu } from './pages/vaastu/vaastu';
 import { Freetier } from './pages/free-tier/freetier';
 
 function App() {
+  // The home page renders its own 3D cosmic backdrop (with a richer starfield),
+  // so the flat particles layer is only used on the other routes.
+  const { pathname } = useLocation();
   return (
     <>
-      <ParticlesBackground />
+      {pathname !== '/' && <ParticlesBackground />}
       <Toaster position="top-center" reverseOrder={false} />
       <Routes>
         <Route path='/' element={<Home />} />

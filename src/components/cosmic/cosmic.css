@@ -1,0 +1,229 @@
+/* ============================================================
+   Shared cosmic design system — tokens, reveals, CTAs, headings
+   ============================================================ */
+
+:root {
+    --ink: #f9f6ee;
+    --ink-dim: rgba(249, 246, 238, 0.62);
+    --ink-faint: rgba(249, 246, 238, 0.4);
+    --gold: #f0b85c;
+    --gold-bright: #ffd9a0;
+    --gold-deep: #e09b3a;
+    --violet: #8b6cff;
+    --space-deep: #030210;
+}
+
+/* Fixed 3D backdrop behind the whole landing page */
+.cosmicSceneFixed {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.cosmicSceneFixed canvas {
+    display: block;
+}
+
+/* ---------------- scroll reveal ---------------- */
+.reveal {
+    opacity: 0;
+    transform: translateY(46px);
+    filter: blur(10px);
+    transition:
+        opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 1s cubic-bezier(0.16, 1, 0.3, 1),
+        filter 1s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--reveal-delay, 0s);
+    will-change: opacity, transform, filter;
+}
+
+.reveal.revealed {
+    opacity: 1;
+    transform: none;
+    filter: none;
+}
+
+/* ---------------- shared headings ---------------- */
+.cosmicEyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'FuturaNowReg', sans-serif;
+    font-size: 0.74rem;
+    letter-spacing: 4.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding: 0.55rem 1.4rem;
+    border: 1px solid rgba(240, 184, 92, 0.35);
+    border-radius: 999px;
+    background: rgba(240, 184, 92, 0.06);
+    backdrop-filter: blur(6px);
+}
+
+.cosmicH2 {
+    font-family: 'FuturaNowXBlack', 'FuturaNowBold', sans-serif;
+    font-size: clamp(2.3rem, 5vw, 4.2rem);
+    line-height: 1.04;
+    letter-spacing: 0.5px;
+    color: var(--ink);
+    margin: 1.6rem auto 0;
+    max-width: 920px;
+    text-shadow: 0 0 50px rgba(139, 108, 255, 0.3);
+}
+
+.cosmicSerif {
+    font-family: 'BaskervilleItalic', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(1.02rem, 1.5vw, 1.3rem);
+    color: var(--ink-dim);
+    line-height: 1.85;
+    max-width: 640px;
+    margin: 1.8rem auto 0;
+}
+
+/* Gold shimmer text — works on any inline element */
+.goldShimmer {
+    width: auto;
+    font: inherit;
+    line-height: inherit;
+    background: linear-gradient(110deg, #f0b85c 20%, #fff3dd 40%, #ffd9a0 52%, #f0b85c 68%);
+    background-size: 220% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: goldShimmerSweep 5s linear infinite;
+}
+
+@keyframes goldShimmerSweep {
+    to {
+        background-position: -220% center;
+    }
+}
+
+/* ---------------- CTAs ---------------- */
+.ctaPrimary {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 1.05rem 2.5rem;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    overflow: hidden;
+    font-family: 'FuturaNowBold', sans-serif;
+    font-size: 1.05rem;
+    letter-spacing: 0.5px;
+    color: #1d1305;
+    background: linear-gradient(135deg, #ffd9a0 0%, #f0b85c 45%, #e09b3a 100%);
+    box-shadow:
+        0 0 26px rgba(240, 184, 92, 0.35),
+        0 12px 42px rgba(240, 184, 92, 0.18);
+    transition:
+        transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.3s ease;
+    animation: ctaPulse 3.2s ease-in-out infinite;
+}
+
+.ctaPrimary::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -80%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+    transform: skewX(-20deg);
+    animation: ctaShine 4.5s ease-in-out infinite;
+}
+
+.ctaPrimary:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow:
+        0 0 44px rgba(240, 184, 92, 0.6),
+        0 18px 56px rgba(240, 184, 92, 0.3);
+}
+
+.ctaPrimary:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+@keyframes ctaPulse {
+
+    0%,
+    100% {
+        box-shadow:
+            0 0 26px rgba(240, 184, 92, 0.35),
+            0 12px 42px rgba(240, 184, 92, 0.18);
+    }
+
+    50% {
+        box-shadow:
+            0 0 38px rgba(240, 184, 92, 0.5),
+            0 12px 48px rgba(240, 184, 92, 0.26);
+    }
+}
+
+@keyframes ctaShine {
+    0% {
+        left: -80%;
+    }
+
+    45%,
+    100% {
+        left: 130%;
+    }
+}
+
+.ctaGhost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1.05rem 2.3rem;
+    border: 1px solid rgba(249, 246, 238, 0.25);
+    border-radius: 999px;
+    cursor: pointer;
+    font-family: 'FuturaNowReg', sans-serif;
+    font-size: 1.02rem;
+    letter-spacing: 0.5px;
+    color: var(--ink);
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(8px);
+    transition:
+        transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.3s ease,
+        background 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.ctaGhost:hover {
+    transform: translateY(-3px);
+    border-color: rgba(139, 108, 255, 0.7);
+    background: rgba(139, 108, 255, 0.1);
+    box-shadow: 0 0 30px rgba(139, 108, 255, 0.25);
+}
+
+.ctaGhost:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+/* ---------------- motion accessibility ---------------- */
+@media (prefers-reduced-motion: reduce) {
+
+    .reveal {
+        opacity: 1;
+        transform: none;
+        filter: none;
+        transition: none;
+    }
+
+    .goldShimmer,
+    .ctaPrimary,
+    .ctaPrimary::after {
+        animation: none;
+    }
+}

@@ -1,81 +1,124 @@
-.section3Container {
+.finalCtaSection {
+    position: relative;
+    box-sizing: border-box;
     width: 100%;
-    height: 80vh;
-    margin-bottom: 4rem;
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 8rem 1.5rem;
+    overflow: hidden;
 }
 
-.section3Container span {
-    font-weight: 600;
-    font-size: 54px;
-    filter: contrast(21);
-    height: 8rem;
-}
-.section3Container h3{
-    color:rgba(255,255,255,0.3);
+.finalCtaSection .cosmicH2 em {
+    font-style: normal;
 }
 
-.reflected_text::after {
-    content: attr(data-text);
+/* faint rotating natal chart behind everything */
+.zodiacWheel {
     position: absolute;
-    top: 0;
-    right: 0;
-    transform-origin: bottom;
-    transform: rotateX(180deg);
-    line-height: 1.2em;
-    background-image: linear-gradient(0deg, #ffffff 0, transparent 95%);
-    -webkit-background-clip: text;
-    color: transparent;
-    opacity: 0.3;
-}
-
-.section3Container .imageContainer {
-    width: 25%;
-    height: 40vh;
-    margin-top: 4rem;
-    margin-left: 50%;
-    transform: translateX(-50%);
+    top: 50%;
+    left: 50%;
+    width: min(58rem, 140vw);
+    aspect-ratio: 1;
+    margin-left: calc(min(58rem, 140vw) / -2);
+    margin-top: calc(min(58rem, 140vw) / -2);
+    background-image: url('../../assets/images/chart.png');
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: contain;
-    background-image: url('../../assets/images/chart.png');
-    cursor: pointer;
-    border-radius: 50%;
-    animation: rotate360 60s linear infinite;
+    opacity: 0.07;
+    pointer-events: none;
+    animation: wheelSpin 120s linear infinite;
+    -webkit-mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 30%, transparent 72%);
+    mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 30%, transparent 72%);
 }
 
-/* adding animation */
-@keyframes rotate360 {
-    0% {
-        transform: translateX(-50%) rotate(0deg);
+@keyframes wheelSpin {
+    to {
+        transform: rotate(360deg);
     }
+}
 
+/* golden eclipse band behind the headline */
+.eclipseGlow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(64rem, 120vw);
+    height: 22rem;
+    background: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(240, 184, 92, 0.16), transparent 70%);
+    filter: blur(8px);
+    pointer-events: none;
+    animation: eclipseBreathe 6s ease-in-out infinite;
+}
+
+@keyframes eclipseBreathe {
+
+    0%,
     100% {
-        transform: translateX(-50%) rotate(360deg);
+        opacity: 0.7;
+    }
+
+    50% {
+        opacity: 1;
     }
 }
 
-@media screen and (max-width:1000px) {
-    .section3Container {
-        height: fit-content;
-        padding-top: 3rem;
+.cosmicQuote {
+    font-family: 'BaskervilleItalic', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(1.15rem, 2vw, 1.6rem);
+    line-height: 1.8;
+    color: rgba(249, 246, 238, 0.5);
+    margin: 0 0 2.4rem;
+}
+
+.finalCtaBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2.6rem;
+}
+
+.finalCtaButton {
+    font-size: 1.15rem;
+    padding: 1.2rem 3rem;
+}
+
+.finalCtaNote {
+    font-family: 'FuturaNowReg', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: rgba(249, 246, 238, 0.42);
+    margin: 1.4rem 0 0;
+}
+
+/* ---------------- mobile ---------------- */
+@media screen and (max-width: 1000px) {
+    .finalCtaSection {
+        min-height: 80vh;
+        padding: 6rem 1.2rem;
     }
 
-    .section3Container span {
-        font-size: 36px;
-        width: 90%;
-        line-height: 3rem;
+    .finalCtaButton {
+        width: min(86%, 22rem);
+        box-sizing: border-box;
     }
 
-    .reflected_text::after {
-        line-height: 2rem;
+    .finalCtaNote {
+        font-size: 0.68rem;
+        padding: 0 1.5rem;
     }
-    .section3Container h3{
-        font-size: 18px;
-        width: 90%;
-        margin-left: 50%;
-        transform:translateX(-50%);
-    }
-    .section3Container .imageContainer{
-        width: 70%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .zodiacWheel,
+    .eclipseGlow {
+        animation: none;
     }
 }

@@ -1,123 +1,135 @@
-.heroSectionContainer2 {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: column;
-    height: 100vh;
+.timeBoundSection {
+    position: relative;
+    box-sizing: border-box;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 9rem 1.5rem 7rem;
 }
 
-span {
-    font-size: 54px;
-    width: 55%;
-    line-height: 5rem;
-}
-.heroSectionContainer2 h3{
-    color:rgba(255,255,255,0.3);
+.timeBoundSection .cosmicH2 em {
+    font-style: normal;
 }
 
-.imagesContainer {
-    width: 90%;
-    height: 50vh;
-    margin-top: 4rem;
+/* ---------------- tilt cards ---------------- */
+.cosmicCardsRow {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
+    justify-content: center;
+    align-items: stretch;
+    gap: 2rem;
+    width: min(1240px, 92%);
+    margin-top: 4.5rem;
 }
 
-.imagesContainer .card {
-    width: 25%;
-    height: 100%;
-    border-radius: 0.8rem;
+.cosmicCardWrap {
+    flex: 1 1 0;
+    display: flex;
+}
+
+.cosmicCard {
+    position: relative;
+    flex: 1;
+    min-height: 27rem;
+    border-radius: 1.2rem;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     cursor: pointer;
-    transition: 0.3s ease-in;
+    overflow: hidden;
+    border: 1px solid rgba(249, 246, 238, 0.12);
     box-shadow:
-        0 4px 10px rgba(255, 255, 255, 0.2),
-        /* White soft glow */
-        0 0 20px rgba(255, 255, 255, 0.1);
-    /* White outer shadow */
+        0 20px 50px rgba(0, 0, 0, 0.55),
+        0 0 30px rgba(139, 108, 255, 0.08);
+    transition:
+        transform 0.25s ease-out,
+        box-shadow 0.4s ease,
+        border-color 0.4s ease;
+    will-change: transform;
 }
 
-.imagesContainer .card div {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.5);
-    transition: 0.3s ease-in;
-    backdrop-filter: blur(8px);
-    border-radius: 0.8rem;
+.cosmicCard:hover {
+    border-color: rgba(240, 184, 92, 0.5);
+    box-shadow:
+        0 26px 60px rgba(0, 0, 0, 0.6),
+        0 0 44px rgba(240, 184, 92, 0.22);
 }
 
-.imagesContainer .card div:hover {
-    backdrop-filter: blur(0);
-}
-
-.imagesContainer .card div span {
-    font-size: 42px;
-    width: 100%;
-}
-
-.imagesContainer .card:hover {}
-
-.imagesContainer .card.one {
+.cardRelationship {
     background-image: url('../../assets/images/relationship.webp');
 }
 
-.imagesContainer .card.two {
+.cardCareer {
     background-image: url('../../assets/images/alone.webp');
 }
 
-.imagesContainer .card.three {
+.cardTiming {
     background-image: url('../../assets/images/struggle.webp');
 }
 
-/* MOBILE RESPONSIVE */
+.cosmicCardVeil {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    text-align: left;
+    padding: 1.8rem;
+    background: linear-gradient(180deg,
+            rgba(3, 2, 16, 0.05) 0%,
+            rgba(3, 2, 16, 0.45) 55%,
+            rgba(3, 2, 16, 0.92) 100%);
+    transition: background 0.4s ease;
+}
 
-@media screen and (max-width:1000px) {
-    .heroSectionContainer2 {
-        height: fit-content;
-        margin-bottom: 5rem;
+.cosmicCardTag {
+    width: auto;
+    font-size: 0.7rem;
+    line-height: 1.4;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    font-family: 'FuturaNowReg', sans-serif;
+    color: #f0b85c;
+    text-shadow: 0 0 14px rgba(240, 184, 92, 0.6);
+}
+
+.cosmicCardTitle {
+    width: auto;
+    font-size: clamp(1.9rem, 2.6vw, 2.6rem);
+    line-height: 1.15;
+    margin-top: 0.5rem;
+    font-family: 'FuturaNowXBlack', 'FuturaNowBold', sans-serif;
+    color: #f9f6ee;
+}
+
+.cosmicCardLine {
+    font-family: 'BaskervilleItalic', Georgia, serif;
+    font-style: italic;
+    font-size: 0.98rem;
+    line-height: 1.65;
+    color: rgba(249, 246, 238, 0.72);
+    margin: 0.6rem 0 0;
+    max-width: 26ch;
+}
+
+/* ---------------- mobile ---------------- */
+@media screen and (max-width: 1000px) {
+    .timeBoundSection {
+        padding: 6rem 1.2rem 4.5rem;
     }
 
-    .heroSectionContainer2 span {
-        font-size: 36px;
-        width: 90%;
-        line-height: 3rem;
-    }
-
-    .heroSectionContainer2 h3 {
-        margin-top: 3rem;
-        width: 90%;
-        font-size: 18px;
-    }
-
-    .imagesContainer {
-        height: fit-content;
-        width: 100%;
+    .cosmicCardsRow {
         flex-direction: column;
-        height: fit-content;
+        gap: 1.4rem;
+        margin-top: 3rem;
+        width: 100%;
     }
 
-    .imagesContainer .card {
-        width: 90%;
-        min-height: 42vh;
-        margin: 1rem 0;
-    }
-
-    .imagesContainer .card div {
-        height: 42vh;
-        backdrop-filter: blur(0);
-        background-color: rgba(0, 0, 0, 0.6);
-
-    }
-
-    .imagesContainer .card div span {
-        font-size: 36px;
+    .cosmicCard {
+        min-height: 22rem;
     }
 }

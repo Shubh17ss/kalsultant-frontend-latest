@@ -16,6 +16,23 @@
 }
 
 @font-face {
+  font-family: 'FuturaNowXBlack';
+  src: url('./fonts/FuturaNow/FuturaNowHeadlineExtraBlack.ttf') format('truetype');
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: 'Baskerville';
+  src: url('./fonts/Libre_Baskerville/LibreBaskerville-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'BaskervilleItalic';
+  src: url('./fonts/Libre_Baskerville/LibreBaskerville-Italic.ttf') format('truetype');
+  font-style: italic;
+}
+
+@font-face {
   font-family: 'FuturaNowLight';
   src: url('./fonts/FuturaNow/FuturaNowHeadlineExtraLight.ttf') format('woff2'),
     url('./fonts/FuturaNow/FuturaNowHeadlineExtraLight.ttf') format('truetype');
