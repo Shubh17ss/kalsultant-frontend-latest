@@ -1,80 +1,171 @@
 import React, { useEffect, useState } from 'react'
 import { Navbar } from '../../components/navbar/navbar'
 import { Footer } from '../../components/footer/footer'
-import { FaCircle } from "react-icons/fa";
-import { useNavigate } from 'react-router-dom';
+import { MdCheck, MdArrowRightAlt } from 'react-icons/md'
+import { useNavigate } from 'react-router-dom'
+import { Reveal } from '../../components/cosmic/Reveal'
 import './pricing.css'
 
 // Pricing configuration
 const PRICING_CONFIG = {
   INR: {
-    price: 1100,
     currency: '₹',
-    currencyCode: 'INR'
+    currencyCode: 'INR',
+    session: 1100,
+    monthly: 3499,
+    premium: 7999,
   },
   USD: {
-    price: 29,
     currency: '$',
-    currencyCode: 'USD'
-  }
-};
+    currencyCode: 'USD',
+    session: 29,
+    monthly: 89,
+    premium: 199,
+  },
+}
+
+const buildPlans = (pricing) => [
+  {
+    id: 'session',
+    tag: 'Pay as you go',
+    name: 'Single Session',
+    price: pricing.session,
+    period: '/ session',
+    blurb: 'One focused hour with your chart. No commitment.',
+    features: [
+      'One-hour private consultation',
+      'Up to 4 birth charts analysed',
+      'Pay only after your session',
+    ],
+    cta: 'Book a session',
+    to: '/schedule-session',
+    style: 'standard',
+  },
+  {
+    id: 'monthly',
+    tag: 'Most popular',
+    name: 'Monthly',
+    price: pricing.monthly,
+    period: '/ month',
+    blurb: 'The stars on retainer — guidance that follows your life.',
+    features: [
+      'Two sessions every month',
+      'Priority scheduling',
+      'Follow-up questions between sessions',
+      'Month-ahead timing guidance',
+    ],
+    cta: 'Start monthly',
+    to: '/schedule-session',
+    style: 'popular',
+  },
+  {
+    id: 'premium',
+    tag: 'For families',
+    name: 'Premium',
+    price: pricing.premium,
+    period: '/ month',
+    blurb: 'One consultant for your whole house — up to 4 members.',
+    features: [
+      'Everything in Monthly',
+      'Covers up to 4 family members',
+      'Individual charts for each member',
+      'Dedicated senior consultant',
+    ],
+    cta: 'Talk to us',
+    to: '/contact-us',
+    style: 'premium',
+  },
+]
 
 export const Pricing = () => {
-  const [pricing, setPricing] = useState(PRICING_CONFIG.INR);
-  const [country, setCountry] = useState(null);
+  const [pricing, setPricing] = useState(PRICING_CONFIG.INR)
+  const navigate = useNavigate()
 
   // Detect user location and set pricing
   useEffect(() => {
     const detectLocation = async () => {
       try {
-        // Using ip-api.com free tier (no API key required)
-        const response = await fetch('https://ipapi.co/json/');
-        const data = await response.json();
-        setCountry(data.country_code);
-        
-        // Set pricing based on country
+        const response = await fetch('https://ipapi.co/json/')
+        const data = await response.json()
         if (data.country_code === 'IN') {
-          setPricing(PRICING_CONFIG.INR);
+          setPricing(PRICING_CONFIG.INR)
         } else {
-          setPricing(PRICING_CONFIG.USD);
+          setPricing(PRICING_CONFIG.USD)
         }
       } catch (error) {
-        console.log('Could not detect location, defaulting to INR');
         // Default to INR if location detection fails
-        setPricing(PRICING_CONFIG.INR);
+        setPricing(PRICING_CONFIG.INR)
       }
-    };
-
-    detectLocation();
-  }, []);
+    }
+    detectLocation()
+  }, [])
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  });
-  const navigate = useNavigate();
+    window.scrollTo(0, 0)
+  }, [])
+
+  const plans = buildPlans(pricing)
+
   return (
-    <div style={{ overflowX: 'hidden', position: 'relative', width: '100%', minHeight: '100vh', textAlign: 'center' }}>
+    <div className="pricingPage">
       <Navbar />
-      <div className='pricingContainer'>
-        <span>One plan fits every zodiac sign</span>
-        <h3>Universal Insights, One Simple Plan – Discover Your Destiny Today!</h3>
-        <div className='infoContainer'>
-          <div className='priceTextContainer'>
-            <h3>{pricing.currency}{pricing.price}</h3>
-            <h2>/session</h2>
-          </div>
-          <h3 className='buttonText' onClick={() => { navigate('/schedule-session') }}>
-            Schedule now
-          </h3>
-          <div className='line'></div>
-          <div className='featuresContainer'>
-            <h3><FaCircle size={8} style={{ marginRight: '0.5rem', marginBottom: '0.1rem' }} />One-hour session</h3>
-            <h3><FaCircle size={8} style={{ marginRight: '0.5rem', marginBottom: '0.1rem' }} />Upto 4 birth charts analysis</h3>
-            <h3><FaCircle size={8} style={{ marginRight: '0.5rem', marginBottom: '0.1rem' }} />Pay post session </h3>
-          </div>
+      <section className="pricingHero">
+        <Reveal>
+          <div className="cosmicEyebrow">✦ Pricing</div>
+        </Reveal>
+        <Reveal delay={0.12}>
+          <h1 className="cosmicH2 pricingTitle">
+            One sky. <em className="goldShimmer">Three ways to read it.</em>
+          </h1>
+        </Reveal>
+        <Reveal delay={0.22}>
+          <p className="cosmicSerif pricingSub">
+            Start with a single session, keep the stars on retainer, or bring
+            your whole family under one consultant.
+          </p>
+        </Reveal>
+
+        <div className="plansGrid">
+          {plans.map((plan, index) => (
+            <Reveal key={plan.id} delay={0.15 + index * 0.13} className="planCardWrap">
+              <article className={`planCard ${plan.style}`}>
+                <span className="planTag">{plan.tag}</span>
+                <h2 className="planName">{plan.name}</h2>
+                <div className="planPriceRow">
+                  <span className="planPrice">
+                    {pricing.currency}
+                    {plan.price.toLocaleString()}
+                  </span>
+                  <span className="planPeriod">{plan.period}</span>
+                </div>
+                <p className="planBlurb">{plan.blurb}</p>
+                <div className="planDivider"></div>
+                <ul className="planFeatures">
+                  {plan.features.map((feature) => (
+                    <li key={feature}>
+                      <MdCheck size={16} />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <button
+                  className={plan.style === 'popular' ? 'ctaPrimary planCta' : 'ctaGhost planCta'}
+                  onClick={() => navigate(plan.to)}
+                >
+                  {plan.cta} <MdArrowRightAlt size={20} />
+                </button>
+              </article>
+            </Reveal>
+          ))}
         </div>
 
-      </div>
+        <Reveal delay={0.3}>
+          <p className="pricingFootnote">
+            Single sessions are billed only after the session ends. Prices shown
+            in {pricing.currencyCode}.
+          </p>
+        </Reveal>
+      </section>
       <Footer />
     </div>
   )

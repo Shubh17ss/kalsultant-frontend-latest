@@ -45,6 +45,15 @@ const run = async () => {
             await page.screenshot({ path: path.join(OUT, `${device}_${name}.png`) })
         }
 
+        await page.goto(`${URL}pricing`, { waitUntil: 'networkidle' })
+        await page.waitForTimeout(2200)
+        await page.screenshot({ path: path.join(OUT, `${device}_pricing.png`) })
+        if (device === 'mobile') {
+            await page.locator('.pricingFootnote').scrollIntoViewIfNeeded()
+            await page.waitForTimeout(1500)
+            await page.screenshot({ path: path.join(OUT, `${device}_pricing_bottom.png`) })
+        }
+
         console.log(`${device}: done. console errors: ${errors.length}`)
         errors.slice(0, 10).forEach((e) => console.log('  ERR:', e))
         await page.close()

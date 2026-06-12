@@ -1,123 +1,247 @@
-.pricingContainer {
+.pricingPage {
+    position: relative;
+    z-index: 1;
     width: 100%;
-    height: 100vh;
-    margin-top: 60px;
-    padding-top: 5%;
+    min-height: 100vh;
+    overflow-x: hidden;
+    text-align: center;
+    color: #f9f6ee;
 }
 
-.pricingContainer .infoContainer {
-    width: 20%;
-    height: fit-content;
-    margin-left: 50%;
-    transform: translateX(-50%);
-    margin-top: 5rem;
-    border-radius: 1.2rem;
-    box-shadow:
-        0 4px 10px rgba(255, 255, 255, 0.2),
-        /* White soft glow */
-        0 0 20px rgba(255, 255, 255, 0.1);
-    /* White outer shadow */
-    backdrop-filter: blur(2px);
+.pricingHero {
+    box-sizing: border-box;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
-    padding-top: 1rem;
-    padding-bottom: 2rem;
+    padding: 9rem 1.5rem 6rem;
 }
 
-.pricingContainer .infoContainer .priceTextContainer {
+.pricingTitle em {
+    font-style: normal;
+}
+
+.pricingSub {
+    max-width: 520px;
+}
+
+/* ---------------- plans grid ---------------- */
+.plansGrid {
     display: flex;
+    flex-direction: row;
     justify-content: center;
-    align-items: center;
-    margin-top: 1rem;
+    align-items: stretch;
+    gap: 1.6rem;
+    width: min(1180px, 94%);
+    margin-top: 4rem;
 }
 
-.pricingContainer .infoContainer .priceTextContainer h3 {
-    font-size: 46px;
-    color: #fff;
-    letter-spacing: 0.2rem;
-    margin: 0;
+.planCardWrap {
+    flex: 1 1 0;
+    display: flex;
 }
 
-.pricingContainer .infoContainer .priceTextContainer h2 {
-    font-family: 'FuturaNowLight', sans-serif;
-    font-size: 16px;
-    margin-top: 2.5rem;
-    letter-spacing: 0.1rem;
-}
-
-.pricingContainer .infoContainer .buttonText {
-    font-family: 'FuturaNowLight', sans-serif;
-    font-size: 1.2rem;
-    color: #407ee2;
-    margin: 0;
-    cursor: pointer;
-    margin-top: 1rem;
-}
-
-.pricingContainer .infoContainer .line {
-    width: 82%;
-    height: 0.1rem;
-    background-color: rgba(255, 255, 255, 0.1);
-    margin-top: 3rem;
-}
-
-.featuresContainer {
-    width: 82%;
-    margin-top: 1rem;
-}
-
-.featuresContainer h3 {
-    font-size: 18px;
+.planCard {
+    position: relative;
+    flex: 1;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     text-align: left;
-    color: rgba(255, 255, 255, 0.7)
+    padding: 2.4rem 2rem 2.2rem;
+    border-radius: 1.1rem;
+    border: 1px solid rgba(249, 246, 238, 0.12);
+    background: linear-gradient(165deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015));
+    backdrop-filter: blur(8px);
+    transition:
+        transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
 }
 
-@media screen and (max-width:1000px) {
-    .pricingContainer {
-        height: fit-content;
-        padding: 4rem 0;
+.planCard:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 22px 52px rgba(0, 0, 0, 0.55);
+}
 
+.planCard.popular {
+    border-color: rgba(240, 184, 92, 0.55);
+    box-shadow:
+        0 0 36px rgba(240, 184, 92, 0.14),
+        0 18px 48px rgba(0, 0, 0, 0.5);
+}
+
+.planCard.popular:hover {
+    border-color: rgba(240, 184, 92, 0.8);
+    box-shadow:
+        0 0 50px rgba(240, 184, 92, 0.22),
+        0 24px 56px rgba(0, 0, 0, 0.55);
+}
+
+.planCard.premium {
+    border-color: rgba(139, 108, 255, 0.4);
+}
+
+.planCard.premium:hover {
+    border-color: rgba(139, 108, 255, 0.7);
+    box-shadow:
+        0 0 44px rgba(139, 108, 255, 0.18),
+        0 22px 52px rgba(0, 0, 0, 0.55);
+}
+
+/* ---------------- card internals ---------------- */
+.planTag {
+    width: auto;
+    font-size: 0.62rem;
+    line-height: 1.4;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-family: 'FuturaNowReg', sans-serif;
+    color: rgba(249, 246, 238, 0.55);
+    padding: 0.4rem 0.9rem;
+    border: 1px solid rgba(249, 246, 238, 0.18);
+    border-radius: 999px;
+}
+
+.planCard.popular .planTag {
+    color: #f0b85c;
+    border-color: rgba(240, 184, 92, 0.5);
+    background: rgba(240, 184, 92, 0.08);
+    text-shadow: 0 0 12px rgba(240, 184, 92, 0.5);
+}
+
+.planCard.premium .planTag {
+    color: #ab97ff;
+    border-color: rgba(139, 108, 255, 0.5);
+    background: rgba(139, 108, 255, 0.08);
+}
+
+.planName {
+    font-family: 'BrandBe', 'FuturaNowBold', sans-serif;
+    font-size: 1.3rem;
+    line-height: 1.2;
+    color: #f9f6ee;
+    margin: 1.6rem 0 0;
+}
+
+.planPriceRow {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-top: 1.1rem;
+}
+
+.planPrice {
+    width: auto;
+    font-family: 'BrandBe', 'FuturaNowBold', sans-serif;
+    font-size: 2.6rem;
+    line-height: 1;
+    color: #f9f6ee;
+}
+
+.planCard.popular .planPrice {
+    background: linear-gradient(110deg, #f0b85c 20%, #fff3dd 40%, #ffd9a0 52%, #f0b85c 68%);
+    background-size: 220% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: goldShimmerSweep 5s linear infinite;
+}
+
+.planPeriod {
+    width: auto;
+    font-size: 0.78rem;
+    line-height: 1;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    font-family: 'FuturaNowReg', sans-serif;
+    color: rgba(249, 246, 238, 0.45);
+}
+
+.planBlurb {
+    font-family: 'FuturaNowLight', sans-serif;
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: rgba(249, 246, 238, 0.6);
+    margin: 1rem 0 0;
+    min-height: 3.1rem;
+}
+
+.planDivider {
+    width: 100%;
+    height: 1px;
+    margin: 1.4rem 0;
+    background: linear-gradient(90deg, rgba(249, 246, 238, 0.18), transparent);
+}
+
+.planFeatures {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    flex: 1;
+}
+
+.planFeatures li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-family: 'FuturaNowLight', sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: rgba(249, 246, 238, 0.72);
+    margin-bottom: 0.85rem;
+}
+
+.planFeatures li svg {
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+    color: #f0b85c;
+}
+
+.planCard.premium .planFeatures li svg {
+    color: #ab97ff;
+}
+
+.planCta {
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 1.6rem;
+}
+
+/* ---------------- footnote ---------------- */
+.pricingFootnote {
+    font-family: 'FuturaNowReg', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: rgba(249, 246, 238, 0.38);
+    margin: 3rem 0 0;
+}
+
+/* ---------------- mobile ---------------- */
+@media screen and (max-width: 1000px) {
+    .pricingHero {
+        padding: 7rem 1.2rem 4rem;
     }
 
-    .pricingContainer span {
-        font-size: 2.4rem;
-        width: 90%;
-        line-height: 3rem;
-    }
-
-    .pricingContainer h3 {
-        color: rgba(255, 255, 255, 0.3);
-        font-size: 1rem;
+    .plansGrid {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1.3rem;
         width: 100%;
-        line-height: 2rem;
-        margin-top: 2rem;
+        margin-top: 3rem;
     }
 
-    .pricingContainer .infoContainer {
-        width: 90%;
+    /* lead with the highlighted plan when stacked */
+    .planCardWrap:has(.planCard.popular) {
+        order: -1;
     }
 
-    .pricingContainer .infoContainer .priceTextContainer h3 {
-        font-size: 36px;
-    }
-
-    .pricingContainer .infoContainer .priceTextContainer h2 {
-        margin-top: 1.5rem;
-        letter-spacing: 0.1rem;
-        color: rgba(255, 255, 255, 0.3);
-    }
-
-    .pricingContainer .infoContainer .buttonText {
-        font-size: 1rem;
-    }
-
-    .pricingContainer .infoContainer .line {
-        margin-top: 2rem;
-    }
-
-    .featuresContainer {
-        margin-top: 0;
+    .pricingFootnote {
+        padding: 0 1.5rem;
+        line-height: 1.8;
     }
 }
