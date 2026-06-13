@@ -19,7 +19,7 @@ export const RecordReview = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
         const invokeFirebaseFunction = async () => {
-            let response = await fetch(process.env.REACT_APP_ENV_URL + '/', {
+            let response = await fetch(import.meta.env.REACT_APP_ENV_URL + '/', {
                 method: 'get'
             });
             let res = await response.json();
@@ -64,7 +64,7 @@ export const RecordReview = () => {
                 email: email,
                 text: text
             }
-            let response = await fetch(process.env.REACT_APP_ENV_URL + '/api/user/storeReview', {
+            let response = await fetch(import.meta.env.REACT_APP_ENV_URL + '/api/user/storeReview', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

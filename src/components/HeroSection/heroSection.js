@@ -36,11 +36,11 @@ export const HeroSection = () => {
 
             <Reveal delay={0.5}>
                 <div className="heroCtaRow">
-                    <button className="ctaPrimary" onClick={() => navigate('/schedule-session')}>
-                        Decode my chart <MdArrowRightAlt size={22} />
-                    </button>
                     <button className="ctaGhost" onClick={() => navigate('/free-tier')}>
-                        Try a free reading
+                        Decode my chart
+                    </button>
+                    <button className="ctaPrimary" onClick={() => navigate('/schedule-session')}>
+                        Schedule session <MdArrowRightAlt size={22} />
                     </button>
                 </div>
             </Reveal>

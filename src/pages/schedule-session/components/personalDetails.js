@@ -20,8 +20,9 @@ export const PersonalDetails = () => {
         style={{
           width: isMobileScreen ? "100%" : "45%",
           height: "46px",
-          backgroundColor: "rgba(255, 255, 255, 0.1)",
-          borderRadius: "8px",
+          backgroundColor: "rgba(255, 255, 255, 0.06)",
+          border: "1px solid rgba(249, 246, 238, 0.14)",
+          borderRadius: "0.7rem",
           padding: "5px",
           marginTop:isMobileScreen?'0.5rem':0
         }}

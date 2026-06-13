@@ -25,10 +25,10 @@ export const Navbar = () => {
                 {isMobileScreen ? <></>
                     :
                     <div className='navBarlinksContainer'>
-                        <h3 onClick={() => { navigate('/about-us') }}>About us</h3>
-                        <h3 onClick={() => { navigate('/how-we-work') }}>How we work</h3>
-                        <Link to={'/pricing'} style={{ textDecoration: 'none' }}><h3>Pricing</h3></Link>
-                        <Link to={'/vaastu'} style={{ textDecoration: 'none' }}><h3>Vaastu</h3></Link>
+                        <h3 className='navLink' onClick={() => { navigate('/about-us') }}>About us</h3>
+                        <h3 className='navLink' onClick={() => { navigate('/how-we-work') }}>How we work</h3>
+                        <Link to={'/pricing'} style={{ textDecoration: 'none' }}><h3 className='navLink'>Pricing</h3></Link>
+                        <Link to={'/vaastu'} style={{ textDecoration: 'none' }}><h3 className='navLink'>Vaastu</h3></Link>
                     </div>
                 }
                 {
@@ -37,7 +37,7 @@ export const Navbar = () => {
                         <IoIosMenu size={32} onClick={() => { setSideBarActive(true) }} style={{marginRight:'0.5rem'}}/>
                         :
                         <div style={{ minWidth: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                            <Link to={'/contact-us'} style={{ textDecoration: 'none' }}><h3>Contact</h3></Link>
+                            <Link to={'/contact-us'} style={{ textDecoration: 'none' }}><h3 className='navLink'>Contact</h3></Link>
                             <div className='store_button' onClick={handleRedirectToItraa}>STORE</div>
                         </div>
                 }

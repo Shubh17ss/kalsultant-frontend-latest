@@ -8,13 +8,13 @@ import { toast } from 'react-hot-toast';
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 export const Freetier = () => {
-    const registerUserFunctionUrl = process.env.REACT_APP_SUPABASE_URL;
+    const registerUserFunctionUrl = import.meta.env.REACT_APP_SUPABASE_URL;
     const isMobile = window.innerWidth <= 768; // Simple check for mobile devices
     const [email, setEmail] = React.useState('');
     useEffect(() => {
         window.scrollTo(0, 0);
         const invokeFirebaseFunction = async () => {
-            let response = await fetch(process.env.REACT_APP_ENV_URL + '/', {
+            let response = await fetch(import.meta.env.REACT_APP_ENV_URL + '/', {
                 method: 'get'
             });
             let res = await response.json();
@@ -44,7 +44,7 @@ export const Freetier = () => {
             let body = {
                 email: email,
             }
-            response = await fetch(process.env.REACT_APP_ENV_URL + '/api/user/recordUserQueryEmail', {
+            response = await fetch(import.meta.env.REACT_APP_ENV_URL + '/api/user/recordUserQueryEmail', {
                 method: 'POST',
                 body: JSON.stringify(body),
                 headers: {

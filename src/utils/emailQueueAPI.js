@@ -6,7 +6,7 @@
 
 // Note: Update this with your actual Cloud Function URL after deployment
 // Format: https://us-central1-YOUR_PROJECT_ID.cloudfunctions.net
-const CLOUD_FUNCTIONS_BASE_URL = process.env.REACT_APP_CLOUD_FUNCTIONS_URL || '';
+const CLOUD_FUNCTIONS_BASE_URL = import.meta.env.REACT_APP_CLOUD_FUNCTIONS_URL || '';
 
 /**
  * Add email via API endpoint

@@ -33,7 +33,7 @@ function App() {
         <Route path='/how-we-work' element={<HowWeWork />} />
         <Route path='/schedule-session' element={<Schedule />} />
         <Route path='/schedule-session/session/:sessionId' element={<SuccessPage />} />
-        <Route path='/free-tier' element={<Freetier/>} />
+        {/* <Route path='/free-tier' element={<Freetier/>} /> */}
         <Route path='/feedback' element={<RecordReview />} />
         <Route path='/terms&Conditions' element={<TermsAndConditions />} />
         <Route path='/privacy-policy' element={<PrivacyPolicy />} />

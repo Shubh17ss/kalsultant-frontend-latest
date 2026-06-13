@@ -39,7 +39,7 @@ export const Slotselection = () => {
             let body = {
                 date: date
             };
-            const response = await fetch(process.env.REACT_APP_ENV_URL + '/api/slots/getslots', {
+            const response = await fetch(import.meta.env.REACT_APP_ENV_URL + '/api/slots/getslots', {
                 method: 'POST',
                 headers: { "Content-type": "application/json" },
                 body: JSON.stringify(body),
@@ -59,7 +59,7 @@ export const Slotselection = () => {
         let body = {
             date: date_temp
         };
-        const response = await fetch(process.env.REACT_APP_ENV_URL + '/api/slots/getslots', {
+        const response = await fetch(import.meta.env.REACT_APP_ENV_URL + '/api/slots/getslots', {
             method: 'POST',
             headers: { "Content-type": "application/json" },
             body: JSON.stringify(body),
@@ -124,7 +124,7 @@ export const Slotselection = () => {
                             ))}
                         </select>
             }
-            <h4 style={{ fontSize: '12px', color: 'crimson', margin: 0 }}>*Date and time are in IST*</h4>
+            <h4 style={{ fontSize: '12px', color: '#f0b85c', margin: 0 }}>*Date and time are in IST*</h4>
         </div>
     )
 }
