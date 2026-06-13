@@ -4,7 +4,7 @@ import { Contact } from './pages/contact-us/contact';
 import { Home } from './pages/Home/home';
 import { Pricing } from './pages/Pricing/pricing'
 import { Schedule } from './pages/schedule-session/schedule';
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast';
 import { SuccessPage } from './pages/schedule-session/components/successPage';
 import { RecordReview } from './pages/record-review/recordReview';
@@ -15,11 +15,15 @@ import { AboutUs } from './pages/about-us/aboutUs';
 import { HowWeWork } from './pages/how-we-work/howWeWork';
 import { Vaastu } from './pages/vaastu/vaastu';
 import { Freetier } from './pages/free-tier/freetier';
+import { FindYourSign } from './pages/find-your-sign/findYourSign';
 
 function App() {
+  // Home and Vaastu render their own 3D backdrops (with richer starfields),
+  // so the flat particles layer is only used on the other routes.
+  const { pathname } = useLocation();
   return (
     <>
-      <ParticlesBackground />
+      {pathname !== '/' && pathname !== '/vaastu' && <ParticlesBackground />}
       <Toaster position="top-center" reverseOrder={false} />
       <Routes>
         <Route path='/' element={<Home />} />
@@ -29,8 +33,9 @@ function App() {
         <Route path='/about-us' element={<AboutUs />} />
         <Route path='/how-we-work' element={<HowWeWork />} />
         <Route path='/schedule-session' element={<Schedule />} />
+        <Route path='/find-your-sign' element={<FindYourSign />} />
         <Route path='/schedule-session/session/:sessionId' element={<SuccessPage />} />
-        <Route path='/free-tier' element={<Freetier/>} />
+        {/* <Route path='/free-tier' element={<Freetier/>} /> */}
         <Route path='/feedback' element={<RecordReview />} />
         <Route path='/terms&Conditions' element={<TermsAndConditions />} />
         <Route path='/privacy-policy' element={<PrivacyPolicy />} />

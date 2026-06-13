@@ -1,0 +1,169 @@
+.newsletterSection {
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 7rem 1.5rem 8rem;
+    overflow: hidden;
+    margin-top: 4rem;
+}
+
+/* soft violet/gold halo behind the panel */
+.newsletterGlow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(60rem, 120vw);
+    height: 26rem;
+    background: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(139, 108, 255, 0.16), transparent 70%);
+    filter: blur(10px);
+    pointer-events: none;
+}
+
+.newsletterReveal {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.newsletterPanel {
+    position: relative;
+    box-sizing: border-box;
+    width: min(46rem, 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 3.4rem 2.6rem 3rem;
+    border: 1px solid rgba(240, 184, 92, 0.22);
+    border-radius: 28px;
+    background: linear-gradient(180deg, rgba(15, 12, 38, 0.72), rgba(6, 4, 20, 0.78));
+    backdrop-filter: blur(14px);
+    box-shadow:
+        0 0 60px rgba(139, 108, 255, 0.12),
+        inset 0 1px 0 rgba(249, 246, 238, 0.06);
+}
+
+.newsletterTitle {
+    margin-top: 1.2rem;
+}
+
+.newsletterSub {
+    margin-top: 1rem;
+    max-width: 34rem;
+}
+
+.newsletterForm {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2.4rem;
+}
+
+.newsletterFields {
+    display: flex;
+    gap: 0.9rem;
+    width: 100%;
+    max-width: 32rem;
+}
+
+.newsletterInput {
+    box-sizing: border-box;
+    flex: 1 1 60%;
+    min-width: 0;
+    height: 3.4rem;
+    padding: 0 1.2rem;
+    border: 1px solid rgba(249, 246, 238, 0.18);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--ink);
+    font-family: 'FuturaNowReg', sans-serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.3px;
+    outline: none;
+    transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.newsletterInput::placeholder {
+    color: var(--ink-faint);
+}
+
+.newsletterInput:focus {
+    border-color: rgba(240, 184, 92, 0.6);
+    background: rgba(240, 184, 92, 0.06);
+    box-shadow: 0 0 22px rgba(240, 184, 92, 0.18);
+}
+
+/* themed MUI dropdown sits here; the wrap only owns its flex sizing */
+.newsletterSelectWrap {
+    position: relative;
+    flex: 1 1 40%;
+    min-width: 0;
+    display: flex;
+}
+
+.newsletterSubmit {
+    width: min(20rem, 100%);
+    height: 3.4rem;
+    font-size: 1rem;
+}
+
+.newsletterFindLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 1.8rem;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-family: 'FuturaNowReg', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.4px;
+    color: var(--ink-dim);
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.newsletterFindLink svg {
+    transition: transform 0.3s ease;
+}
+
+.newsletterFindLink:hover {
+    color: var(--gold-bright);
+}
+
+.newsletterFindLink:hover svg {
+    transform: translateX(4px);
+}
+
+/* ---------------- mobile ---------------- */
+@media screen and (max-width: 720px) {
+    .newsletterSection {
+        padding: 5rem 1.1rem 6rem;
+    }
+
+    .newsletterPanel {
+        padding: 2.6rem 1.4rem 2.4rem;
+        border-radius: 22px;
+    }
+
+    .newsletterFields {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .newsletterInput,
+    .newsletterSelectWrap {
+        flex: 1 1 auto;
+        width: 100%;
+    }
+
+    .newsletterSubmit {
+        width: 100%;
+    }
+}

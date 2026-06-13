@@ -11,24 +11,93 @@
 }
 
 .stepper_header {
-    width: 60%;
-    height: 5vh;
+    width: min(620px, 92%);
+    height: fit-content;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     padding: 0 1rem;
 }
 
-.stepper_header .line {
-    background-color: rgba(255, 255, 255, 0.2);
-    height: 0.05rem;
-    width: 25%;
-    margin: 0 2rem
+.stepper_header .step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.55rem;
+    cursor: default;
 }
 
-.stepper_header .line.white {
-    background-color: #f9f6ee;
-    height: 0.08rem;
+.stepper_header .step.done {
+    cursor: pointer;
+}
+
+.stepper_header .stepCircle {
+    width: 2.9rem;
+    height: 2.9rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 1px solid rgba(249, 246, 238, 0.18);
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(249, 246, 238, 0.4);
+    backdrop-filter: blur(6px);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        background 0.4s ease, border-color 0.4s ease,
+        box-shadow 0.4s ease, color 0.4s ease;
+}
+
+.stepper_header .step.active .stepCircle {
+    color: #1d1305;
+    border-color: transparent;
+    background: linear-gradient(135deg, #ffd9a0 0%, #f0b85c 45%, #e09b3a 100%);
+    box-shadow: 0 0 26px rgba(240, 184, 92, 0.45),
+        0 0 0 4px rgba(240, 184, 92, 0.12);
+    transform: translateY(-2px) scale(1.05);
+}
+
+.stepper_header .step.done .stepCircle {
+    color: #f0b85c;
+    border-color: rgba(240, 184, 92, 0.6);
+    background: rgba(240, 184, 92, 0.08);
+    box-shadow: 0 0 16px rgba(240, 184, 92, 0.2);
+}
+
+.stepper_header .step.done:hover .stepCircle {
+    background: rgba(240, 184, 92, 0.14);
+    box-shadow: 0 0 22px rgba(240, 184, 92, 0.32);
+}
+
+.stepper_header .stepLabel {
+    font-family: 'FuturaNowReg', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(249, 246, 238, 0.4);
+    transition: color 0.3s ease;
+}
+
+.stepper_header .step.active .stepLabel {
+    color: #ffd9a0;
+}
+
+.stepper_header .step.done .stepLabel {
+    color: rgba(249, 246, 238, 0.7);
+}
+
+.stepper_header .stepLine {
+    flex: 1;
+    max-width: 5rem;
+    height: 2px;
+    margin: 1.4rem 0.5rem 0;
+    border-radius: 2px;
+    background: rgba(249, 246, 238, 0.15);
+    transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+
+.stepper_header .stepLine.filled {
+    background: linear-gradient(90deg, rgba(240, 184, 92, 0.75), rgba(240, 184, 92, 0.35));
+    box-shadow: 0 0 10px rgba(240, 184, 92, 0.25);
 }
 
 .form_area {
@@ -50,27 +119,40 @@
 }
 
 .button_area button {
-    width: 20%;
+    min-width: 200px;
     height: 52px;
-    border-radius: 0.5rem;
-    color: #fff;
-    background-color: #3a74d2cb;
+    padding: 0 2.4rem;
+    border-radius: 999px;
+    color: #1d1305;
+    background: linear-gradient(135deg, #ffd9a0 0%, #f0b85c 45%, #e09b3a 100%);
+    box-shadow: 0 0 26px rgba(240, 184, 92, 0.35),
+        0 12px 42px rgba(240, 184, 92, 0.18);
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     border: none;
-    transition: 0.3s ease-in;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.3s ease;
 }
 
-.button_area button:hover {
-    background-color: #3a74d2;
+.button_area button:hover:not(:disabled) {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 0 44px rgba(240, 184, 92, 0.6),
+        0 18px 56px rgba(240, 184, 92, 0.3);
+}
+
+.button_area button:disabled {
+    opacity: 0.75;
+    cursor: default;
 }
 
 .button_area button h3 {
-    font-family: 'FuturaNowReg', sans-serif;
-    font-size: 1.2rem;
-    color:#f9f6ee;
+    font-family: 'FuturaNowBold', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    color: #1d1305;
+    margin: 0;
 }
 
 /* success page css */
@@ -78,10 +160,11 @@
     min-width: 40%;
     width: fit-content;
     height: 60%;
-    backdrop-filter: blur(1px);
-    border-radius: 0.5rem;
-    background-color: rgba(15, 15, 15, 0.727);
-    padding-top: 0.5rem;
+    backdrop-filter: blur(8px);
+    border-radius: 1.2rem;
+    border: 1px solid rgba(249, 246, 238, 0.12);
+    background: linear-gradient(165deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012));
+    padding: 1rem 1rem 0.5rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -96,7 +179,8 @@
     height: fit-content;
     margin:0.5rem 0;
     width: 90%;
-    border-radius: 0.5rem;
+    border-radius: 0.7rem;
+    border: 1px solid rgba(249, 246, 238, 0.08);
     background-color: rgba(255,255,255,0.05);
 }
 .schedule_screen_main .information_card .row h4{
@@ -105,10 +189,18 @@
 
 @media screen and (max-width:1000px) {
     .stepper_header{
-        width: 90%;
+        width: 86%;
     }
-    .stepper_header .line{
-        width: 15%;
+    .stepper_header .stepCircle{
+        width: 2.6rem;
+        height: 2.6rem;
+    }
+    .stepper_header .stepLine{
+        margin: 1.25rem 0.3rem 0;
+    }
+    .stepper_header .stepLabel{
+        font-size: 0.58rem;
+        letter-spacing: 0.5px;
     }
     .form_area{
         width: 90%;

@@ -39,7 +39,7 @@ export const SuccessPage = () => {
             let body = {
                 sessionId: sessionId
             }
-            const response = await fetch(process.env.REACT_APP_ENV_URL+'/api/session/getSession', {
+            const response = await fetch(import.meta.env.REACT_APP_ENV_URL+'/api/session/getSession', {
                 method: 'POST',
                 body: JSON.stringify(body),
                 headers: { 'Content-Type': 'application/json' },

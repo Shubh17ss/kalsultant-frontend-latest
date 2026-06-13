@@ -1,85 +1,248 @@
-.heroSectionContainer {
-    margin-top: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    height: 100vh;
-    margin: 0;
-}
-
+/* ============================================================
+   Legacy global rules — several other pages render bare <span>
+   and <h3> headings that rely on these. Do not scope or remove.
+   ============================================================ */
 span {
     font-size: 54px;
     width: 55%;
     line-height: 5rem;
 }
 
-.mainButton {
-    width: 22rem;
-    height: 58px;
-    font-size: 18px;
-    margin-top: 4rem;
-    border: none;
-    border-radius: 0.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    background-color: rgba(255, 255, 255, 0.05);
-    transition: 0.3s ease-in;
-    color: #fff;
-}
-
 h3 {
     font-family: 'FuturaNowLight', 'sans-serif';
-    color:rgba(255,255,255,0.3);
-}
-
-.mainButton h3 {
-    color:#f9f6ee;
-    font-size: 1.2rem;
-    margin:0;
-    font-family: 'FuturaNowReg', 'sans-serif';
-}
-
-.mainButton:hover {
-    background-color: #3a74d2;
-}
-
-.mainButton:active {
-    transform: scale(95%);
-}
-
-h3 {
+    color: rgba(255, 255, 255, 0.3);
     font-size: 22px;
 }
 
-/* Mobile responsive */
-@media screen and (max-width:1050px) {
-    .heroSectionContainer {
-        margin-top: 4rem;
-        height: 70vh;
-        justify-content: flex-start;
-        padding-top: 35%;
+/* ============================================================
+   Cinematic hero
+   ============================================================ */
+.cosmicHero {
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 7rem 1.5rem 5rem;
+    overflow: hidden;
+}
+
+.heroTitle {
+    font-family: 'BrandBe', 'FuturaNowBold', sans-serif;
+    font-size: clamp(2.2rem, 4.6vw, 4rem);
+    line-height: 1.12;
+    letter-spacing: 0.5px;
+    color: #f9f6ee;
+    margin: 1.6rem 0 0;
+    text-shadow: 0 0 70px rgba(139, 108, 255, 0.4);
+}
+
+.heroTitle em {
+    font-style: normal;
+}
+
+.heroSerif {
+    max-width: 640px;
+}
+
+.heroCtaRow {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem;
+    margin-top: 2.8rem;
+}
+
+.heroTrustRow {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.9rem;
+    margin-top: 2.6rem;
+}
+
+.heroTrustRow span {
+    width: auto;
+    font-size: 0.72rem;
+    line-height: 1.5;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    font-family: 'FuturaNowReg', sans-serif;
+    color: rgba(249, 246, 238, 0.48);
+}
+
+.heroTrustRow i {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #f0b85c;
+    box-shadow: 0 0 8px #f0b85c;
+}
+
+/* ---------------- scroll cue ---------------- */
+.scrollCue {
+    position: absolute;
+    bottom: 1.8rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.7rem;
+    opacity: 0.55;
+}
+
+.scrollCue span {
+    width: auto;
+    font-size: 0.68rem;
+    line-height: 1;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    font-family: 'FuturaNowReg', sans-serif;
+    color: #f9f6ee;
+}
+
+.scrollCueLine {
+    position: relative;
+    width: 1px;
+    height: 56px;
+    overflow: hidden;
+    background: linear-gradient(180deg, transparent, rgba(240, 184, 92, 0.5));
+}
+
+.scrollCueLine::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: -40%;
+    width: 100%;
+    height: 40%;
+    background: #ffd9a0;
+    animation: cueDrop 2.2s ease-in-out infinite;
+}
+
+@keyframes cueDrop {
+    0% {
+        top: -40%;
     }
-    .heroSectionContainer span {
-        font-size: 36px;
-        width: 90%;
-        line-height: 3rem;
+
+    100% {
+        top: 140%;
     }
-    .heroSectionContainer h3{
-        margin-top: 3rem;
-        width: 90%;
-        font-size: 18px;
+}
+
+/* ---------------- shooting stars ---------------- */
+.heroShootingStars {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.shootingStar {
+    position: absolute;
+    width: 150px;
+    height: 1.5px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.9), transparent);
+    opacity: 0;
+    transform: rotate(-32deg) translateX(0);
+    animation: shoot 9s linear infinite;
+}
+
+.shootingStar.s1 {
+    top: 16%;
+    left: 6%;
+    animation-delay: 2s;
+}
+
+.shootingStar.s2 {
+    top: 32%;
+    left: 60%;
+    animation-delay: 5.5s;
+    animation-duration: 11s;
+}
+
+.shootingStar.s3 {
+    top: 9%;
+    left: 38%;
+    animation-delay: 8.2s;
+    animation-duration: 10s;
+}
+
+@keyframes shoot {
+    0% {
+        opacity: 0;
+        transform: rotate(-32deg) translateX(0);
     }
-    .mainButton{
-        margin-top:2rem;
-        width: 80%;
-        background-color:#3a74d2;
+
+    2% {
+        opacity: 1;
     }
-    .mainButton h3{
-        margin:0;
-        width: 70%;
+
+    8% {
+        opacity: 0;
+        transform: rotate(-32deg) translateX(46vw);
+    }
+
+    100% {
+        opacity: 0;
+        transform: rotate(-32deg) translateX(46vw);
+    }
+}
+
+/* ---------------- mobile ---------------- */
+@media screen and (max-width: 1050px) {
+    .cosmicHero {
+        justify-content: flex-end;
+        padding-bottom: 6.5rem;
+    }
+
+    .heroTitle {
+        font-size: clamp(1.55rem, 6.6vw, 2.3rem);
+        letter-spacing: 0.3px;
+    }
+
+    .cosmicHero .cosmicEyebrow {
+        font-size: 0.6rem;
+        letter-spacing: 3px;
+        padding: 0.5rem 1rem;
+    }
+
+    .heroSerif {
+        width: 92%;
+    }
+
+    .heroCtaRow {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .heroCtaRow .ctaPrimary,
+    .heroCtaRow .ctaGhost {
+        width: min(86%, 22rem);
+        box-sizing: border-box;
+    }
+
+    .heroTrustRow {
+        gap: 0.6rem;
+        padding: 0 1rem;
+    }
+
+    .heroTrustRow span {
+        font-size: 0.7rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .shootingStar,
+    .scrollCueLine::after {
+        animation: none;
     }
 }

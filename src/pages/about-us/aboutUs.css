@@ -1,292 +1,294 @@
-.aboutUsContainer {
+.auPage {
+    position: relative;
+    z-index: 1;
     width: 100%;
     min-height: 100vh;
-    height: fit-content;
-    padding-bottom: 5rem;
-    margin-top: 60px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.aboutUsContainer .heroSectionAU {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.aboutUsContainer .heroSectionAU .left {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-}
-
-.aboutUsContainer .heroSectionAU .left strong {
-    font-size: 6rem;
-    text-align: right;
-    font-family: 'FuturaNowBold', sans-serif;
-}
-
-.aboutUsContainer .heroSectionAU .right {
-    width: 50%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-}
-
-.aboutUsContainer .heroSectionAU .right .box {
-    width: 35%;
-    height: 22vh;
-    background-color: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(5px);
-    border-radius: 0.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-.aboutUsContainer .heroSectionAU .right .box h3:nth-child(1) {
-    font-family: 'FuturaNowBold', sans-serif;
-    margin: 0;
-    font-size: 1.2rem;
+    overflow-x: hidden;
+    text-align: center;
     color: #f9f6ee;
 }
 
-.aboutUsContainer .heroSectionAU .right .box h3:nth-child(2) {
-    margin: 0;
-    color: rgba(255, 255, 255, 0.3);
-    font-size: 1rem;
-    margin-top: 0.5rem;
-}
-
-/* QUOTE SECTION */
-.aboutUsContainer .quoteSection {
-    width: 50%;
-    height: 30vh;
-}
-
-.aboutUsContainer .quoteSection strong:nth-child(1) {
-    font-size: 3rem;
-    font-family: 'FuturaNowLight', sans-serif;
-    color: rgba(255, 255, 255, 0.3);
-}
-
-.aboutUsContainer .quoteSection strong:nth-child(2) {
-    font-size: 3rem;
-    font-family: 'FuturaNowLight', sans-serif;
-}
-
-/* section 3 */
-.aboutUsContainer .section3 {
+/* ---------------- hero ---------------- */
+.auHero {
+    box-sizing: border-box;
     width: 100%;
-    height: 75vh;
-    padding-top: 8%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
+    padding: 9rem 1.5rem 4rem;
 }
 
-.aboutUsContainer .section3 strong:nth-child(1) {
-    font-size: 3rem;
+.auTitle em,
+.auSectionTitle em {
+    font-style: normal;
+}
+
+.auSub {
+    max-width: 520px;
+}
+
+/* fact tiles */
+.auFactsGrid {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    gap: 1.3rem;
+    width: min(1100px, 94%);
+    margin-top: 3.5rem;
+}
+
+.auFactWrap {
+    flex: 1 1 0;
+    display: flex;
+}
+
+.auFact {
+    flex: 1;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 1.8rem 1.2rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(249, 246, 238, 0.12);
+    background: linear-gradient(165deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015));
+    backdrop-filter: blur(8px);
+    transition:
+        transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.auFact:hover {
+    transform: translateY(-6px);
+    border-color: rgba(240, 184, 92, 0.45);
+    box-shadow: 0 14px 38px rgba(0, 0, 0, 0.5), 0 0 24px rgba(240, 184, 92, 0.12);
+}
+
+.auFactTitle {
+    width: auto;
+    font-family: 'BrandBe', 'FuturaNowBold', sans-serif;
+    font-size: 1.15rem;
+    line-height: 1.2;
+    color: #f0b85c;
+}
+
+.auFactLabel {
+    width: auto;
     font-family: 'FuturaNowLight', sans-serif;
-    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.84rem;
+    line-height: 1.45;
+    color: rgba(249, 246, 238, 0.55);
 }
 
-.aboutUsContainer .section3 strong:nth-child(2) {
-    font-size: 3rem;
+/* ---------------- quote ---------------- */
+.auQuote {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 4.5rem 1.5rem;
+}
+
+.auQuoteText {
     font-family: 'FuturaNowLight', sans-serif;
+    font-size: clamp(1.1rem, 2vw, 1.6rem);
+    line-height: 1.8;
+    letter-spacing: 0.5px;
+    color: rgba(249, 246, 238, 0.55);
+    margin: 0;
 }
 
-/* REVIEWS SECTION */
-.reviews_section_container {
-    width: 70%;
-    height: 320px;
-    margin-top: 120px;
+/* ---------------- reviews ---------------- */
+.auReviews {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 0 2rem;
 }
 
-.review_text_container {
-    background-color: transparent;
-    min-height: 120px;
-    max-width: 320px;
-    padding: 1rem;
+.auReviewsSlider {
+    width: min(1180px, 94%);
+    margin-top: 3rem;
+}
+
+.auReviewCard {
+    position: relative;
+    box-sizing: border-box;
+    min-height: 9.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 12px;
-    color: #d2d2d2;
-    font-weight: 400;
-    backdrop-filter: blur(1px);
-    font-family: 'FuturaNowReg', 'sans-serif';
-    box-shadow:0 4px 15px rgba(255,255,255,0.09);
-    margin:20px;
+    padding: 1.6rem 1.5rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(249, 246, 238, 0.1);
+    background: linear-gradient(165deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012));
+    backdrop-filter: blur(6px);
+    font-family: 'FuturaNowLight', sans-serif;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: rgba(249, 246, 238, 0.7);
 }
 
-/* REVIEWS SECTION */
+.auReviewCard::before {
+    content: '“';
+    position: absolute;
+    top: 0.2rem;
+    left: 0.9rem;
+    font-family: 'BrandBe', serif;
+    font-size: 2.6rem;
+    line-height: 1;
+    color: rgba(240, 184, 92, 0.45);
+    pointer-events: none;
+}
 
-/* section 4 */
-.aboutUsContainer .section4 {
+.auSwipeHint {
+    font-family: 'FuturaNowReg', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: rgba(249, 246, 238, 0.4);
+    margin: 1.2rem 0 0;
+}
+
+/* ---------------- team ---------------- */
+.auTeam {
+    box-sizing: border-box;
     width: 100%;
-    height: fit-content;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
-    margin: 8rem 0;
+    padding: 5rem 1.5rem 2rem;
 }
 
-.aboutUsContainer .section4 strong:nth-child(1) {
-    font-size: 3rem;
-    font-family: 'FuturaNowLight', sans-serif;
-    color: rgba(255, 255, 255, 0.4);
-}
-
-.aboutUsContainer .section4 strong:nth-child(2) {
-    font-size: 3rem;
-    font-family: 'FuturaNowLight', sans-serif;
-}
-
-.aboutUsContainer .section4 .infoHolder {
-    width: 90%;
-    height: 50vh;
-    height: fit-content;
-    margin-top: 10%;
+.auTeamGrid {
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    gap: 1.6rem;
+    width: min(1100px, 94%);
+    margin-top: 3.5rem;
+}
+
+.auTeamWrap {
+    flex: 1 1 0;
+    display: flex;
+}
+
+.auTeamCard {
+    flex: 1;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    padding: 1.6rem 1.4rem 1.8rem;
+    border-radius: 1.1rem;
+    border: 1px solid rgba(249, 246, 238, 0.12);
+    background: linear-gradient(165deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015));
+    backdrop-filter: blur(8px);
+    transition:
+        transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
 }
 
-.aboutUsContainer .section4 .infoHolder .charInfo {
-    width: 30%;
-    height: fit-content;
-    overflow: hidden;
+.auTeamCard:hover {
+    transform: translateY(-8px);
+    border-color: rgba(240, 184, 92, 0.45);
+    box-shadow: 0 18px 46px rgba(0, 0, 0, 0.5), 0 0 30px rgba(240, 184, 92, 0.12);
 }
 
-.aboutUsContainer .section4 .infoHolder .charInfo img {
-    width: 320px;
-    height: 320px;
-    border-radius: 20%;
-    filter: contrast(80%);
+.auTeamCard img {
+    width: 100%;
+    max-width: 280px;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 0.9rem;
+    filter: contrast(85%) saturate(90%);
+    transition: filter 0.35s ease;
 }
 
-.aboutUsContainer .section4 .infoHolder .charInfo h3 {
-    margin: 0;
-    margin-top: 0.5rem;
+.auTeamCard:hover img {
+    filter: contrast(95%) saturate(100%);
 }
 
-.aboutUsContainer .section4 .infoHolder .charInfo h3:nth-child(3) {
-    margin-top: 0.5rem;
-    color: rgba(255, 255, 255, 0.3);
+.auTeamName {
+    width: auto;
+    font-family: 'BrandBe', 'FuturaNowBold', sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.2;
+    color: #f9f6ee;
+    margin-top: 1.2rem;
 }
 
-/* MAKING MOBILE RESPONSIVE */
-@media screen and (max-width:1000px) {
-    .aboutUsContainer .heroSectionAU {
+.auTeamRole {
+    width: auto;
+    font-family: 'FuturaNowReg', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    line-height: 1.5;
+    color: rgba(249, 246, 238, 0.5);
+    margin-top: 0.4rem;
+}
+
+/* ---------------- outro ---------------- */
+.auOutro {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4.5rem 1.5rem 7rem;
+}
+
+.auOutro .ctaPrimary {
+    margin-top: 2.2rem;
+}
+
+/* ---------------- mobile ---------------- */
+@media screen and (max-width: 950px) {
+    .auHero {
+        padding: 7rem 1.2rem 3rem;
+    }
+
+    .auFactsGrid {
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-top: 2.6rem;
+    }
+
+    .auFactWrap {
+        flex: 1 1 42%;
+    }
+
+    .auQuote {
+        padding: 3rem 1.5rem;
+    }
+
+    .auReviewsSlider {
+        width: 92%;
+    }
+
+    .auTeamGrid {
         flex-direction: column;
-        justify-content: flex-start;
-        padding-top: 15%;
-        height: 85vh;
+        gap: 1.3rem;
     }
 
-    .aboutUsContainer .heroSectionAU .left {
-        width: 90%;
-        align-self: flex-start;
+    .auTeamCard img {
+        max-width: 100%;
     }
 
-    .aboutUsContainer .heroSectionAU .left strong {
-        font-size: 3rem;
+    .auOutro {
+        padding: 3.5rem 1.2rem 5rem;
     }
 
-    .aboutUsContainer .heroSectionAU .right {
-        width: 100%;
-        margin-top: 2rem;
+    .auOutro .ctaPrimary {
+        width: min(86%, 22rem);
+        box-sizing: border-box;
     }
-
-    .aboutUsContainer .heroSectionAU .right .box {
-        width: 40%;
-    }
-
-    .aboutUsContainer .heroSectionAU .right .box h3:nth-child(1) {
-        font-size: 1rem;
-        color: #f9f6ee;
-        min-height: 3rem;
-    }
-
-    .aboutUsContainer .heroSectionAU .right .box h3:nth-child(2) {
-        font-size: 0.8rem;
-    }
-
-    .aboutUsContainer .quoteSection {
-        width: 90%;
-    }
-
-    .aboutUsContainer .quoteSection strong:nth-child(1) {
-        font-size: 1.8rem;
-    }
-
-    .aboutUsContainer .quoteSection strong:nth-child(2) {
-        font-size: 1.8rem;
-    }
-
-    .aboutUsContainer .section3 {
-        height: 60vh;
-    }
-
-    .aboutUsContainer .section3 strong:nth-child(1) {
-        font-size: 1.8rem;
-    }
-
-    .aboutUsContainer .section3 strong:nth-child(2) {
-        font-size: 1.8rem;
-    }
-
-    .aboutUsContainer .reviews_section_container{
-        width: 100%;
-        height: fit-content;
-        margin-top: 60px;
-    }
-    .review_text_container{
-        max-width: 90%;
-    }
-
-    .aboutUsContainer .section4 {
-        margin: 2rem 0;
-    }
-
-    .aboutUsContainer .section4 strong:nth-child(1) {
-        font-size: 1.8rem;
-    }
-
-    .aboutUsContainer .section4 strong:nth-child(2) {
-        font-size: 1.8rem;
-        margin-top: 1rem;
-    }
-
-    .aboutUsContainer .section4 .infoHolder {
-        width: 100%;
-        flex-direction: column;
-    }
-
-    .aboutUsContainer .section4 .infoHolder .charInfo {
-        width: 90%;
-        margin: 2rem 0;
-    }
-
-    .aboutUsContainer .section4 .infoHolder .charInfo img {
-        width: 280px;
-        height: 280px;
-    }
-
-    .aboutUsContainer .section4 .infoHolder .charInfo h3:nth-child(2) {
-        margin-top: 0.5rem;
-        color: #f9f6ee;
-    }
-
-
 }

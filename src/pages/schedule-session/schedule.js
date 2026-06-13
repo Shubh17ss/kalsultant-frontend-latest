@@ -23,7 +23,7 @@ export const Schedule = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
         const invokeFirebaseFunction = async () => {
-            let response = await fetch(process.env.REACT_APP_ENV_URL + '/', {
+            let response = await fetch(import.meta.env.REACT_APP_ENV_URL + '/', {
                 method: 'get'
             });
             let res = await response.json();
@@ -103,7 +103,7 @@ export const Schedule = () => {
                 proposed_slot: slotChoice
             }
             if (slot.length === 0) {
-                let response = await fetch(process.env.REACT_APP_ENV_URL + '/api/session/storeProposedSession', {
+                let response = await fetch(import.meta.env.REACT_APP_ENV_URL + '/api/session/storeProposedSession', {
                     method: 'POST',
                     body: JSON.stringify(body),
                     headers: { 'Content-Type': 'application/json' },
@@ -131,7 +131,7 @@ export const Schedule = () => {
                 }
             }
             else if (slot.length != 0) {
-                let response = await fetch(process.env.REACT_APP_ENV_URL + '/api/session/createSession', {
+                let response = await fetch(import.meta.env.REACT_APP_ENV_URL + '/api/session/createSession', {
                     method: 'POST',
                     body: JSON.stringify(body),
                     headers: { 'Content-Type': 'application/json' },
@@ -162,44 +162,45 @@ export const Schedule = () => {
         let newIndex = index + 1;
         setIndex(newIndex);
     }
-    const setIndexToZero = () => {
-        if (index > 0) {
-            setIndex(0);
+    // Steps can only be revisited backwards (forward moves go through validation).
+    const goTo = (target) => {
+        if (target < index) {
+            setIndex(target);
         }
     }
-    const setIndexToOne = () => {
-        if (index > 1) { setIndex(1); }
-    }
-    const setIndexToTwo = () => {
-        if (index > 2) {
-            setIndex(2);
-        }
-    }
-    const setIndexToThree = () => {
-        if (index > 3) {
-            setIndex(3);
-        }
-    }
+    const steps = [
+        { Icon: FaUser, label: 'You' },
+        { Icon: FaCakeCandles, label: 'Birth' },
+        { Icon: FaClock, label: 'Slot' },
+        { Icon: MdRateReview, label: 'Review' },
+    ];
 
     return (
         <div style={{ overflowX: 'hidden', position: 'relative', width: '100%', minHeight: '100vh', height: 'fitContent', textAlign: 'center' }}>
             <Navbar />
             <div className='schedule_screen_main'>
                 <div className='stepper_header'>
-                    <FaUser size={isMobileScreen ? 30 : 22} color={index === 0 ? '#f9f6ee' : 'rgba(255,255,255,0.3)'} style={{ cursor: 'pointer' }} onClick={setIndexToZero} />
-                    <span className={index >= 1 ? 'line white' : 'line'}></span>
-                    <FaCakeCandles size={isMobileScreen ? 30 : 22} color={index === 1 ? '#f9f6ee' : 'rgba(255,255,255,0.3)'} style={{ cursor: 'pointer' }} onClick={setIndexToOne} />
-                    <span className={index >= 2 ? 'line white' : 'line'}></span>
-                    <FaClock size={isMobileScreen ? 30 : 22} color={index === 2 ? '#f9f6ee' : 'rgba(255,255,255,0.3)'} style={{ cursor: 'pointer' }} onClick={setIndexToTwo} />
-                    <span className={index >= 3 ? 'line white' : 'line'}></span>
-                    <MdRateReview size={isMobileScreen ? 32 : 24} color={index === 3 ? '#f9f6ee' : 'rgba(255,255,255,0.3)'} style={{ cursor: 'pointer' }} onClick={setIndexToThree} />
+                    {steps.map(({ Icon, label }, i) => (
+                        <React.Fragment key={label}>
+                            <div
+                                className={`step ${i === index ? 'active' : i < index ? 'done' : 'upcoming'}`}
+                                onClick={() => goTo(i)}
+                            >
+                                <span className='stepCircle'>
+                                    <Icon size={isMobileScreen ? 22 : 18} />
+                                </span>
+                                <span className='stepLabel'>{label}</span>
+                            </div>
+                            {i < steps.length - 1 && <span className={`stepLine ${index > i ? 'filled' : ''}`}></span>}
+                        </React.Fragment>
+                    ))}
                 </div>
                 <div className='form_area'>
                     {index === 0 ? <PersonalDetails /> : index === 1 ? <BirthDetails /> : index === 2 ? <Slotselection /> : <Review />}
                 </div>
                 <div className='button_area'>
                     <button onClick={handleNext} disabled={loading}>
-                        {loading ? <ClipLoader color='#fff' size={20} speedMultiplier={0.8} /> : <h3>{index === 0 ? 'Birth details' : index === 1 ? 'Choose Slot' : index === 2 ? 'Review' : 'Register'} </h3>}
+                        {loading ? <ClipLoader color='#1d1305' size={20} speedMultiplier={0.8} /> : <h3>{index === 0 ? 'Birth details' : index === 1 ? 'Choose Slot' : index === 2 ? 'Review' : 'Register'} </h3>}
                         {index === 3 ? '' : <MdArrowRightAlt style={{ marginTop: isMobileScreen ? '0' : '0.4rem', marginLeft: '1rem', fontSize: '1.2rem' }} />}
                     </button>
                 </div>

@@ -4,8 +4,7 @@ import toast from 'react-hot-toast';
 import './footer.css'
 
 export const Footer = () => {
-  const [year, setYear] = useState(new Date().getFullYear())
-  const isMobileScreen = window.innerWidth <= 1000 ? true : false;
+  const [year] = useState(new Date().getFullYear())
   const navigate = useNavigate();
   const copyToClipBoardEmail = (text) => {
     navigator.clipboard.writeText(text).then(() => {
@@ -18,7 +17,7 @@ export const Footer = () => {
   const copyToClipBoardContact = (text) => {
     navigator.clipboard.writeText(text).then(() => {
       toast.success('Contact number copied to clipboard');
-    }).catch((error) => {
+    }).catch(() => {
       toast.error('Contact number could not be copied');
     })
   }
@@ -29,55 +28,29 @@ export const Footer = () => {
         <div className='leftSection'>
           <h3>KalSultant</h3>
         </div>
-        {isMobileScreen ?
-          <div className='rightSection'>
-            <div className='row links'>
-              <h3 style={{ color: '#fff' }}>Consultation</h3>
-              <h3 onClick={() => { navigate('/about-us') }}>About</h3>
-              <h3 onClick={() => { navigate('/schedule-session') }}>Session</h3>
-              <h3 onClick={() => { navigate('/vaastu') }}>Vaastu</h3>
-            </div>
-            <div className='row links'>
-              <h3 style={{ color: '#fff' }}>Support</h3>
-              <h3 onClick={() => { navigate('/contact-us') }}>Contact</h3>
-              <h3 onClick={() => { copyToClipBoardContact("+91-9997301225") }}>+91-9997301225</h3>
-              <h3 onClick={() => { copyToClipBoardEmail("contact@kalsultant.com") }}>contact@kalsultant.com</h3>
-            </div>
-            <div className='row links'>
-              <h3 style={{ color: '#fff' }}>Company</h3>
-              <h3 onClick={() => { navigate('/terms&Conditions') }}>Terms and Conditions</h3>
-              <h3 onClick={() => { navigate('/privacy-policy') }}>Privacy Policy</h3>
-              <h3 onClick={() => { navigate('/refund-policy') }}>Refund Policy</h3>
-            </div>
+        <div className='rightSection'>
+          <div className='footerColumn'>
+            <h4>Consultation</h4>
+            <span onClick={() => { navigate('/about-us') }}>About</span>
+            <span onClick={() => { navigate('/schedule-session') }}>Session</span>
+            <span onClick={() => { navigate('/vaastu') }}>Vaastu</span>
           </div>
-          :
-          <div className='rightSection'>
-            <div className='row'>
-              <h3 style={{ color: '#fff' }}>Consultation</h3>
-              <h3 style={{ color: '#fff' }}>Support</h3>
-              <h3 style={{ color: '#fff' }}>Company</h3>
-            </div>
-            <div className='row links'>
-              <h3 onClick={() => { navigate('/about-us') }}>About</h3>
-              <h3 onClick={() => { navigate('/contact-us') }}>Contact</h3>
-              <h3 onClick={() => { navigate('/terms&Conditions') }}>Terms and Conditions</h3>
-            </div>
-            <div className='row links'>
-              <h3 onClick={() => { navigate('/schedule-session') }}>Session</h3>
-              <h3 onClick={() => { copyToClipBoardEmail("contact@kalsultant.com") }}>contact@kalsultant.com</h3>
-              <h3 onClick={() => { navigate('/privacy-policy') }}>Privacy Policy</h3>
-            </div>
-            <div className='row links'>
-              <h3></h3>
-              <h3 onClick={() => { copyToClipBoardContact("+91-9997301225") }}>+91-9997301225</h3>
-              <h3 onClick={() => { navigate('/refund-policy') }}>Refund Policy</h3>
-            </div>
-
+          <div className='footerColumn'>
+            <h4>Support</h4>
+            <span onClick={() => { navigate('/contact-us') }}>Contact</span>
+            <span onClick={() => { copyToClipBoardContact("+91-9997301225") }}>+91-9997301225</span>
+            <span onClick={() => { copyToClipBoardEmail("contact@kalsultant.com") }}>contact@kalsultant.com</span>
           </div>
-        }
+          <div className='footerColumn'>
+            <h4>Company</h4>
+            <span onClick={() => { navigate('/terms&Conditions') }}>Terms and Conditions</span>
+            <span onClick={() => { navigate('/privacy-policy') }}>Privacy Policy</span>
+            <span onClick={() => { navigate('/refund-policy') }}>Refund Policy</span>
+          </div>
+        </div>
       </div>
-      <div>
-        <h3 style={{ fontSize: '1rem', color: '#f9f6ee' }}>KalSultant &#169; {year} All rights reserved </h3>
+      <div className='footerBottom'>
+        <span>KalSultant &#169; {year} All rights reserved</span>
       </div>
     </div>
   )

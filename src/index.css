@@ -1,26 +1,139 @@
+/*
+ * The whole app uses Merriweather (a serif). It ships as a single family with
+ * several weights, so the canonical `Merriweather` family below maps each CSS
+ * font-weight (300–900, plus italics) to its matching static file.
+ *
+ * The legacy family names are kept (the codebase encodes weight in the family
+ * name) but now resolve to the equivalent Merriweather weight, so every
+ * existing `font-family` declaration renders Merriweather at the right weight
+ * with no changes needed in component styles:
+ *   FuturaNowLight   -> Light      (300)
+ *   FuturaNowReg     -> Regular    (400)
+ *   FuturaNowBold    -> Bold       (700)
+ *   BrandBe          -> ExtraBold  (800)
+ *   FuturaNowXBlack  -> Black      (900)
+ *   Baskerville(Italic) -> Regular / Italic
+ */
 @font-face {
-  font-family: 'FuturaNowBold';
-  src: url('./fonts/FuturaNow/FuturaNowHeadlineBold.ttf') format('woff2'),
-    url('./fonts/FuturaNow/FuturaNowHeadlineBold.ttf') format('truetype');
-
-  font-weight: normal;
-  font-style: bold;
+  font-family: 'Merriweather';
+  src: url('./fonts/Merriweather/static/Merriweather_24pt-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-  font-family: 'FuturaNowReg';
-  src: url('./fonts/FuturaNow/FuturaNowHeadline.ttf') format('woff2'),
-    url('./fonts/FuturaNow/FuturaNowHeadline.ttf') format('truetype');
+  font-family: 'Merriweather';
+  src: url('./fonts/Merriweather/static/Merriweather_24pt-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
-  font-weight: normal;
+@font-face {
+  font-family: 'Merriweather';
+  src: url('./fonts/Merriweather/static/Merriweather_24pt-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  src: url('./fonts/Merriweather/static/Merriweather_24pt-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  src: url('./fonts/Merriweather/static/Merriweather_24pt-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  src: url('./fonts/Merriweather/static/Merriweather_24pt-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  src: url('./fonts/Merriweather/static/Merriweather_24pt-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  src: url('./fonts/Merriweather/static/Merriweather_24pt-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  src: url('./fonts/Merriweather/static/Merriweather_24pt-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'FuturaNowLight';
-  src: url('./fonts/FuturaNow/FuturaNowHeadlineExtraLight.ttf') format('woff2'),
-    url('./fonts/FuturaNow/FuturaNowHeadlineExtraLight.ttf') format('truetype');
+  src: url('./fonts/Merriweather/static/Merriweather_24pt-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-display: swap;
+}
 
-  font-weight: lighter;
+@font-face {
+  font-family: 'FuturaNowReg';
+  src: url('./fonts/Merriweather/static/Merriweather_24pt-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'FuturaNowBold';
+  src: url('./fonts/Merriweather/static/Merriweather_24pt-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'BrandBe';
+  src: url('./fonts/Merriweather/static/Merriweather_24pt-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'FuturaNowXBlack';
+  src: url('./fonts/Merriweather/static/Merriweather_24pt-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Baskerville';
+  src: url('./fonts/Merriweather/static/Merriweather_24pt-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'BaskervilleItalic';
+  src: url('./fonts/Merriweather/static/Merriweather_24pt-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
 }
 *{
   scroll-behavior: smooth;
@@ -30,7 +143,7 @@ body {
   margin: 0;
   border: 0;
   box-sizing: border-box;
-  font-family: 'FuturaNowBold', sans-serif;
+  font-family: 'FuturaNowBold', 'Merriweather', serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #020202;
@@ -42,10 +155,10 @@ body {
 }
 
 span {
-  font-family: 'FuturaNowBold', 'sans-serif';
+  font-family: 'FuturaNowBold', 'Merriweather', serif;
 }
 p{
-  font-family: 'FuturaNowLight', 'sans-serif';
+  font-family: 'FuturaNowLight', 'Merriweather', serif;
 }
 
 html::-webkit-scrollbar{

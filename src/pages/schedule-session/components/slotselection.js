@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './components.css'
 import { useFormContext } from '../../../context/formContext'
 import { toast } from 'react-hot-toast'
+import { CosmicSelect } from '../../../components/cosmic/CosmicSelect'
 
 
 const formatDateValue = (date) => {
@@ -39,7 +40,7 @@ export const Slotselection = () => {
             let body = {
                 date: date
             };
-            const response = await fetch(process.env.REACT_APP_ENV_URL + '/api/slots/getslots', {
+            const response = await fetch(import.meta.env.REACT_APP_ENV_URL + '/api/slots/getslots', {
                 method: 'POST',
                 headers: { "Content-type": "application/json" },
                 body: JSON.stringify(body),
@@ -59,7 +60,7 @@ export const Slotselection = () => {
         let body = {
             date: date_temp
         };
-        const response = await fetch(process.env.REACT_APP_ENV_URL + '/api/slots/getslots', {
+        const response = await fetch(import.meta.env.REACT_APP_ENV_URL + '/api/slots/getslots', {
             method: 'POST',
             headers: { "Content-type": "application/json" },
             body: JSON.stringify(body),
@@ -102,12 +103,15 @@ export const Slotselection = () => {
 
     return (
         <div className='form_container_2'>
-            <select className='date_selector' value={date} onChange={(e) => { changeSessionDate(e.target.value) }}>
-                <option value="">Choose date</option>
-                {dates.map((date) => (
-                    <option value={date.value} key={date.value}>{date.label}</option>
-                ))}
-            </select>
+            <CosmicSelect
+                className='date_selector'
+                value={date}
+                onChange={changeSessionDate}
+                placeholder='Choose date'
+                ariaLabel='Session date'
+                height={48}
+                options={dates.map((d) => ({ value: d.value, label: d.label }))}
+            />
             {
                 date === "" ?
                     <></>
@@ -117,14 +121,17 @@ export const Slotselection = () => {
                             style={{ width: isMobileScreen ? "96%" : "98%" }}
                             type="text" placeholder='Propose a time HH:MM' value={slotChoice} onChange={(e) => { setSlotChoice(e.target.value) }}></input>
                         :
-                        <select className='date_selector' value={slot} onChange={(e) => { setSlot(e.target.value) }}>
-                            <option>Choose slot</option>
-                            {slots.map((slot, index) => (
-                                <option value={slot.slot} key={index}>{changeLayout(slot.slot)}</option>
-                            ))}
-                        </select>
+                        <CosmicSelect
+                            className='date_selector'
+                            value={slot}
+                            onChange={setSlot}
+                            placeholder='Choose slot'
+                            ariaLabel='Session slot'
+                            height={48}
+                            options={slots.map((s) => ({ value: s.slot, label: changeLayout(s.slot) }))}
+                        />
             }
-            <h4 style={{ fontSize: '12px', color: 'crimson', margin: 0 }}>*Date and time are in IST*</h4>
+            <h4 style={{ fontSize: '12px', color: '#f0b85c', margin: 0 }}>*Date and time are in IST*</h4>
         </div>
     )
 }

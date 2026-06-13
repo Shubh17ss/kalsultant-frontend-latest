@@ -1,0 +1,222 @@
+/* Registered so the radial reveal radius can be transitioned (Houdini). */
+@property --reveal {
+    syntax: '<length-percentage>';
+    inherits: false;
+    initial-value: 0%;
+}
+
+.intro {
+    position: fixed;
+    inset: 0;
+    z-index: 100000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    cursor: pointer;
+    /* resting centre of the ball — also the origin of the light */
+    --orb-y: 61%;
+}
+
+/* ---------------- black curtain (reveals radially) ---------------- */
+.introBlackout {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: #000;
+    --reveal: 0%;
+    /* transparent circle of radius --reveal with a soft trailing edge; the
+       transparent stop sits behind the edge so --reveal:0 is fully opaque. */
+    -webkit-mask-image: radial-gradient(circle at 50% var(--orb-y), transparent max(0%, calc(var(--reveal) - 14%)), #000 var(--reveal));
+    mask-image: radial-gradient(circle at 50% var(--orb-y), transparent max(0%, calc(var(--reveal) - 14%)), #000 var(--reveal));
+    /* smooth ease-in-out so the light spreads gradually, not in a pop */
+    transition: --reveal 1.8s cubic-bezier(0.45, 0, 0.45, 1);
+}
+
+.intro--illuminate .introBlackout {
+    --reveal: 160%;
+}
+
+/* ---------------- the glowing ball ---------------- */
+.introOrb {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    z-index: 3;
+    opacity: 0;
+    /* opacity is driven by stage (transition) so the transform animations
+       below don't have to carry it — otherwise the orb vanishes the moment
+       the stage class (and its forwards-filled animation) changes. */
+    transition: opacity 0.5s ease;
+    transform: translate(-50%, -50%) scale(0);
+    background: radial-gradient(circle at 38% 32%, #fffaf0 0%, #ffe2b0 32%, #f0b85c 62%, #d98b2e 100%);
+    box-shadow:
+        0 0 26px 6px rgba(255, 214, 150, 0.75),
+        0 0 64px 20px rgba(240, 184, 92, 0.45),
+        0 0 120px 50px rgba(139, 108, 255, 0.18);
+    pointer-events: none;
+}
+
+.intro--forming .introOrb {
+    opacity: 1;
+    animation: orbForm 0.82s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* the same orbDrop animation is declared for both stages so it keeps running
+   (and holds its end frame) across the class change instead of restarting */
+.intro--dropping .introOrb {
+    opacity: 1;
+    animation: orbDrop 1.05s cubic-bezier(0.55, 0, 0.85, 0.35) forwards;
+}
+
+.intro--illuminate .introOrb {
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    animation: orbDrop 1.05s cubic-bezier(0.55, 0, 0.85, 0.35) forwards;
+}
+
+@keyframes orbForm {
+    0% { transform: translate(-50%, -50%) scale(0); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes orbDrop {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    52% { transform: translate(-50%, calc(-50% + 11vh)) scale(1); }
+    66% { transform: translate(-50%, calc(-50% + 11vh)) scale(1.2, 0.8); }
+    82% { transform: translate(-50%, calc(-50% + 8.5vh)) scale(0.92, 1.1); }
+    100% { transform: translate(-50%, calc(-50% + 11vh)) scale(1); }
+}
+
+/* ---------------- radial illumination from the ball ---------------- */
+.introGlow {
+    position: absolute;
+    top: var(--orb-y);
+    left: 50%;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    z-index: 4;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+    background: radial-gradient(circle,
+            rgba(255, 245, 224, 0.95) 0%,
+            rgba(255, 208, 130, 0.6) 20%,
+            rgba(240, 184, 92, 0.22) 42%,
+            rgba(139, 108, 255, 0.1) 62%,
+            transparent 72%);
+    pointer-events: none;
+}
+
+.intro--illuminate .introGlow {
+    animation: glowSpread 1.8s cubic-bezier(0.45, 0, 0.45, 1) forwards;
+}
+
+@keyframes glowSpread {
+    0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+    12% { opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(62); opacity: 0; }
+}
+
+/* ---------------- typewriter text ---------------- */
+.introText {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    padding: 0 1.5rem;
+    transition:
+        opacity 0.55s ease,
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 0.55s ease;
+}
+
+/* once the ball starts forming, the text collapses into it */
+.intro--forming .introText,
+.intro--dropping .introText,
+.intro--illuminate .introText {
+    opacity: 0;
+    transform: scale(0.55);
+    filter: blur(9px);
+    pointer-events: none;
+}
+
+/* explicit metrics override the legacy global `span { font-size:54px;
+   width:55%; line-height:5rem }` rule */
+.introBrand {
+    display: block;
+    width: auto;
+    min-height: 1.1em;
+    font-family: 'BrandBe', 'FuturaNowBold', serif;
+    font-size: clamp(2.4rem, 7vw, 5rem);
+    line-height: 1.12;
+    letter-spacing: 1px;
+    color: #f9f6ee;
+    text-shadow: 0 0 45px rgba(240, 184, 92, 0.35);
+}
+
+.introTagline {
+    display: block;
+    width: auto;
+    min-height: 1.4em;
+    margin-top: 1.1rem;
+    font-family: 'FuturaNowLight', serif;
+    font-size: clamp(0.85rem, 2.2vw, 1.35rem);
+    line-height: 1.4;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: rgba(240, 184, 92, 0.88);
+}
+
+.introCaret {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    margin-left: 5px;
+    vertical-align: -0.12em;
+    background: #f0b85c;
+    box-shadow: 0 0 9px #f0b85c;
+    animation: caretBlink 0.85s steps(1) infinite;
+}
+
+@keyframes caretBlink {
+    0%, 50% { opacity: 1; }
+    50.01%, 100% { opacity: 0; }
+}
+
+/* ---------------- skip ---------------- */
+.introSkip {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 5;
+    padding: 0.5rem 1.15rem;
+    border: 1px solid rgba(249, 246, 238, 0.25);
+    border-radius: 999px;
+    background: transparent;
+    color: rgba(249, 246, 238, 0.7);
+    font-family: 'FuturaNowReg', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.4s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.introSkip:hover {
+    color: #f0b85c;
+    border-color: rgba(240, 184, 92, 0.5);
+}
+
+.intro--illuminate .introSkip {
+    opacity: 0;
+    pointer-events: none;
+}
+
+@media screen and (max-width: 1050px) {
+    .introSkip { bottom: 1.4rem; right: 1.4rem; }
+    .intro { --orb-y: 58%; }
+}
