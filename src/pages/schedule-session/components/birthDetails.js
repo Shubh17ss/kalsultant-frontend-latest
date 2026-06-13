@@ -1,6 +1,7 @@
 import React from 'react'
 import './components.css'
 import { useFormContext } from '../../../context/formContext';
+import { CosmicSelect } from '../../../components/cosmic/CosmicSelect';
 
 export const BirthDetails = () => {
     const { dob, setDob, tob, setTob, pob, setPob, gender, setGender } = useFormContext();
@@ -110,12 +111,18 @@ export const BirthDetails = () => {
             <input type="text" placeholder='Date of birth (DD/MM/YYYY)' value={dob} onChange={(e) => { handleDateChange(e) }}></input>
             <input type="text" placeholder='Time of birth (HH:MM AM/PM)' value={tob} onChange={(e) => { handleTimeChange(e) }}></input>
             <input type="text" placeholder='Place of birth' value={pob} onChange={(e) => { setPob(e.target.value) }}></input>
-            <select className='gender_selector' value={gender} onChange={(e) => { setGender(e.target.value) }}>
-                <option value=''>Select gender</option>
-                <option value='Male'>Male</option>
-                <option value='Female'>Female</option>
-                <option value='Prefer not to say'>Prefer not to say</option>
-            </select>
+            <CosmicSelect
+                className='gender_selector'
+                value={gender}
+                onChange={setGender}
+                placeholder='Select gender'
+                ariaLabel='Gender'
+                options={[
+                    { value: 'Male', label: 'Male' },
+                    { value: 'Female', label: 'Female' },
+                    { value: 'Prefer not to say', label: 'Prefer not to say' },
+                ]}
+            />
         </div>
     )
 }

@@ -13,10 +13,12 @@
     width: 35vw;
 }
 
-.form_container_2 input,
-.form_container input,
-.form_container_2 .gender_selector,
-.form_container_2 .date_selector {
+/* Direct-child combinator (`>`) is deliberate: MUI <CosmicSelect> renders a
+   hidden native <input> nested inside its root, and a bare `input` selector
+   would un-hide it as an empty box overlapping the dropdown. The real text
+   fields are always direct children of these containers. */
+.form_container_2 > input,
+.form_container > input {
     height: 46px;
     margin: 0.5rem 0;
     box-sizing: border-box;
@@ -31,52 +33,30 @@
     transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
-/* native dropdowns aligned to the cosmic design system */
-.form_container_2 .gender_selector,
-.form_container_2 .date_selector {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    box-sizing: border-box;
-    cursor: pointer;
-    color-scheme: dark;
-    padding-right: 2.6rem;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f0b85c' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 1rem center;
-    background-size: 0.85rem;
-}
-
-.form_container_2 .gender_selector option,
-.form_container_2 .date_selector option {
-    background-color: #1a1207;
-    color: #f9f6ee;
-    font-family: 'FuturaNowReg', sans-serif;
-}
-
-.form_container_2 input,
+/* MUI <CosmicSelect> dropdowns (gender / date / slot) carry these classes
+   but are themed entirely via the component's sx — the form only owns their
+   vertical rhythm so they line up with the text inputs. */
 .form_container_2 .gender_selector,
 .form_container_2 .date_selector {
     width: 100%;
+    margin: 0.5rem 0;
 }
 
-.form_container input {
+.form_container_2 > input {
+    width: 100%;
+}
+
+.form_container > input {
     width: 45%;
 }
 
-.form_container_2 .date_selector {
-    height: 48px;
-}
-
-.form_container_2 input::placeholder,
-.form_container input::placeholder {
+.form_container_2 > input::placeholder,
+.form_container > input::placeholder {
     color: rgba(249, 246, 238, 0.35);
 }
 
-.form_container_2 input:focus,
-.form_container input:focus,
-.form_container_2 .gender_selector:focus,
-.form_container_2 .date_selector:focus {
+.form_container_2 > input:focus,
+.form_container > input:focus {
     outline: none;
     border-color: rgba(240, 184, 92, 0.6);
     background-color: rgba(255, 255, 255, 0.08);
@@ -112,7 +92,7 @@
 }
 
 @media  screen and (max-width:1000px) {
-    .form_container input{
+    .form_container > input{
         width: 100%;
     }
     .form_container_2{
@@ -120,7 +100,6 @@
     }
     .form_container_2 .gender_selector{
         width: 100%;
-        height: 48px;
     }
     .form_container_2 .review_info_container{
         width: 100%;

@@ -15,6 +15,7 @@ import { AboutUs } from './pages/about-us/aboutUs';
 import { HowWeWork } from './pages/how-we-work/howWeWork';
 import { Vaastu } from './pages/vaastu/vaastu';
 import { Freetier } from './pages/free-tier/freetier';
+import { FindYourSign } from './pages/find-your-sign/findYourSign';
 
 function App() {
   // Home and Vaastu render their own 3D backdrops (with richer starfields),
@@ -32,6 +33,7 @@ function App() {
         <Route path='/about-us' element={<AboutUs />} />
         <Route path='/how-we-work' element={<HowWeWork />} />
         <Route path='/schedule-session' element={<Schedule />} />
+        <Route path='/find-your-sign' element={<FindYourSign />} />
         <Route path='/schedule-session/session/:sessionId' element={<SuccessPage />} />
         {/* <Route path='/free-tier' element={<Freetier/>} /> */}
         <Route path='/feedback' element={<RecordReview />} />
