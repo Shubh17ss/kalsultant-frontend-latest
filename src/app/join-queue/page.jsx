@@ -1,0 +1,6 @@
+'use client'
+import dynamic from 'next/dynamic'
+const JoinQueue = dynamic(() => import('../../screens/queue/joinQueue').then((m) => m.JoinQueue), { ssr: false })
+export default function Page() {
+    return <JoinQueue />
+}

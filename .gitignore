@@ -5,11 +5,15 @@
 /.pnp
 .pnp.js
 /env
+.env
 # testing
 /coverage
 
 # production
 /build
+/.next
+/out
+next-env.d.ts
 firebase
 
 # local screenshot output from scripts/screenshot-landing.js

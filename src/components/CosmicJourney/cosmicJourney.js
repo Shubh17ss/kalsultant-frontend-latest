@@ -1,7 +1,7 @@
 import React from 'react'
 import './cosmicJourney.css'
 import { MdArrowRightAlt } from 'react-icons/md'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/navigation'
 import { Reveal, Parallax } from '../cosmic/Reveal'
 
 const STEPS = [
@@ -23,7 +23,7 @@ const STEPS = [
 ]
 
 export const CosmicJourney = () => {
-    const navigate = useNavigate()
+    const router = useRouter()
     return (
         <section className="journeySection">
             <Parallax speed={0.08} className="journeyNebula" aria-hidden="true">
@@ -63,7 +63,7 @@ export const CosmicJourney = () => {
             </div>
 
             <Reveal delay={0.3}>
-                <button className="journeyLink" onClick={() => navigate('/how-we-work')}>
+                <button className="journeyLink" onClick={() => router.push('/how-we-work')}>
                     See how we work <MdArrowRightAlt size={20} />
                 </button>
             </Reveal>

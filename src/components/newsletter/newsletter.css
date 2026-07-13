@@ -72,6 +72,13 @@
     max-width: 32rem;
 }
 
+/* full-width single input (name) that lines up with the fields row below it */
+.newsletterInputFull {
+    width: 100%;
+    max-width: 32rem;
+    flex: 0 0 auto;
+}
+
 .newsletterInput {
     box-sizing: border-box;
     flex: 1 1 60%;

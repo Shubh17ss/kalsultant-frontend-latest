@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './newsletter.css'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import { toast } from 'react-hot-toast'
 import { ClipLoader } from 'react-spinners'
 import { MdArrowRightAlt } from 'react-icons/md'
 import { Reveal } from '../cosmic/Reveal'
 import { CosmicSelect } from '../cosmic/CosmicSelect'
+import { subscribeNewsletter } from '../../utils/queueApi'
 
 const ZODIAC_SIGNS = [
     'Aries', 'Taurus', 'Gemini', 'Cancer',
@@ -14,27 +15,34 @@ const ZODIAC_SIGNS = [
 ]
 
 export const Newsletter = () => {
-    const navigate = useNavigate()
-    const location = useLocation()
+    const router = useRouter()
+    const pathname = usePathname()
+    const searchParams = useSearchParams()
     const sectionRef = useRef(null)
+    const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [zodiac, setZodiac] = useState('')
     const [loading, setLoading] = useState(false)
 
-    // Pre-fill the sign when the user returns from the "find your sign" page.
+    // Pre-fill the sign when the user returns from the "find your sign" page
+    // (passed via ?zodiac= query param).
     useEffect(() => {
-        const picked = location.state?.zodiac
+        const picked = searchParams.get('zodiac')
         if (picked && ZODIAC_SIGNS.includes(picked)) {
             setZodiac(picked)
             sectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
-            // clear the routing state so a refresh doesn't re-trigger
-            navigate(location.pathname, { replace: true, state: {} })
+            // clear the query param so a refresh doesn't re-trigger
+            router.replace(pathname)
         }
-    }, [location, navigate])
+    }, [searchParams, pathname, router])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        if (name.trim().length === 0) {
+            toast.error('Please enter your name')
+            return
+        }
         if (!emailRegex.test(email)) {
             toast.error('Please enter a valid email')
             return
@@ -45,17 +53,14 @@ export const Newsletter = () => {
         }
         setLoading(true)
         try {
-            const response = await fetch(import.meta.env.REACT_APP_ENV_URL + '/api/user/newsletterSignup', {
-                method: 'POST',
-                body: JSON.stringify({ email, zodiac }),
-                headers: { 'Content-Type': 'application/json' },
-            })
-            if (response.status === 200) {
+            const { ok, data } = await subscribeNewsletter(name.trim(), email, zodiac)
+            if (ok) {
+                setName('')
                 setEmail('')
                 setZodiac('')
-                toast.success('You are on the list — watch the skies')
+                toast.success(data?.message || 'You are on the list — watch the skies')
             } else {
-                toast.error('Something went wrong')
+                toast.error(data?.message || 'Something went wrong')
             }
         } catch (error) {
             toast.error('Something went wrong')
@@ -82,6 +87,14 @@ export const Newsletter = () => {
                     </p>
 
                     <form className="newsletterForm" onSubmit={handleSubmit}>
+                        <input
+                            type="text"
+                            className="newsletterInput newsletterInputFull"
+                            placeholder="Your name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            autoComplete="name"
+                        />
                         <div className="newsletterFields">
                             <input
                                 type="email"
@@ -89,6 +102,7 @@ export const Newsletter = () => {
                                 placeholder="Email address"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
+                                autoComplete="email"
                             />
                             <div className="newsletterSelectWrap">
                                 <CosmicSelect
@@ -117,7 +131,7 @@ export const Newsletter = () => {
                     <button
                         type="button"
                         className="newsletterFindLink"
-                        onClick={() => navigate('/find-your-sign')}
+                        onClick={() => router.push('/find-your-sign')}
                     >
                         Not sure of your sign? Find it here
                         <MdArrowRightAlt size={18} />
