@@ -1,11 +1,11 @@
 import React from 'react'
 import './section3.css'
 import { MdArrowRightAlt } from 'react-icons/md'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/navigation'
 import { Reveal } from '../cosmic/Reveal'
 
 export const Section3 = () => {
-    const navigate = useNavigate()
+    const router = useRouter()
     return (
         <section className="finalCtaSection">
             <div className="zodiacWheel" aria-hidden="true"></div>
@@ -33,10 +33,10 @@ export const Section3 = () => {
 
             <Reveal delay={0.44}>
                 <div className="finalCtaBlock">
-                    <button className="ctaPrimary finalCtaButton" onClick={() => navigate('/schedule-session')}>
-                        Schedule a session <MdArrowRightAlt size={22} />
+                    <button className="ctaPrimary finalCtaButton" onClick={() => router.push('/join-queue')}>
+                        Join the queue <MdArrowRightAlt size={22} />
                     </button>
-                    <p className="finalCtaNote">No advance payment — pay only after your session ends.</p>
+                    <p className="finalCtaNote">Join with your email — we invite you to pick a slot when your turn comes.</p>
                 </div>
             </Reveal>
         </section>

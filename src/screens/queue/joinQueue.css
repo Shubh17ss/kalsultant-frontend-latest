@@ -1,0 +1,142 @@
+.joinQueuePage {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.joinQueueHero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 120px 1.2rem 80px;
+}
+
+.joinQueueGlow {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    width: 620px;
+    max-width: 90vw;
+    height: 620px;
+    transform: translateX(-50%);
+    background: radial-gradient(circle, rgba(240, 184, 92, 0.16) 0%, rgba(240, 184, 92, 0) 62%);
+    filter: blur(20px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.joinQueueReveal {
+    position: relative;
+    z-index: 1;
+    width: min(560px, 100%);
+}
+
+.joinQueuePanel {
+    width: 100%;
+    padding: 2.6rem 2.2rem;
+    border-radius: 1.4rem;
+    border: 1px solid rgba(249, 246, 238, 0.12);
+    background: linear-gradient(165deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.012));
+    backdrop-filter: blur(10px);
+    text-align: center;
+}
+
+.joinQueueTitle {
+    margin: 0.6rem 0 1rem;
+}
+
+.joinQueueSub {
+    color: rgba(249, 246, 238, 0.7);
+    line-height: 1.7;
+    margin: 0 auto 1.8rem;
+    max-width: 460px;
+}
+
+.joinQueueForm {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    align-items: stretch;
+}
+
+.joinQueueInput {
+    height: 52px;
+    box-sizing: border-box;
+    border-radius: 999px;
+    border: 1px solid rgba(249, 246, 238, 0.14);
+    padding: 0 1.4rem;
+    background-color: rgba(255, 255, 255, 0.06);
+    caret-color: #f0b85c;
+    color: #f9f6ee;
+    font-size: 1rem;
+    font-family: 'FuturaNowReg', sans-serif;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.joinQueueInput::placeholder {
+    color: rgba(249, 246, 238, 0.35);
+}
+
+.joinQueueInput:focus {
+    outline: none;
+    border-color: rgba(240, 184, 92, 0.6);
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.joinQueueSubmit {
+    height: 52px;
+    border-radius: 999px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.4rem;
+}
+
+.joinQueueFinePrint {
+    margin: 1.4rem 0 0;
+    font-size: 0.8rem;
+    color: rgba(249, 246, 238, 0.4);
+}
+
+.otpInput {
+    text-align: center;
+    letter-spacing: 0.8rem;
+    font-size: 1.5rem;
+    padding-left: 0.8rem;
+    font-family: 'Courier New', monospace;
+}
+
+.jqLinkBtn {
+    background: none;
+    border: none;
+    color: #f0b85c;
+    cursor: pointer;
+    font-size: 0.8rem;
+    padding: 0;
+    text-decoration: underline;
+    display: inline;
+}
+
+.jqLinkBtn:disabled {
+    color: rgba(249, 246, 238, 0.35);
+    cursor: default;
+    text-decoration: none;
+}
+
+.joinQueueSuccess .jqSuccessIcon {
+    color: #f0b85c;
+    margin-bottom: 0.6rem;
+}
+
+@media screen and (max-width: 1000px) {
+    .joinQueuePanel {
+        padding: 2rem 1.3rem;
+    }
+    .joinQueueHero {
+        padding: 100px 1rem 60px;
+    }
+}

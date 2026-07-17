@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import './footer.css'
 
 export const Footer = () => {
   const [year] = useState(new Date().getFullYear())
-  const navigate = useNavigate();
+  const router = useRouter();
   const copyToClipBoardEmail = (text) => {
     navigator.clipboard.writeText(text).then(() => {
       toast.success('Email copied to clipboard');
@@ -31,21 +31,21 @@ export const Footer = () => {
         <div className='rightSection'>
           <div className='footerColumn'>
             <h4>Consultation</h4>
-            <span onClick={() => { navigate('/about-us') }}>About</span>
-            <span onClick={() => { navigate('/schedule-session') }}>Session</span>
-            <span onClick={() => { navigate('/vaastu') }}>Vaastu</span>
+            <span onClick={() => { router.push('/about-us') }}>About</span>
+            <span onClick={() => { router.push('/join-queue') }}>Join queue</span>
+            <span onClick={() => { router.push('/vaastu') }}>Vaastu</span>
           </div>
           <div className='footerColumn'>
             <h4>Support</h4>
-            <span onClick={() => { navigate('/contact-us') }}>Contact</span>
+            <span onClick={() => { router.push('/contact-us') }}>Contact</span>
             <span onClick={() => { copyToClipBoardContact("+91-9997301225") }}>+91-9997301225</span>
             <span onClick={() => { copyToClipBoardEmail("contact@kalsultant.com") }}>contact@kalsultant.com</span>
           </div>
           <div className='footerColumn'>
             <h4>Company</h4>
-            <span onClick={() => { navigate('/terms&Conditions') }}>Terms and Conditions</span>
-            <span onClick={() => { navigate('/privacy-policy') }}>Privacy Policy</span>
-            <span onClick={() => { navigate('/refund-policy') }}>Refund Policy</span>
+            <span onClick={() => { router.push('/terms-and-conditions') }}>Terms and Conditions</span>
+            <span onClick={() => { router.push('/privacy-policy') }}>Privacy Policy</span>
+            <span onClick={() => { router.push('/refund-policy') }}>Refund Policy</span>
           </div>
         </div>
       </div>

@@ -1,11 +1,11 @@
 import React from 'react'
 import './heroSection.css'
 import { MdArrowRightAlt } from 'react-icons/md'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/navigation'
 import { Reveal } from '../cosmic/Reveal'
 
 export const HeroSection = () => {
-    const navigate = useNavigate()
+    const router = useRouter()
     return (
         <section className="cosmicHero">
             <div className="heroShootingStars" aria-hidden="true">
@@ -34,13 +34,10 @@ export const HeroSection = () => {
                 </p>
             </Reveal>
 
-            <Reveal delay={0.5}>
+            <Reveal delay={0.5} className="heroCtaWrap">
                 <div className="heroCtaRow">
-                    <button className="ctaGhost" onClick={() => navigate('/free-tier')}>
-                        Decode my chart
-                    </button>
-                    <button className="ctaPrimary" onClick={() => navigate('/schedule-session')}>
-                        Schedule session <MdArrowRightAlt size={22} />
+                    <button className="ctaPrimary" onClick={() => router.push('/join-queue')}>
+                        Join the queue <MdArrowRightAlt size={22} />
                     </button>
                 </div>
             </Reveal>
@@ -49,9 +46,9 @@ export const HeroSection = () => {
                 <div className="heroTrustRow">
                     <span>1-hour private session</span>
                     <i></i>
-                    <span>Up to 4 birth charts</span>
+                    <span>Limited weekly slots</span>
                     <i></i>
-                    <span>Pay only after your session</span>
+                    <span>Invited in queue order</span>
                 </div>
             </Reveal>
 

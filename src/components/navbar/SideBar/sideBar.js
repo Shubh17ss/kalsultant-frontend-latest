@@ -1,19 +1,19 @@
 import React from 'react'
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useRouter, usePathname } from 'next/navigation';
 import './sideBar.css'
 import { IoCloseOutline } from "react-icons/io5";
 import {toast} from 'react-hot-toast'
 
 export const SideBar = ({ data }) => {
     let setSideBarActive = data[1];
-    const navigate = useNavigate();
-    const location = useLocation();
+    const router = useRouter();
+    const pathname = usePathname();
     const navigateHandler = (route) => {
-        if (location.pathname === route) {
+        if (pathname === route) {
             setSideBarActive(false);
             return;
         }
-        navigate(route);
+        router.push(route);
 
     }
     const handleRedirectToItraa = () => {
@@ -34,9 +34,9 @@ export const SideBar = ({ data }) => {
                 <p onClick={() => { navigateHandler('/contact-us') }}>Contact</p>
                 <p onClick={() => { navigateHandler('/how-we-work') }}>How we work</p>
                 <p onClick={() => { navigateHandler('/pricing') }}>Pricing</p>
-                <p onClick={() => { navigateHandler('/schedule-session') }}>Schedule session</p>
+                <p onClick={() => { navigateHandler('/join-queue') }}>Join the queue</p>
                 <p onClick={() => { navigateHandler('/vaastu') }}>Vaastu</p>
-                <p onClick={() => { navigateHandler('/terms&Conditions') }}>Terms & Conditions</p>
+                <p onClick={() => { navigateHandler('/terms-and-conditions') }}>Terms & Conditions</p>
                 <p onClick={() => { navigateHandler('/privacy-policy') }}>Privacy policy</p>
                 <p onClick={() => { navigateHandler('/refund-policy') }}>Refund policy</p>
             </div>
