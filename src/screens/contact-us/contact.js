@@ -45,18 +45,6 @@ export const Contact = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0)
-        // warm up the backend so the form submit is fast
-        const invokeFirebaseFunction = async () => {
-            try {
-                let response = await fetch(process.env.NEXT_PUBLIC_ENV_URL + '/', {
-                    method: 'get',
-                })
-                await response.json()
-            } catch (error) {
-                // warm-up is best-effort only
-            }
-        }
-        invokeFirebaseFunction()
     }, [])
 
     const handleSubmit = async (e) => {
@@ -74,7 +62,7 @@ export const Contact = () => {
             email: email,
             message: message,
         }
-        const response = await fetch(process.env.NEXT_PUBLIC_ENV_URL + '/api/user/userContactUsForm', {
+        const response = await fetch('/api/user/userContactUsForm', {
             method: 'POST',
             body: JSON.stringify(body),
             headers: {

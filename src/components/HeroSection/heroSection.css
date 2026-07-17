@@ -218,13 +218,19 @@ h3 {
         width: 92%;
     }
 
+    /* The Reveal wrapper is the flex item .cosmicHero centres, so it has to
+       carry the width — otherwise .heroCtaRow's 100% resolves against a
+       shrink-to-fit box and the button label wraps. */
+    .heroCtaWrap {
+        width: 100%;
+    }
+
     .heroCtaRow {
         width: 100%;
         flex-direction: column;
     }
 
-    .heroCtaRow .ctaPrimary,
-    .heroCtaRow .ctaGhost {
+    .heroCtaRow .ctaPrimary {
         width: min(86%, 22rem);
         box-sizing: border-box;
     }

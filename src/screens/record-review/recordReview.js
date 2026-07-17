@@ -18,15 +18,7 @@ export const RecordReview = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        const invokeFirebaseFunction = async () => {
-            let response = await fetch(process.env.NEXT_PUBLIC_ENV_URL + '/', {
-                method: 'get'
-            });
-            let res = await response.json();
-            console.log(res);
-        }
-        invokeFirebaseFunction();
-    })
+    }, [])
 
     const handleTextChange = (val) => {
         if (val.length > 200) return;
@@ -64,7 +56,7 @@ export const RecordReview = () => {
                 email: email,
                 text: text
             }
-            let response = await fetch(process.env.NEXT_PUBLIC_ENV_URL + '/api/user/storeReview', {
+            let response = await fetch('/api/user/storeReview', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

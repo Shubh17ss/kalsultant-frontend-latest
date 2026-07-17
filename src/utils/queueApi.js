@@ -1,9 +1,8 @@
-// Thin fetch wrapper for the new queue/booking backend.
-// Base URL comes from NEXT_PUBLIC_QUEUE_API_URL (see .env).
-const BASE = (process.env.NEXT_PUBLIC_QUEUE_API_URL || '').replace(/\/$/, '');
-
+// Thin fetch wrapper for the queue/booking backend.
+// Paths stay relative (/api/...) and next.config.mjs rewrites them to the
+// backend origin, so there is no base URL baked into the bundle.
 const request = async (path, options = {}) => {
-    const res = await fetch(BASE + path, {
+    const res = await fetch(path, {
         ...options,
         headers: { 'Content-Type': 'application/json', ...(options.headers || {}) },
     });
@@ -30,11 +29,19 @@ export const getQueueStatus = (email) =>
     request(`/api/queue/status?email=${encodeURIComponent(email)}`);
 
 // ---- Newsletter ----
+// Double opt-in: subscribe only emails a code; verifyNewsletterOtp is what
+// actually adds the subscriber.
 export const subscribeNewsletter = (name, email, zodiac) =>
     request('/api/newsletter/subscribe', {
         method: 'POST',
         body: JSON.stringify({ name, email, zodiac }),
     });
+
+export const verifyNewsletterOtp = (email, otp) =>
+    request('/api/newsletter/verify-otp', { method: 'POST', body: JSON.stringify({ email, otp }) });
+
+export const resendNewsletterOtp = (email) =>
+    request('/api/newsletter/resend-otp', { method: 'POST', body: JSON.stringify({ email }) });
 
 // ---- Invite / booking ----
 export const getInvite = (token) => request(`/api/invite/${encodeURIComponent(token)}`);

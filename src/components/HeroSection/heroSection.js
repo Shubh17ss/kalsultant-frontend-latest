@@ -34,11 +34,8 @@ export const HeroSection = () => {
                 </p>
             </Reveal>
 
-            <Reveal delay={0.5}>
+            <Reveal delay={0.5} className="heroCtaWrap">
                 <div className="heroCtaRow">
-                    <button className="ctaGhost" onClick={() => router.push('/free-tier')}>
-                        Decode my chart
-                    </button>
                     <button className="ctaPrimary" onClick={() => router.push('/join-queue')}>
                         Join the queue <MdArrowRightAlt size={22} />
                     </button>

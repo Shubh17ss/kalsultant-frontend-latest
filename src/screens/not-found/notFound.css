@@ -1,0 +1,147 @@
+/* ============================================================
+   404 — the site's thesis is "your destiny has coordinates", so a
+   missing page is a coordinate with nothing at it. The chart-lookup
+   readout is the one loud element; everything else stays quiet.
+   ============================================================ */
+.nfPage {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100svh;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: var(--ink);
+}
+
+.nfHero {
+    box-sizing: border-box;
+    flex: 1 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 9rem 1.5rem 4rem;
+}
+
+.nfTitle em {
+    font-style: normal;
+}
+
+.nfSub {
+    max-width: 34rem;
+}
+
+/* ---------------- chart lookup readout ---------------- */
+.nfReadoutWrap {
+    width: min(30rem, 100%);
+    margin-top: 2.6rem;
+}
+
+.nfReadout {
+    box-sizing: border-box;
+    width: 100%;
+    text-align: left;
+    border: 1px solid rgba(240, 184, 92, 0.22);
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(15, 12, 38, 0.72), rgba(6, 4, 20, 0.78));
+    backdrop-filter: blur(14px);
+    box-shadow:
+        0 0 60px rgba(139, 108, 255, 0.12),
+        inset 0 1px 0 rgba(249, 246, 238, 0.06);
+    overflow: hidden;
+}
+
+.nfReadoutHead {
+    padding: 0.72rem 1.1rem;
+    border-bottom: 1px solid rgba(240, 184, 92, 0.18);
+    background: rgba(240, 184, 92, 0.05);
+    font-family: 'FuturaNowReg', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+}
+
+.nfRows {
+    margin: 0;
+    padding: 0;
+}
+
+.nfRow {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.72rem 1.1rem;
+    border-bottom: 1px solid rgba(249, 246, 238, 0.07);
+}
+
+.nfRow:last-child {
+    border-bottom: none;
+}
+
+.nfKey {
+    flex: 0 0 4.2rem;
+    margin: 0;
+    font-family: 'FuturaNowReg', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+}
+
+/* Monospace so the digits sit in columns the way an ephemeris prints them. */
+.nfVal {
+    flex: 1 1 auto;
+    min-width: 0;
+    margin: 0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.86rem;
+    letter-spacing: 0.4px;
+    color: var(--ink);
+    overflow-wrap: anywhere;
+}
+
+.nfValFlag {
+    color: var(--gold-bright);
+}
+
+/* ---------------- ctas ---------------- */
+/* The Reveal wrapper is the flex item .nfHero centres, so it must carry the
+   width — a percentage on .nfCtaRow alone resolves against a shrink-to-fit box. */
+.nfCtaWrap {
+    width: 100%;
+}
+
+.nfCtaRow {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem;
+    margin-top: 2.8rem;
+}
+
+/* ---------------- mobile ---------------- */
+@media screen and (max-width: 720px) {
+    .nfHero {
+        padding: 7.5rem 1.1rem 3rem;
+    }
+
+    .nfKey {
+        flex-basis: 3.6rem;
+    }
+
+    .nfCtaRow {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .nfCtaRow .nfCta {
+        width: min(86%, 22rem);
+        box-sizing: border-box;
+    }
+}
