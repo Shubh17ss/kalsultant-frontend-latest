@@ -32,10 +32,13 @@
     position: relative;
     z-index: 1;
     width: min(560px, 100%);
+    min-width: 0;
+    margin-inline: auto;
 }
 
 .joinQueuePanel {
     width: 100%;
+    box-sizing: border-box;
     padding: 2.6rem 2.2rem;
     border-radius: 1.4rem;
     border: 1px solid rgba(249, 246, 238, 0.12);
@@ -137,6 +140,18 @@
         padding: 2rem 1.3rem;
     }
     .joinQueueHero {
-        padding: 100px 1rem 60px;
+        padding: 100px 1.25rem 60px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .joinQueuePanel {
+        padding: 1.8rem 1.2rem;
+    }
+    .joinQueueHero {
+        padding: 100px 1.1rem 60px;
+    }
+    .joinQueueSub {
+        max-width: 100%;
     }
 }
